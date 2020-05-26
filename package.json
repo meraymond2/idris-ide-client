@@ -1,12 +1,22 @@
 {
   "name": "idris-ide-client",
-  "description": "A library for talking to the Idris IDE.",
   "version": "0.1.0",
+  "description": "A library for talking to the Idris IDE.",
+  "keywords": [
+    "idris"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meraymond2/idris-ide-client"
+  },
   "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
   "scripts": {
     "build": "tsc -p ./ && rm -r build/test",
     "eslint": "eslint src --ext ts",
     "lint": "tsc --noEmit && prettier --check --write 'src/**/*.ts' && eslint src --ext .ts --fix",
+    "prepublish": "npm run build",
     "start": "npm run build && node build/src/index.js",
     "test": "npx mocha --recursive --require ts-node/register --extensions ts 'test/**/*.ts'",
     "watch": "tsc -watch -p ./"
