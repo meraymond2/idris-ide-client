@@ -12,11 +12,14 @@
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "tsc -p ./ && rm -r build/test",
     "eslint": "eslint src --ext ts",
     "lint": "tsc --noEmit && prettier --check --write 'src/**/*.ts' && eslint src --ext .ts --fix",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "start": "npm run build && node build/src/index.js",
     "test": "npx mocha --recursive --require ts-node/register --extensions ts 'test/**/*.ts'",
     "watch": "tsc -watch -p ./"
