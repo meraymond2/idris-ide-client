@@ -26,7 +26,7 @@ client.close()
 ```
 
 ## What’s it for?
-It’s primarily intended to serve as the foundation for my VSCode extension (work ongoing). By keeping it as a separate layer, it can easily be reused in case someone wants to make their own extension. Or for another editor that supports TypeScript.
+It’s primarily intended to serve as the foundation for my [VSCode extension](https://github.com/meraymond2/idris-vscode). By keeping it as a separate layer, it can easily be reused in case someone wants to make their own extension. Or for another editor that supports TypeScript.
 
 Types are great documentation, and I’ve typed all of the s-expressions that the IDE returns in TypeScript. As the IDE protocol documentation is a bit spare, hopefully this will be of help to anyone implementing something similar in the future.
 
