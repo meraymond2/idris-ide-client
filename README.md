@@ -38,6 +38,4 @@ If you experience any problems on other versions or OSes, please raise an issue.
 A few request-types related to tt-terms have not been implemented yet, because I don’t understand what they’re supposed to do.
 
 ## Known Issues
-There’s one bug in the lexer that I know of, it’s on the to do list to fix. At the moment it chokes on the string ` "Prelude.List.\\\\"`.
-
 The handling for unexpected errors could use a bit of work. For example, in Idris 1.3.2, you can cause the IDE to crash by passing in a line number that doesn’t exist, and there’s nothing at the moment to restart the IDE if it dies unexpectedly.
