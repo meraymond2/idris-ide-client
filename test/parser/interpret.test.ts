@@ -300,15 +300,15 @@ describe("Parsing :interpret reply", () => {
   })
 
   it("can parse a failure sexp without metadata.", () => {
-    const sexp = String.raw`(:return (:error "(input):1:1:\n  |\n1 | -----\n  | ^^^^^\nunexpected \"-----\"\nexpecting ':', dependent type signature, or end of input\n") 3)`
+    const sexp = `(:return (:error "(input):1:1:\n  |\n1 | -----\n  | ^^^^^\nunexpected \\"-----\\"\nexpecting ':', dependent type signature, or end of input\n") 3)`
     const payload: S_Exp.InterpretErr = [
       ":error",
-      String.raw`(input):1:1:\n  |\n1 | -----\n  | ^^^^^\nunexpected \"-----\"\nexpecting ':', dependent type signature, or end of input\n`,
+      `(input):1:1:\n  |\n1 | -----\n  | ^^^^^\nunexpected "-----"\nexpecting ':', dependent type signature, or end of input\n`,
     ]
     const rootExpr: RootExpr = [":return", payload, 3]
     const expected: FinalReply.Interpret = {
       err: {
-        message: String.raw`(input):1:1:\n  |\n1 | -----\n  | ^^^^^\nunexpected \"-----\"\nexpecting ':', dependent type signature, or end of input\n`,
+        message: `(input):1:1:\n  |\n1 | -----\n  | ^^^^^\nunexpected "-----"\nexpecting ':', dependent type signature, or end of input\n`,
         metadata: [],
       },
       id: 3,

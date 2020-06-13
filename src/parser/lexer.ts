@@ -15,6 +15,24 @@ const isAlpha = (char: string): boolean => {
   )
 }
 
+/**
+ * Parses the s-exp representation of a string and into a JS string.
+ * Unfortunately, we can’t just reuse JSON.parse. It does not have exhaustive
+ * error handling; it assumes strings are well-formed.
+ */
+const parseEscapes = (s: string): string => {
+  let res = ""
+  let pos = 1 // skip opening quotes
+  const end = s.length - 1 // skip closing quotes
+  while (pos < end) {
+    if (s[pos] === "\\") pos += 1
+
+    res += s[pos]
+    pos += 1
+  }
+  return res
+}
+
 export const lex = (msg: string): Token[] => {
   let pos = 0
   let tokens: Token[] = []
@@ -39,14 +57,17 @@ export const lex = (msg: string): Token[] => {
         break
       }
       case '"': {
-        pos += 1 // skip the opening quotes
         const start = pos
-        // FIX ME!
-        while (!(msg[pos] === '"' && msg[pos - 1] !== "\\")) {
+        pos += 1 // consume the opening quotes
+        let escapes = 0
+        while (msg[pos] !== '"' || escapes % 2 !== 0) {
+          if (msg[pos] === "\\") escapes += 1
+          else escapes = 0
           pos += 1
         }
-        tokens.push({ type: "STRING", str: msg.slice(start, pos) })
-        pos += 1 // skip the closing quotes
+        pos += 1 // consume the closing quotes
+        const str = parseEscapes(msg.slice(start, pos))
+        tokens.push({ type: "STRING", str })
         break
       }
       default: {

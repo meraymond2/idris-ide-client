@@ -249,7 +249,7 @@ export class IdrisClient {
   }
 
   /**
-   * Returns a reply containing a string represetning a new with-rule pattern match template.
+   * Returns a reply containing a string representing a new with-rule pattern match template.
    * Always successful — simply returns the result of wrapping the `name` argument
    * in a with-clause.
    */
@@ -261,7 +261,7 @@ export class IdrisClient {
 
   /**
    * Returns a reply containing a list of metavariable descriptions. Each has the name
-   * and type of the metavariable, with metadata, as well as a list of descriptions
+   * and type of the metavariable, with metadata for the type, as well as a list of descriptions
    * for other variables in the metavariable’s scope.
    * Always successful — it is an empty list if no metavariables are found.
    */
