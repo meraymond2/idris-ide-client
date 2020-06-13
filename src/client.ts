@@ -1,7 +1,7 @@
-import { ChildProcess, spawn } from "child_process"
 import { parseReply, parseRootExpr } from "./parser"
 import { FinalReply, Reply } from "./reply"
 import { DocMode, Request, RequestType, serialiseRequest } from "./request"
+import { Readable, Writable } from "stream"
 
 const HEADER_LENGTH = 6
 
@@ -13,41 +13,31 @@ type ReplyCallback = (reply: Reply) => void
 
 interface Opts {
   debug?: boolean
-  idrisPath?: string
   replyCallback?: ReplyCallback
-}
-
-const defaultOpts = {
-  debug: false,
-  idrisPath: "idris",
 }
 
 export class IdrisClient {
   private debug: boolean
-  private idris: ChildProcess
+  private input: Writable
   private messageBuffer: string
+  private output: Readable
   private registry: Record<string, Resolver>
   private replyCallback?: ReplyCallback
   private reqCounter: number
 
-  constructor(optArgs: Opts = {}) {
-    const opts = { ...defaultOpts, ...optArgs }
-    if (opts.replyCallback) this.replyCallback = opts.replyCallback
+  constructor(input: Writable, output: Readable, options: Opts = {}) {
+    if (options.replyCallback) this.replyCallback = options.replyCallback
+    this.debug = Boolean(options.debug)
 
     this.messageBuffer = ""
     this.registry = {}
     this.reqCounter = 0
-    this.idris = spawn(opts.idrisPath, ["--ide-mode"])
-    this.idris.stdout?.setEncoding("utf8")
-    this.idris.stdout?.on("data", (chunk: string) => {
-      this.messageBuffer = this.messageBuffer + chunk
+    this.input = input
+    this.output = output
+    this.output.on("data", (chunk: Buffer | string) => {
+      this.messageBuffer = this.messageBuffer + chunk.toString("utf8")
       this.consumeOutput()
     })
-    this.debug = opts.debug
-  }
-
-  close() {
-    this.idris.kill()
   }
 
   consumeOutput() {
@@ -92,7 +82,7 @@ export class IdrisClient {
     if (this.debug) console.debug("<< " + serialisedReq)
     return new Promise((res) => {
       this.registry[req.id] = { requestType: req.type, resFn: res }
-      this.idris.stdin?.write(serialisedReq, "utf8")
+      this.input.write(serialisedReq, "utf8")
     })
   }
 
