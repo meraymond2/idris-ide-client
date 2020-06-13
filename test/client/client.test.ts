@@ -1,15 +1,20 @@
 import { assert } from "chai"
 import { IdrisClient } from "../../src/client"
 import * as expected from "./expected"
+import { spawn, ChildProcess } from "child_process"
 
 // These tests are order dependent, which is ugly, but the alternative is
 // stopping and re-starting the client between each one, which would add seconds
 // to each test. If it becomes an issue in the future, it can be changed.
 describe("Running the client commands", () => {
   let ic: IdrisClient
+  let proc: ChildProcess
 
   before(async () => {
-    ic = new IdrisClient()
+    proc = spawn("idris", ["--ide-mode"])
+    if (proc.stdin && proc.stdout) {
+      ic = new IdrisClient(proc.stdin, proc.stdout)
+    }
   })
 
   it("returns the expected result for :load-file", async () => {
@@ -111,6 +116,6 @@ describe("Running the client commands", () => {
   })
 
   after(async () => {
-    await ic.close()
+    proc.kill()
   })
 })
