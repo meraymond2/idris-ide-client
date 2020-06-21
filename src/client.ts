@@ -15,6 +15,10 @@ interface Opts {
   debug?: boolean
   idrisPath?: string
   replyCallback?: ReplyCallback
+  /**
+   * idris libraries that should be pulled in as dependencies
+   */
+  dependencies?: Array<string>
 }
 
 const defaultOpts = {
@@ -34,10 +38,18 @@ export class IdrisClient {
     const opts = { ...defaultOpts, ...optArgs }
     if (opts.replyCallback) this.replyCallback = opts.replyCallback
 
+    const dependencies = opts.dependencies ? opts.dependencies : []
+    var flags: Array<string> = []
+    for(const dependency of dependencies) {
+      flags.push("-p")
+      flags.push(dependency)
+    }
+    flags.push("--ide-mode")
+
     this.messageBuffer = ""
     this.registry = {}
     this.reqCounter = 0
-    this.idris = spawn(opts.idrisPath, ["--ide-mode"])
+    this.idris = spawn(opts.idrisPath, flags)
     this.idris.stdout?.setEncoding("utf8")
     this.idris.stdout?.on("data", (chunk: string) => {
       this.messageBuffer = this.messageBuffer + chunk
