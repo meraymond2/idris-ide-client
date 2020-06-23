@@ -1,4 +1,4 @@
-## Unreleased
+## v0.1.2
 ### Added
 - Support for connecting to an Idris process over sockets.
 
