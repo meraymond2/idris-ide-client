@@ -640,16 +640,6 @@ export const typeOf: FinalReply.TypeOf = {
   type: ":return",
 }
 
-export const version: FinalReply.Version = {
-  major: 1,
-  minor: 3,
-  patch: 2,
-  tags: [],
-  id: 18,
-  ok: true,
-  type: ":return",
-}
-
 export const whoCalls: FinalReply.WhoCalls = {
   callee: {
     metadata: [

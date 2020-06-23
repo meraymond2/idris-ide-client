@@ -106,7 +106,8 @@ describe("Running the client commands", () => {
 
   it("returns the expected result for :version", async () => {
     const actual = await ic.version()
-    assert.deepEqual(actual, expected.version)
+    // We don’t want to tie the test to an actual version.
+    assert.isTrue(actual.ok)
   })
 
   it("returns the expected result for :who-calls", async () => {
