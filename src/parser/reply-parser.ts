@@ -226,8 +226,9 @@ const intoFinalReplyAddClause = (
 ): FinalReply.AddClause => {
   const [_ok, initialClause] = payload
   return {
-    ok: initialClause,
+    initialClause,
     id,
+    ok: true,
     type: ":return",
   }
 }
@@ -236,10 +237,11 @@ const intoFinalReplyAddMissing = (
   payload: S_Exp.AddMissing,
   id: number
 ): FinalReply.AddMissing => {
-  const [_ok, missingCases] = payload
+  const [_ok, missingClauses] = payload
   return {
-    ok: missingCases,
     id,
+    ok: true,
+    missingClauses,
     type: ":return",
   }
 }
@@ -251,8 +253,10 @@ const intoFinalReplyApropos = (
   if (S_Exp.isOkApropos(payload)) {
     const [_ok, apropos, metadata] = payload
     return {
-      ok: { docs: apropos, metadata: intoMessageMetadata(metadata) },
+      docs: apropos,
+      metadata: intoMessageMetadata(metadata),
       id,
+      ok: true,
       type: ":return",
     }
   } else {
@@ -260,6 +264,7 @@ const intoFinalReplyApropos = (
     return {
       err: msg,
       id,
+      ok: false,
       type: ":return",
     }
   }
@@ -272,8 +277,10 @@ const intoFinalReplyBrowseNamespace = (
   if (S_Exp.isOkBrowseNamespace(payload)) {
     const [_ok, [subModules, decls]] = payload
     return {
-      ok: { subModules, declarations: decls.map(formatDecl) },
+      declarations: decls.map(formatDecl),
       id,
+      ok: true,
+      subModules,
       type: ":return",
     }
   } else {
@@ -281,6 +288,7 @@ const intoFinalReplyBrowseNamespace = (
     return {
       err: msg,
       id,
+      ok: false,
       type: ":return",
     }
   }
@@ -293,17 +301,18 @@ const intoFinalReplyCallsWho = (
   if (payload[1].length > 0) {
     const [_ok, [[decl, refs]]] = payload
     return {
-      ok: {
-        caller: formatDecl(decl),
-        references: refs.map(formatDecl),
-      },
+      caller: formatDecl(decl),
       id,
+      ok: true,
+      references: refs.map(formatDecl),
       type: ":return",
     }
   } else {
     return {
-      ok: { caller: null, references: [] },
+      caller: null,
       id,
+      ok: true,
+      references: [],
       type: ":return",
     }
   }
@@ -314,10 +323,11 @@ const intoFinalReplyCaseSplit = (
   id: number
 ): FinalReply.CaseSplit => {
   if (S_Exp.isOkCaseSplit(payload)) {
-    const [_ok, caseStmts] = payload
+    const [_ok, caseClause] = payload
     return {
-      ok: caseStmts,
+      caseClause,
       id,
+      ok: true,
       type: ":return",
     }
   } else {
@@ -325,6 +335,7 @@ const intoFinalReplyCaseSplit = (
     return {
       err: msg,
       id,
+      ok: false,
       type: ":return",
     }
   }
@@ -337,8 +348,10 @@ const intoFinalReplyDocsFor = (
   if (S_Exp.isOkDocsFor(payload)) {
     const [_ok, docs, metadata] = payload
     return {
-      ok: { docs, metadata: intoMessageMetadata(metadata) },
+      docs,
       id,
+      metadata: intoMessageMetadata(metadata),
+      ok: true,
       type: ":return",
     }
   } else {
@@ -346,6 +359,7 @@ const intoFinalReplyDocsFor = (
     return {
       err: msg,
       id,
+      ok: false,
       type: ":return",
     }
   }
@@ -358,18 +372,19 @@ const intoFinalReplyInterpret = (
   if (S_Exp.isOkInterpret(payload)) {
     const [_ok, result, metadata] = payload
     return {
-      ok: {
-        result,
-        metadata: intoMessageMetadata(metadata),
-      },
       id,
+      ok: true,
+      metadata: intoMessageMetadata(metadata),
+      result,
       type: ":return",
     }
   } else {
-    const [_err, message, metadata] = payload
+    const [_err, msg, metadata] = payload
     return {
-      err: { message, metadata: intoMessageMetadata(metadata || []) },
+      err: msg,
       id,
+      metadata: intoMessageMetadata(metadata || []),
+      ok: false,
       type: ":return",
     }
   }
@@ -381,8 +396,8 @@ const intoFinalReplyLoadFile = (
 ): FinalReply.LoadFile => {
   if (S_Exp.isOkLoadFile(payload)) {
     return {
-      ok: null,
       id,
+      ok: true,
       type: ":return",
     }
   } else {
@@ -390,6 +405,7 @@ const intoFinalReplyLoadFile = (
     return {
       err: msg,
       id,
+      ok: false,
       type: ":return",
     }
   }
@@ -401,8 +417,9 @@ const intoFinalReplyMakeCase = (
 ): FinalReply.MakeCase => {
   const [_ok, caseClause] = payload
   return {
-    ok: caseClause,
+    caseClause,
     id,
+    ok: true,
     type: ":return",
   }
 }
@@ -417,11 +434,10 @@ const intoFinalReplyMakeLemma = (
       [_metavariableLemma, [_replace, metavariable], [_def_type, declaration]],
     ] = payload
     return {
-      ok: {
-        declaration,
-        metavariable,
-      },
+      declaration,
       id,
+      ok: true,
+      metavariable,
       type: ":return",
     }
   } else {
@@ -429,6 +445,7 @@ const intoFinalReplyMakeLemma = (
     return {
       err: msg,
       id,
+      ok: false,
       type: ":return",
     }
   }
@@ -440,8 +457,9 @@ const intoFinalReplyMakeWith = (
 ): FinalReply.MakeWith => {
   const [_ok, withClause] = payload
   return {
-    ok: withClause,
+    withClause,
     id,
+    ok: true,
     type: ":return",
   }
 }
@@ -450,23 +468,23 @@ const intoFinalReplyMetavariables = (
   payload: S_Exp.Metavariables,
   id: number
 ): FinalReply.Metavariables => {
-  const [_ok, metavariables] = payload
-  const metavars = metavariables.map(
-    ([name, varsInScope, [type, metadata]]) => {
+  const [_ok, metavars] = payload
+  const metavariables = metavars.map(
+    ([name, holePremises, [type, metadata]]) => {
       const metavariable = {
         name,
         type,
         metadata: intoMessageMetadata(metadata),
       }
-      const scope = varsInScope.map(([name, type, metadata]) => ({
+      const premises = holePremises.map(([name, type, metadata]) => ({
         name,
         type,
         metadata: intoMessageMetadata(metadata),
       }))
-      return { metavariable, scope }
+      return { metavariable, premises }
     }
   )
-  return { ok: metavars, id, type: ":return" }
+  return { id, ok: true, metavariables, type: ":return" }
 }
 
 const intoFinalReplyPrintDefinition = (
@@ -476,8 +494,10 @@ const intoFinalReplyPrintDefinition = (
   if (S_Exp.isOkPrintDefinition(payload)) {
     const [_ok, definition, metadata] = payload
     return {
-      ok: { definition, metadata: intoMessageMetadata(metadata) },
+      definition,
       id,
+      metadata: intoMessageMetadata(metadata),
+      ok: true,
       type: ":return",
     }
   } else {
@@ -485,6 +505,7 @@ const intoFinalReplyPrintDefinition = (
     return {
       err: msg,
       id,
+      ok: false,
       type: ":return",
     }
   }
@@ -496,8 +517,9 @@ const intoFinalReplyProofSearch = (
 ): FinalReply.ProofSearch => {
   const [_ok, solution] = payload
   return {
-    ok: solution,
     id,
+    ok: true,
+    solution,
     type: ":return",
   }
 }
@@ -508,8 +530,9 @@ const intoFinalReplyReplCompletions = (
 ): FinalReply.ReplCompletions => {
   const [_ok, [completions, _x]] = payload // x is always ""?
   return {
-    ok: completions,
+    completions,
     id,
+    ok: true,
     type: ":return",
   }
 }
@@ -519,17 +542,20 @@ const intoFinalReplyTypeOf = (
   id: number
 ): FinalReply.TypeOf => {
   if (S_Exp.isOkTypeOf(payload)) {
-    const [_ok, type, metadata] = payload
+    const [_ok, typeOf, metadata] = payload
     return {
-      ok: { type, metadata: intoMessageMetadata(metadata) },
       id,
+      ok: true,
+      metadata: intoMessageMetadata(metadata),
       type: ":return",
+      typeOf,
     }
   } else {
     const [_err, msg] = payload
     return {
       err: msg,
       id,
+      ok: false,
       type: ":return",
     }
   }
@@ -541,13 +567,12 @@ const intoFinalReplyVersion = (
 ): FinalReply.Version => {
   const [_ok, [[major, minor, patch], tags]] = payload
   return {
-    ok: {
-      major,
-      minor,
-      patch,
-      tags,
-    },
     id,
+    major,
+    minor,
+    ok: true,
+    patch,
+    tags,
     type: ":return",
   }
 }
@@ -559,17 +584,18 @@ const intoFinalReplyWhoCalls = (
   if (payload[1].length > 0) {
     const [_ok, [[decl, refs]]] = payload
     return {
-      ok: {
-        callee: formatDecl(decl),
-        references: refs.map(formatDecl),
-      },
+      callee: formatDecl(decl),
       id,
+      ok: true,
+      references: refs.map(formatDecl),
       type: ":return",
     }
   } else {
     return {
-      ok: { callee: null, references: [] },
+      callee: null,
       id,
+      ok: true,
+      references: [],
       type: ":return",
     }
   }

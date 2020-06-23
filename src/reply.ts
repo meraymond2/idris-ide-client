@@ -62,7 +62,7 @@ export interface HolePremise {
 
 export interface Metavariable {
   metavariable: Variable
-  scope: Array<HolePremise>
+  premises: Array<HolePremise>
 }
 
 export namespace InfoReply {
@@ -112,7 +112,7 @@ export namespace FinalReply {
   export type AddMissing = {
     id: number
     ok: true
-    missingClause: string
+    missingClauses: string
     type: ":return"
   }
 
@@ -235,9 +235,9 @@ export namespace FinalReply {
     | { err: string; id: number; ok: false; type: ":return" }
 
   export type ProofSearch = {
-    result: string
     id: number
     ok: true
+    solution: string
     type: ":return"
   }
 
@@ -256,8 +256,8 @@ export namespace FinalReply {
         id: number
         ok: true
         metadata: Array<MessageMetadata>
-        typeOf: string
         type: ":return"
+        typeOf: string
       }
     | { err: string; id: number; ok: false; type: ":return" }
 
