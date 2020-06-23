@@ -50,37 +50,36 @@ describe("Parsing :type-of reply", () => {
 
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.TypeOf = {
-      ok: {
-        type: "Cat : Type",
-        metadata: [
-          {
-            length: 3,
-            metadata: {
-              decor: ":type",
-              docOverview: "",
-              implicit: ":False",
-              key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
-              name: "Example.Cat",
-              namespace: "Example",
-              type: "Type",
-            },
-            start: 0,
+      typeOf: "Cat : Type",
+      metadata: [
+        {
+          length: 3,
+          metadata: {
+            decor: ":type",
+            docOverview: "",
+            implicit: ":False",
+            key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
+            name: "Example.Cat",
+            namespace: "Example",
+            type: "Type",
           },
-          {
-            length: 4,
-            metadata: {
-              decor: ":type",
-              docOverview: "The type of types",
-              name: "Type",
-              ttTerm:
-                "AAAAAAAAAAAHAAAAAAAAAAAbLi8uL3Rlc3QvcmVzb3VyY2VzL3Rlc3QuaWRyAAAAAAAAABQ=",
-              type: "Type",
-            },
-            start: 6,
+          start: 0,
+        },
+        {
+          length: 4,
+          metadata: {
+            decor: ":type",
+            docOverview: "The type of types",
+            name: "Type",
+            ttTerm:
+              "AAAAAAAAAAAHAAAAAAAAAAAbLi8uL3Rlc3QvcmVzb3VyY2VzL3Rlc3QuaWRyAAAAAAAAABQ=",
+            type: "Type",
           },
-        ],
-      },
+          start: 6,
+        },
+      ],
       id: 2,
+      ok: true,
       type: ":return",
     }
 
@@ -100,6 +99,7 @@ describe("Parsing :type-of reply", () => {
     const expected: FinalReply.TypeOf = {
       err: "No such variable luna",
       id: 2,
+      ok: false,
       type: ":return",
     }
 

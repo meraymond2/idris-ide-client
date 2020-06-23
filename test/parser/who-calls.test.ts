@@ -142,121 +142,118 @@ describe("Parsing :who-calls reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.WhoCalls = {
-      ok: {
-        callee: {
+      callee: {
+        metadata: [
+          {
+            length: 11,
+            metadata: {
+              decor: ":type",
+              docOverview: "",
+              implicit: ":False",
+              key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
+              name: "Example.Cat",
+              namespace: "Example",
+              type: "Type",
+            },
+            start: 0,
+          },
+        ],
+        name: "Example.Cat",
+      },
+      references: [
+        {
           metadata: [
             {
               length: 11,
               metadata: {
-                decor: ":type",
+                decor: ":data",
                 docOverview: "",
                 implicit: ":False",
-                key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
-                name: "Example.Cat",
+                key: "AQAAAAAAAAAAA0NhcwAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
+                name: "Example.Cas",
                 namespace: "Example",
-                type: "Type",
+                type: "Cat",
               },
               start: 0,
             },
           ],
-          name: "Example.Cat",
+          name: "Example.Cas",
         },
-        references: [
-          {
-            metadata: [
-              {
-                length: 11,
-                metadata: {
-                  decor: ":data",
-                  docOverview: "",
-                  implicit: ":False",
-                  key: "AQAAAAAAAAAAA0NhcwAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
-                  name: "Example.Cas",
-                  namespace: "Example",
-                  type: "Cat",
-                },
-                start: 0,
+        {
+          metadata: [
+            {
+              length: 12,
+              metadata: {
+                decor: ":data",
+                docOverview: "",
+                implicit: ":False",
+                key: "AQAAAAAAAAAABEx1bmEAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
+                name: "Example.Luna",
+                namespace: "Example",
+                type: "Cat",
               },
-            ],
-            name: "Example.Cas",
-          },
-          {
-            metadata: [
-              {
-                length: 12,
-                metadata: {
-                  decor: ":data",
-                  docOverview: "",
-                  implicit: ":False",
-                  key: "AQAAAAAAAAAABEx1bmEAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
-                  name: "Example.Luna",
-                  namespace: "Example",
-                  type: "Cat",
-                },
-                start: 0,
+              start: 0,
+            },
+          ],
+          name: "Example.Luna",
+        },
+        {
+          metadata: [
+            {
+              length: 16,
+              metadata: {
+                decor: ":data",
+                docOverview: "",
+                implicit: ":False",
+                key: "AQAAAAAAAAAACFNoZXJsb2NrAAAAAAAAAAEAAAAAAAAAB0V4YW1wbGU=",
+                name: "Example.Sherlock",
+                namespace: "Example",
+                type: "Cat",
               },
-            ],
-            name: "Example.Luna",
-          },
-          {
-            metadata: [
-              {
-                length: 16,
-                metadata: {
-                  decor: ":data",
-                  docOverview: "",
-                  implicit: ":False",
-                  key:
-                    "AQAAAAAAAAAACFNoZXJsb2NrAAAAAAAAAAEAAAAAAAAAB0V4YW1wbGU=",
-                  name: "Example.Sherlock",
-                  namespace: "Example",
-                  type: "Cat",
-                },
-                start: 0,
+              start: 0,
+            },
+          ],
+          name: "Example.Sherlock",
+        },
+        {
+          metadata: [
+            {
+              length: 9,
+              metadata: {
+                decor: ":metavar",
+                docOverview: "",
+                implicit: ":False",
+                key: "AQAAAAAAAAAAAWYAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
+                name: "Example.f",
+                namespace: "Example",
+                type: "Cat -> String",
               },
-            ],
-            name: "Example.Sherlock",
-          },
-          {
-            metadata: [
-              {
-                length: 9,
-                metadata: {
-                  decor: ":metavar",
-                  docOverview: "",
-                  implicit: ":False",
-                  key: "AQAAAAAAAAAAAWYAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
-                  name: "Example.f",
-                  namespace: "Example",
-                  type: "Cat -> String",
-                },
-                start: 0,
+              start: 0,
+            },
+          ],
+          name: "Example.f",
+        },
+        {
+          metadata: [
+            {
+              length: 15,
+              metadata: {
+                decor: ":function",
+                docOverview: "",
+                implicit: ":False",
+                key: "AQAAAAAAAAAAB2dldE5hbWUAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
+                name: "Example.getName",
+                namespace: "Example",
+                type: "Cat -> String",
               },
-            ],
-            name: "Example.f",
-          },
-          {
-            metadata: [
-              {
-                length: 15,
-                metadata: {
-                  decor: ":function",
-                  docOverview: "",
-                  implicit: ":False",
-                  key:
-                    "AQAAAAAAAAAAB2dldE5hbWUAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
-                  name: "Example.getName",
-                  namespace: "Example",
-                  type: "Cat -> String",
-                },
-                start: 0,
-              },
-            ],
-            name: "Example.getName",
-          },
-        ],
-      },
+              start: 0,
+            },
+          ],
+          name: "Example.getName",
+        },
+      ],
       id: 2,
+      ok: true,
       type: ":return",
     }
     const tokens = lex(sexp)
@@ -271,11 +268,10 @@ describe("Parsing :who-calls reply", () => {
     const payload: S_Exp.WhoCalls = [":ok", []]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.WhoCalls = {
-      ok: {
-        callee: null,
-        references: [],
-      },
+      callee: null,
+      references: [],
       id: 2,
+      ok: true,
       type: ":return",
     }
 

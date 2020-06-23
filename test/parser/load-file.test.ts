@@ -107,7 +107,7 @@ describe("Parsing :load-file reply", () => {
     const payload: S_Exp.LoadFileOk = [":ok", []]
     const rootExpr: RootExpr = [":return", payload, 1]
     const expected: FinalReply.LoadFile = {
-      ok: null,
+      ok: true,
       id: 1,
       type: ":return",
     }
@@ -246,6 +246,7 @@ describe("Parsing :load-file reply", () => {
     const expected: FinalReply.LoadFile = {
       err: "didn't load ./test/resources/test.idr",
       id: 1,
+      ok: false,
       type: ":return",
     }
 

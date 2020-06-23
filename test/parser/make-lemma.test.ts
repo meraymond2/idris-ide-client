@@ -18,11 +18,10 @@ describe("Parsing :make-lemma reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.MakeLemma = {
-      ok: {
-        declaration: "g_rhs : (n : Nat) -> (b : Bool) -> String",
-        metavariable: "g_rhs n b",
-      },
+      declaration: "g_rhs : (n : Nat) -> (b : Bool) -> String",
       id: 2,
+      metavariable: "g_rhs n b",
+      ok: true,
       type: ":return",
     }
 
@@ -41,6 +40,7 @@ describe("Parsing :make-lemma reply", () => {
     const expected: FinalReply.MakeLemma = {
       err: "NoSuchVariable nix",
       id: 2,
+      ok: false,
       type: ":return",
     }
 

@@ -12,8 +12,12 @@ describe("Parsing :version reply", () => {
     const payload: S_Exp.Version = [":ok", [[1, 3, 2], []]]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.Version = {
-      ok: { major: 1, minor: 3, patch: 2, tags: [] },
       id: 2,
+      major: 1,
+      minor: 3,
+      ok: true,
+      patch: 2,
+      tags: [],
       type: ":return",
     }
 
@@ -31,8 +35,12 @@ describe("Parsing :version reply", () => {
     const payload: S_Exp.Version = [":ok", [[1, 3, 2], ["git:PRE"]]]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.Version = {
-      ok: { major: 1, minor: 3, patch: 2, tags: ["git:PRE"] },
       id: 2,
+      major: 1,
+      minor: 3,
+      ok: true,
+      patch: 2,
+      tags: ["git:PRE"],
       type: ":return",
     }
 

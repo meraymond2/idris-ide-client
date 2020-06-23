@@ -40,8 +40,7 @@ describe("Running the client commands", () => {
   it("returns the expected result for :browse-namespace.", async () => {
     const actual = await ic.browseNamespace("Language.Reflection")
     // The metadata for an actual namespace is too long to read if the test fails.
-    if ("ok" in actual)
-      actual.ok.declarations = actual.ok.declarations.slice(0, 1)
+    if (actual.ok) actual.declarations = actual.declarations.slice(0, 1)
     assert.deepEqual(actual, expected.browseNamespace)
   })
 

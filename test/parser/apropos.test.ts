@@ -52,47 +52,46 @@ describe("Parsing :apropos reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.Apropos = {
-      ok: {
-        docs:
-          "\nPrelude.Bits.b8ToBinString : Bits8 -> String\nEncode Bits8 as an 8-character binary string.\n",
-        metadata: [
-          {
-            length: 26,
-            metadata: {
-              decor: ":function",
-              docOverview: "Encode Bits8 as an 8-character binary string.",
-              implicit: ":False",
-              key:
-                "AQAAAAAAAAAADWI4VG9CaW5TdHJpbmcAAAAAAAAAAgAAAAAAAAAEQml0cwAAAAAAAAAHUHJlbHVkZQ==",
-              name: "Prelude.Bits.b8ToBinString",
-              namespace: "Prelude.Bits",
-              type: "Bits8 -> String",
-            },
-            start: 1,
+      docs:
+        "\nPrelude.Bits.b8ToBinString : Bits8 -> String\nEncode Bits8 as an 8-character binary string.\n",
+      metadata: [
+        {
+          length: 26,
+          metadata: {
+            decor: ":function",
+            docOverview: "Encode Bits8 as an 8-character binary string.",
+            implicit: ":False",
+            key:
+              "AQAAAAAAAAAADWI4VG9CaW5TdHJpbmcAAAAAAAAAAgAAAAAAAAAEQml0cwAAAAAAAAAHUHJlbHVkZQ==",
+            name: "Prelude.Bits.b8ToBinString",
+            namespace: "Prelude.Bits",
+            type: "Bits8 -> String",
           },
-          {
-            length: 5,
-            metadata: {
-              decor: ":type",
-              docOverview: "Eight bits (unsigned)",
-              name: "Bits8",
-              type: "Type",
-            },
-            start: 30,
+          start: 1,
+        },
+        {
+          length: 5,
+          metadata: {
+            decor: ":type",
+            docOverview: "Eight bits (unsigned)",
+            name: "Bits8",
+            type: "Type",
           },
-          {
-            length: 6,
-            metadata: {
-              decor: ":type",
-              docOverview: "Strings in some unspecified encoding",
-              name: "String",
-              type: "Type",
-            },
-            start: 39,
+          start: 30,
+        },
+        {
+          length: 6,
+          metadata: {
+            decor: ":type",
+            docOverview: "Strings in some unspecified encoding",
+            name: "String",
+            type: "Type",
           },
-        ],
-      },
+          start: 39,
+        },
+      ],
       id: 2,
+      ok: true,
       type: ":return",
     }
 
@@ -111,6 +110,7 @@ describe("Parsing :apropos reply", () => {
     const expected: FinalReply.Apropos = {
       err: "No results found",
       id: 2,
+      ok: false,
       type: ":return",
     }
 

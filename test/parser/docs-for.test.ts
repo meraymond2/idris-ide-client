@@ -52,47 +52,46 @@ describe("Parsing :case-split reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.DocsFor = {
-      ok: {
-        docs:
-          "Prelude.Bits.b8ToBinString : Bits8 -> String\n    Encode Bits8 as an 8-character binary string.\n    \n    The function is: Total & public export",
-        metadata: [
-          {
-            start: 0,
-            length: 26,
-            metadata: {
-              name: "Prelude.Bits.b8ToBinString",
-              implicit: ":False",
-              key:
-                "AQAAAAAAAAAADWI4VG9CaW5TdHJpbmcAAAAAAAAAAgAAAAAAAAAEQml0cwAAAAAAAAAHUHJlbHVkZQ==",
-              decor: ":function",
-              docOverview: "Encode Bits8 as an 8-character binary string.",
-              type: "Bits8 -> String",
-              namespace: "Prelude.Bits",
-            },
+      docs:
+        "Prelude.Bits.b8ToBinString : Bits8 -> String\n    Encode Bits8 as an 8-character binary string.\n    \n    The function is: Total & public export",
+      metadata: [
+        {
+          start: 0,
+          length: 26,
+          metadata: {
+            name: "Prelude.Bits.b8ToBinString",
+            implicit: ":False",
+            key:
+              "AQAAAAAAAAAADWI4VG9CaW5TdHJpbmcAAAAAAAAAAgAAAAAAAAAEQml0cwAAAAAAAAAHUHJlbHVkZQ==",
+            decor: ":function",
+            docOverview: "Encode Bits8 as an 8-character binary string.",
+            type: "Bits8 -> String",
+            namespace: "Prelude.Bits",
           },
-          {
-            start: 29,
-            length: 5,
-            metadata: {
-              decor: ":type",
-              type: "Type",
-              docOverview: "Eight bits (unsigned)",
-              name: "Bits8",
-            },
+        },
+        {
+          start: 29,
+          length: 5,
+          metadata: {
+            decor: ":type",
+            type: "Type",
+            docOverview: "Eight bits (unsigned)",
+            name: "Bits8",
           },
-          {
-            start: 38,
-            length: 6,
-            metadata: {
-              decor: ":type",
-              type: "Type",
-              docOverview: "Strings in some unspecified encoding",
-              name: "String",
-            },
+        },
+        {
+          start: 38,
+          length: 6,
+          metadata: {
+            decor: ":type",
+            type: "Type",
+            docOverview: "Strings in some unspecified encoding",
+            name: "String",
           },
-        ],
-      },
+        },
+      ],
       id: 2,
+      ok: true,
       type: ":return",
     }
 
@@ -114,6 +113,7 @@ describe("Parsing :case-split reply", () => {
     const expected: FinalReply.DocsFor = {
       err: "No documentation for Blue Notebook #10",
       id: 2,
+      ok: false,
       type: ":return",
     }
 

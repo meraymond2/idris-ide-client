@@ -11,8 +11,9 @@ describe("Parsing :proof-search reply", () => {
     const payload: S_Exp.ProofSearch = [":ok", "0"]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.ProofSearch = {
-      ok: "0",
       id: 2,
+      ok: true,
+      solution: "0",
       type: ":return",
     }
 

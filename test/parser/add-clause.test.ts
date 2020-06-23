@@ -11,8 +11,9 @@ describe("Parsing :add-clause reply", () => {
     const payload: S_Exp.AddClause = [":ok", "f cat = ?f_rhs"]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.AddClause = {
-      ok: "f cat = ?f_rhs",
       id: 2,
+      initialClause: "f cat = ?f_rhs",
+      ok: true,
       type: ":return",
     }
 

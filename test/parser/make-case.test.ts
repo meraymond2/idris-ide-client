@@ -14,8 +14,9 @@ describe("Parsing :make-case reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.MakeCase = {
-      ok: "g n b = case _ of\n             case_val => ?g_rhs\n",
+      caseClause: "g n b = case _ of\n             case_val => ?g_rhs\n",
       id: 2,
+      ok: true,
       type: ":return",
     }
 
@@ -33,8 +34,9 @@ describe("Parsing :make-case reply", () => {
     const payload: S_Exp.MakeCase = [":ok", "\n"]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.MakeCase = {
-      ok: "\n",
+      caseClause: "\n",
       id: 2,
+      ok: true,
       type: ":return",
     }
 
