@@ -35,6 +35,36 @@ export interface SourceMetadata {
   metadata: MetaDetails
 }
 
+export interface FileWarning {
+  end: Position
+  filename: string
+  metadata: Array<MessageMetadata>
+  start: Position
+  warning: string
+}
+
+export interface Declaration {
+  name: string
+  metadata: Array<MessageMetadata>
+}
+
+export interface Variable {
+  name: string
+  type: string
+  metadata: Array<MessageMetadata>
+}
+
+export interface HolePremise {
+  name: string
+  type: string
+  metadata: Array<MessageMetadata>
+}
+
+export interface Metavariable {
+  metavariable: Variable
+  scope: Array<HolePremise>
+}
+
 export namespace InfoReply {
   export interface SetPrompt extends BaseReply {
     path: string
@@ -49,13 +79,7 @@ export namespace InfoReply {
   }
 
   export interface Warning extends BaseReply {
-    err: {
-      end: Position
-      filename: string
-      metadata: MessageMetadata[]
-      start: Position
-      warning: string
-    }
+    err: FileWarning
     id: number
     type: ":warning"
   }
@@ -68,7 +92,7 @@ export namespace InfoReply {
 }
 
 export interface OutputReply extends BaseReply {
-  ok: SourceMetadata[]
+  ok: Array<SourceMetadata>
   id: number
   type: ":output"
 }
@@ -79,156 +103,141 @@ export namespace FinalReply {
     reply.type === ":return"
 
   export type AddClause = {
-    ok: string
+    initialClause: string
     id: number
+    ok: true
     type: ":return"
   }
 
   export type AddMissing = {
-    ok: string
     id: number
+    ok: true
+    missingClause: string
     type: ":return"
   }
 
   export type Apropos =
     | {
-        ok: {
-          docs: string
-          metadata: MessageMetadata[]
-        }
+        docs: string
         id: number
+        metadata: Array<MessageMetadata>
+        ok: true
         type: ":return"
       }
-    | { err: string; id: number; type: ":return" }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   export type BrowseNamespace =
     | {
-        ok: {
-          declarations: {
-            name: string
-            metadata: MessageMetadata[]
-          }[]
-          subModules: string[]
-        }
+        declarations: Array<Declaration>
         id: number
+        ok: true
+        subModules: string[]
         type: ":return"
       }
-    | { err: string; id: number; type: ":return" }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   /**
    * Caller is null only when it is not found.
    */
   export type CallsWho = {
-    ok: {
-      caller: {
-        name: string
-        metadata: MessageMetadata[]
-      } | null
-      references: {
-        name: string
-        metadata: MessageMetadata[]
-      }[]
-    }
+    caller: Declaration | null
     id: number
+    ok: true
+    references: Array<Declaration>
     type: ":return"
   }
 
   export type CaseSplit =
     | {
-        ok: string
+        caseClause: string
         id: number
+        ok: true
         type: ":return"
       }
-    | { err: string; id: number; type: ":return" }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   export type DocsFor =
     | {
-        ok: {
-          docs: string
-          metadata: MessageMetadata[]
-        }
+        docs: string
+        metadata: Array<MessageMetadata>
         id: number
+        ok: true
         type: ":return"
       }
-    | { err: string; id: number; type: ":return" }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   /**
    * If part of the input can be interpreted, it will be an error, but with metadata.
    */
   export type Interpret =
     | {
-        ok: { result: string; metadata: MessageMetadata[] }
         id: number
+        ok: true
+        metadata: Array<MessageMetadata>
+        result: string
         type: ":return"
       }
     | {
-        err: {
-          message: string
-          metadata: MessageMetadata[]
-        }
+        err: string
+        metadata: MessageMetadata[]
         id: number
+        ok: false
         type: ":return"
       }
 
   export type LoadFile =
     | {
-        ok: null
         id: number
+        ok: true
         type: ":return"
       }
-    | { err: string; id: number; type: ":return" }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   export type MakeCase = {
-    ok: string
+    caseClause: string
     id: number
+    ok: true
     type: ":return"
   }
 
   export type MakeLemma =
     | {
-        ok: {
-          declaration: string
-          metavariable: string
-        }
+        declaration: string
+        metavariable: string
         id: number
+        ok: true
         type: ":return"
       }
-    | { err: string; id: number; type: ":return" }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   export type MakeWith = {
-    ok: string
     id: number
+    ok: true
     type: ":return"
+    withClause: string
   }
 
   export type Metavariables = {
-    ok: {
-      metavariable: {
-        name: string
-        type: string
-        metadata: MessageMetadata[]
-      }
-      scope: {
-        name: string
-        type: string
-        metadata: MessageMetadata[]
-      }[]
-    }[]
     id: number
+    metavariables: Array<Metavariable>
+    ok: true
     type: ":return"
   }
 
   export type PrintDefinition =
     | {
-        ok: { definition: string; metadata: MessageMetadata[] }
+        definition: string
         id: number
+        metadata: Array<MessageMetadata>
+        ok: true
         type: ":return"
       }
-    | { err: string; id: number; type: ":return" }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   export type ProofSearch = {
-    ok: string
+    result: string
     id: number
+    ok: true
     type: ":return"
   }
 
@@ -236,46 +245,37 @@ export namespace FinalReply {
    * This reply omits an additional element that seems to always be an empty string.
    */
   export type ReplCompletions = {
-    ok: string[]
+    completions: Array<string>
     id: number
+    ok: true
     type: ":return"
   }
 
   export type TypeOf =
     | {
-        ok: {
-          type: string
-          metadata: MessageMetadata[]
-        }
         id: number
+        ok: true
+        metadata: Array<MessageMetadata>
+        typeOf: string
         type: ":return"
       }
-    | { err: string; id: number; type: ":return" }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   export type Version = {
-    ok: {
-      major: number
-      minor: number
-      patch: number
-      tags: string[]
-    }
     id: number
+    minor: number
+    major: number
+    ok: true
+    patch: number
+    tags: Array<string>
     type: ":return"
   }
 
   export type WhoCalls = {
-    ok: {
-      callee: {
-        name: string
-        metadata: MessageMetadata[]
-      } | null
-      references: {
-        name: string
-        metadata: MessageMetadata[]
-      }[]
-    }
-
+    callee: Declaration | null
+    references: Array<Declaration>
     id: number
+    ok: true
     type: ":return"
   }
 }
