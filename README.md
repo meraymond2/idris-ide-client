@@ -5,8 +5,11 @@ A TypeScript library for communicating with an Idris IDE process.
 ```typescript
 import { IdrisClient } from "idris-ide-client"
 
-// Start the client
-const client = new IdrisClient()
+// Create an Idris process
+const idrisProc = spawn("idris", ["--ide-mode"])
+
+// Instantiate the client
+const client = new IdrisClient(idrisProc.stdin, idrisProc.stdout)
 
 // Load a file
 await client.loadFile("test/resources/test.idr")
