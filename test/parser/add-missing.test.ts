@@ -14,8 +14,9 @@ describe("Parsing :add-missing reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.AddMissing = {
-      ok: "getName Sherlock = ?getName_rhs_1",
       id: 2,
+      missingClauses: "getName Sherlock = ?getName_rhs_1",
+      ok: true,
       type: ":return",
     }
 

@@ -34,7 +34,7 @@ describe("Parsing :repl-completions reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.ReplCompletions = {
-      ok: [
+      completions: [
         "getArgs",
         "getChar",
         "getEnv",
@@ -53,6 +53,7 @@ describe("Parsing :repl-completions reply", () => {
         "getWitness",
       ],
       id: 2,
+      ok: true,
       type: ":return",
     }
 

@@ -149,7 +149,7 @@ describe("Parsing :metavariables reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.Metavariables = {
-      ok: [
+      metavariables: [
         {
           metavariable: {
             metadata: [
@@ -188,7 +188,7 @@ describe("Parsing :metavariables reply", () => {
             name: "Example.f",
             type: "Cat -> String",
           },
-          scope: [],
+          premises: [],
         },
         {
           metavariable: {
@@ -208,7 +208,7 @@ describe("Parsing :metavariables reply", () => {
             name: "Example.g_rhs",
             type: "String",
           },
-          scope: [
+          premises: [
             {
               metadata: [
                 {
@@ -258,6 +258,7 @@ describe("Parsing :metavariables reply", () => {
         },
       ],
       id: 2,
+      ok: true,
       type: ":return",
     }
 

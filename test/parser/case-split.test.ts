@@ -14,8 +14,9 @@ describe("Parsing :case-split reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.CaseSplit = {
-      ok: "plusTwo Z = plus 2 n\nplusTwo (S k) = plus 2 n\n",
+      caseClause: "plusTwo Z = plus 2 n\nplusTwo (S k) = plus 2 n\n",
       id: 2,
+      ok: true,
       type: ":return",
     }
 
@@ -37,6 +38,7 @@ describe("Parsing :case-split reply", () => {
     const expected: FinalReply.CaseSplit = {
       err: `Elaborating {__infer_0} arg {ival_0}: Internal error: "Unelaboratable syntactic form (Example.plusTwo : (n : Nat) ->\nNat)"`,
       id: 2,
+      ok: false,
       type: ":return",
     }
 

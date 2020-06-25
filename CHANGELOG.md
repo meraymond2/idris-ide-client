@@ -1,3 +1,10 @@
+## Unreleased
+### Added
+### Changed
+- Breaking: `ok` in FinalReply is now a Boolean discriminator.
+
+### Fixed
+
 ## v0.1.2
 ### Added
 - Support for connecting to an Idris process over sockets.

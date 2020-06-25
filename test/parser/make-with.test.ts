@@ -14,9 +14,10 @@ describe("Parsing :make-with reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.MakeWith = {
-      ok: "g n b with (_)\n  g n b | with_pat = ?g_rhs_rhs\n",
       id: 2,
+      ok: true,
       type: ":return",
+      withClause: "g n b with (_)\n  g n b | with_pat = ?g_rhs_rhs\n",
     }
 
     const tokens = lex(sexp)

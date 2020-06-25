@@ -1,5 +1,13 @@
-import { IdrisClient } from "./client"
-import { InfoReply, FinalReply, OutputReply, Reply } from "./reply"
-import { Request } from "./request"
-
-export { IdrisClient, InfoReply, FinalReply, OutputReply, Reply, Request }
+export { IdrisClient } from "./client"
+export {
+  InfoReply,
+  FinalReply,
+  HolePremise,
+  Metavariable,
+  MessageMetadata,
+  OutputReply,
+  Reply,
+  SourceMetadata,
+} from "./reply"
+export { Request } from "./request"
+export { Decor } from "./s-exps"

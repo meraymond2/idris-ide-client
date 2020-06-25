@@ -138,112 +138,111 @@ describe("Parsing :print-definition reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.PrintDefinition = {
-      ok: {
-        definition: "data Bool : Type where\n  False : Bool\n  True : Bool",
-        metadata: [
-          {
-            length: 4,
-            metadata: {
-              decor: ":keyword",
-            },
-            start: 0,
+      definition: "data Bool : Type where\n  False : Bool\n  True : Bool",
+      metadata: [
+        {
+          length: 4,
+          metadata: {
+            decor: ":keyword",
           },
-          {
-            length: 4,
-            metadata: {
-              decor: ":type",
-              docOverview: "Boolean Data Type",
-              implicit: ":False",
-              key:
-                "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
-              name: "Prelude.Bool.Bool",
-              namespace: "Prelude.Bool",
-              type: "Type",
-            },
-            start: 5,
+          start: 0,
+        },
+        {
+          length: 4,
+          metadata: {
+            decor: ":type",
+            docOverview: "Boolean Data Type",
+            implicit: ":False",
+            key:
+              "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+            name: "Prelude.Bool.Bool",
+            namespace: "Prelude.Bool",
+            type: "Type",
           },
-          {
-            length: 4,
-            metadata: {
-              decor: ":type",
-              docOverview: "The type of types",
-              name: "Type",
-              ttTerm:
-                "AAAAAAAAAAAHAAAAAAAAAAASLi9QcmVsdWRlL0Jvb2wuaWRyAAAAAAAAABQ=",
-              type: "Type",
-            },
-            start: 12,
+          start: 5,
+        },
+        {
+          length: 4,
+          metadata: {
+            decor: ":type",
+            docOverview: "The type of types",
+            name: "Type",
+            ttTerm:
+              "AAAAAAAAAAAHAAAAAAAAAAASLi9QcmVsdWRlL0Jvb2wuaWRyAAAAAAAAABQ=",
+            type: "Type",
           },
-          {
-            length: 5,
-            metadata: {
-              decor: ":keyword",
-            },
-            start: 17,
+          start: 12,
+        },
+        {
+          length: 5,
+          metadata: {
+            decor: ":keyword",
           },
-          {
-            length: 5,
-            metadata: {
-              decor: ":data",
-              docOverview: "",
-              implicit: ":False",
-              key:
-                "AQAAAAAAAAAABUZhbHNlAAAAAAAAAAIAAAAAAAAABEJvb2wAAAAAAAAAB1ByZWx1ZGU=",
-              name: "Prelude.Bool.False",
-              namespace: "Prelude.Bool",
-              type: "Bool",
-            },
-            start: 25,
+          start: 17,
+        },
+        {
+          length: 5,
+          metadata: {
+            decor: ":data",
+            docOverview: "",
+            implicit: ":False",
+            key:
+              "AQAAAAAAAAAABUZhbHNlAAAAAAAAAAIAAAAAAAAABEJvb2wAAAAAAAAAB1ByZWx1ZGU=",
+            name: "Prelude.Bool.False",
+            namespace: "Prelude.Bool",
+            type: "Bool",
           },
-          {
-            length: 4,
-            metadata: {
-              decor: ":type",
-              docOverview: "Boolean Data Type",
-              implicit: ":False",
-              key:
-                "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
-              name: "Prelude.Bool.Bool",
-              namespace: "Prelude.Bool",
-              ttTerm:
-                "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
-              type: "Type",
-            },
-            start: 33,
+          start: 25,
+        },
+        {
+          length: 4,
+          metadata: {
+            decor: ":type",
+            docOverview: "Boolean Data Type",
+            implicit: ":False",
+            key:
+              "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+            name: "Prelude.Bool.Bool",
+            namespace: "Prelude.Bool",
+            ttTerm:
+              "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
+            type: "Type",
           },
-          {
-            length: 4,
-            metadata: {
-              decor: ":data",
-              docOverview: "",
-              implicit: ":False",
-              key:
-                "AQAAAAAAAAAABFRydWUAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
-              name: "Prelude.Bool.True",
-              namespace: "Prelude.Bool",
-              type: "Bool",
-            },
-            start: 40,
+          start: 33,
+        },
+        {
+          length: 4,
+          metadata: {
+            decor: ":data",
+            docOverview: "",
+            implicit: ":False",
+            key:
+              "AQAAAAAAAAAABFRydWUAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+            name: "Prelude.Bool.True",
+            namespace: "Prelude.Bool",
+            type: "Bool",
           },
-          {
-            length: 4,
-            metadata: {
-              decor: ":type",
-              docOverview: "Boolean Data Type",
-              implicit: ":False",
-              key:
-                "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
-              name: "Prelude.Bool.Bool",
-              namespace: "Prelude.Bool",
-              ttTerm:
-                "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
-              type: "Type",
-            },
-            start: 47,
+          start: 40,
+        },
+        {
+          length: 4,
+          metadata: {
+            decor: ":type",
+            docOverview: "Boolean Data Type",
+            implicit: ":False",
+            key:
+              "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+            name: "Prelude.Bool.Bool",
+            namespace: "Prelude.Bool",
+            ttTerm:
+              "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
+            type: "Type",
           },
-        ],
-      },
+          start: 47,
+        },
+      ],
       id: 2,
+      ok: true,
       type: ":return",
     }
 
@@ -262,6 +261,7 @@ describe("Parsing :print-definition reply", () => {
     const expected: FinalReply.PrintDefinition = {
       err: "Not found",
       id: 2,
+      ok: false,
       type: ":return",
     }
 

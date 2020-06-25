@@ -184,34 +184,33 @@ describe("Parsing :interpret reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.Interpret = {
-      ok: {
-        result: "4 : Integer",
-        metadata: [
-          {
-            length: 1,
-            metadata: {
-              decor: ":data",
-              docOverview: "An arbitrary-precision integer",
-              name: "4",
-              ttTerm: "AAAAAAAAAAAEAQAAAAAE",
-              type: "Integer",
-            },
-            start: 0,
+      result: "4 : Integer",
+      metadata: [
+        {
+          length: 1,
+          metadata: {
+            decor: ":data",
+            docOverview: "An arbitrary-precision integer",
+            name: "4",
+            ttTerm: "AAAAAAAAAAAEAQAAAAAE",
+            type: "Integer",
           },
-          {
-            length: 7,
-            metadata: {
-              decor: ":type",
-              docOverview: "Arbitrary-precision integers",
-              name: "Integer",
-              ttTerm: "AAAAAAAAAAAECg==",
-              type: "Type",
-            },
-            start: 4,
+          start: 0,
+        },
+        {
+          length: 7,
+          metadata: {
+            decor: ":type",
+            docOverview: "Arbitrary-precision integers",
+            name: "Integer",
+            ttTerm: "AAAAAAAAAAAECg==",
+            type: "Type",
           },
-        ],
-      },
+          start: 4,
+        },
+      ],
       id: 2,
+      ok: true,
       type: ":return",
     }
 
@@ -258,36 +257,35 @@ describe("Parsing :interpret reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 2]
     const expected: FinalReply.Interpret = {
-      err: {
-        message:
-          "When checking an application of function Prelude.Interfaces.*:\n        No such variable cas",
-        metadata: [
-          {
-            length: 20,
-            metadata: {
-              decor: ":function",
-              docOverview: "",
-              implicit: ":False",
-              key:
-                "AQAAAAAAAAAAASoAAAAAAAAAAgAAAAAAAAAKSW50ZXJmYWNlcwAAAAAAAAAHUHJlbHVkZQ==",
-              name: "Prelude.Interfaces.*",
-              namespace: "Prelude.Interfaces",
-              type: "Num ty => ty -> ty -> ty",
-            },
-            start: 41,
+      err:
+        "When checking an application of function Prelude.Interfaces.*:\n        No such variable cas",
+      metadata: [
+        {
+          length: 20,
+          metadata: {
+            decor: ":function",
+            docOverview: "",
+            implicit: ":False",
+            key:
+              "AQAAAAAAAAAAASoAAAAAAAAAAgAAAAAAAAAKSW50ZXJmYWNlcwAAAAAAAAAHUHJlbHVkZQ==",
+            name: "Prelude.Interfaces.*",
+            namespace: "Prelude.Interfaces",
+            type: "Num ty => ty -> ty -> ty",
           },
-          {
-            length: 3,
-            metadata: {
-              implicit: ":False",
-              key: "AAAAAAAAAAADY2Fz",
-              name: "cas",
-            },
-            start: 88,
+          start: 41,
+        },
+        {
+          length: 3,
+          metadata: {
+            implicit: ":False",
+            key: "AAAAAAAAAAADY2Fz",
+            name: "cas",
           },
-        ],
-      },
+          start: 88,
+        },
+      ],
       id: 2,
+      ok: false,
       type: ":return",
     }
 
@@ -307,11 +305,10 @@ describe("Parsing :interpret reply", () => {
     ]
     const rootExpr: RootExpr = [":return", payload, 3]
     const expected: FinalReply.Interpret = {
-      err: {
-        message: `(input):1:1:\n  |\n1 | -----\n  | ^^^^^\nunexpected "-----"\nexpecting ':', dependent type signature, or end of input\n`,
-        metadata: [],
-      },
+      err: `(input):1:1:\n  |\n1 | -----\n  | ^^^^^\nunexpected "-----"\nexpecting ':', dependent type signature, or end of input\n`,
+      metadata: [],
       id: 3,
+      ok: false,
       type: ":return",
     }
 

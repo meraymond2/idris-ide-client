@@ -18,8 +18,8 @@ await client.loadFile("test/resources/test.idr")
 const reply = await client.typeOf("n")
 
 // Do something with the reply
-if ("ok" in reply) {
-  console.log(reply.ok.type) // => "n : Nat"
+if (reply.ok) {
+  console.log(reply.typeOf) // => "n : Nat"
 } else {
   console.warn(reply.err)
 }
