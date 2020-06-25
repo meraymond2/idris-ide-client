@@ -1,5 +1,5 @@
-import { IdrisClient } from "./client"
-import {
+export { IdrisClient } from "./client"
+export {
   InfoReply,
   FinalReply,
   HolePremise,
@@ -9,19 +9,5 @@ import {
   Reply,
   SourceMetadata,
 } from "./reply"
-import { Request } from "./request"
-import { Decor } from "./s-exps"
-
-export {
-  Decor,
-  FinalReply,
-  IdrisClient,
-  InfoReply,
-  HolePremise,
-  MessageMetadata,
-  Metavariable,
-  OutputReply,
-  Reply,
-  Request,
-  SourceMetadata,
-}
+export { Request } from "./request"
+export { Decor } from "./s-exps"
