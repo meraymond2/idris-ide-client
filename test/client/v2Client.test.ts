@@ -2,6 +2,7 @@ import { assert } from "chai"
 import { IdrisClient } from "../../src/client"
 import * as expected from "./expected"
 import { spawn, ChildProcess } from "child_process"
+import { FinalReply } from "../../src/reply"
 
 // These tests are order dependent, which is ugly, but the alternative is
 // stopping and re-starting the client between each one, which would add seconds
@@ -13,46 +14,83 @@ describe("Running the client commands", () => {
   before(async () => {
     proc = spawn("idris2", ["--ide-mode"])
     if (proc.stdin && proc.stdout) {
-      ic = new IdrisClient(proc.stdin, proc.stdout)
+      ic = new IdrisClient(proc.stdin, proc.stdout, { debug: true })
     }
   })
 
   it("returns the expected result for :load-file", async () => {
-    const actual = await ic.loadFile("./test/resources/test.idr")
-    assert.deepEqual(actual, expected.loadFileV2)
+    const actual = await ic.loadFile("./test/resources/test-v2.idr")
+    assert.deepEqual(actual, expected.loadFile)
   }).timeout(10000)
 
-  // it("returns the expected result for :add-clause.", async () => {
-  //   const actual = await ic.addClause("f", 5)
-  //   assert.deepEqual(actual, expected.addClause)
-  // })
+  it("returns the expected result for :add-clause.", async () => {
+    const actual = await ic.addClause("f", 5)
+    assert.deepEqual(actual, expected.addClause)
+  })
 
-  // it("returns the expected result for :add-missing.", async () => {
-  //   const actual = await ic.addMissing("getName", 7)
-  //   assert.deepEqual(actual, expected.addMissing)
-  // })
+  // TODO: UNIMPLEMENTED
+  // (:write-string "add-missing: command not yet implemented. Hopefully soon!" 3)
+  // Also, how will this work if it won’t load the file with missing cases?
+  it("returns the expected result for :add-missing.", async () => {
+    const actual = await ic.addMissing("getName", 7)
+    const unimplemented: FinalReply.AddMissing = {
+      id: 3,
+      missingClauses: "",
+      ok: true,
+      type: ":return",
+    }
+    assert.deepEqual(actual, unimplemented)
+  })
 
-  // it("returns the expected result for :apropos.", async () => {
-  //   const actual = await ic.apropos("b8ToBinString")
-  //   assert.deepEqual(actual, expected.apropos)
-  // })
+  // TODO: UNIMPLEMENTED
+  // (:write-string "apropros: command not yet implemented. Hopefully soon!" 4)
+  it("returns the expected result for :apropos.", async () => {
+    const unimplemented: FinalReply.Apropos = {
+      docs: "",
+      id: 4,
+      metadata: [],
+      ok: true,
+      type: ":return",
+    }
+    const actual = await ic.apropos("plus")
+    assert.deepEqual(actual, unimplemented)
+  })
 
-  // it("returns the expected result for :browse-namespace.", async () => {
-  //   const actual = await ic.browseNamespace("Language.Reflection")
-  //   // The metadata for an actual namespace is too long to read if the test fails.
-  //   if (actual.ok) actual.declarations = actual.declarations.slice(0, 1)
-  //   assert.deepEqual(actual, expected.browseNamespace)
-  // })
+  // TODO: UNIMPLEMENTED
+  // (:write-string "browse-namespace: command not yet implemented. Hopefully soon!" 3)
+  it("returns the expected result for :browse-namespace.", async () => {
+    const actual = await ic.browseNamespace("Language.Reflection")
+    const unimplemented: FinalReply.BrowseNamespace = {
+      declarations: [],
+      id: 5,
+      ok: true,
+      subModules: [],
+      type: ":return",
+    }
+    if (actual.ok) actual.declarations = actual.declarations.slice(0, 1)
+    assert.deepEqual(actual, unimplemented)
+  })
 
-  // it("returns the expected result for :calls-who.", async () => {
-  //   const actual = await ic.callsWho("plusTwo")
-  //   assert.deepEqual(actual, expected.callsWho)
-  // })
+  // TODO: UNIMPLEMENTED
+  // (:write-string "calls-who: command not yet implemented. Hopefully soon!" 6)
+  it("returns the expected result for :calls-who.", async () => {
+    const actual = await ic.callsWho("plusTwo")
+    const unimplemented: FinalReply.CallsWho = {
+      caller: null,
+      id: 6,
+      ok: true,
+      references: [],
+      type: ":return",
+    }
+    assert.deepEqual(actual, unimplemented)
+  })
 
-  // it("returns the expected result for :case-split", async () => {
-  //   const actual = await ic.caseSplit("n", 12)
-  //   assert.deepEqual(actual, expected.caseSplit)
-  // })
+  // TODO: can’t get to work. It looks like V2 has an optional column parameter,
+  // but adding it didn’t seem to make a difference.
+  it("returns the expected result for :case-split", async () => {
+    const actual = await ic.caseSplit("n", 13)
+    assert.deepEqual(actual, expected.caseSplit)
+  })
 
   // it("returns the expected result for :docs-for", async () => {
   //   const actual = await ic.docsFor("b8ToBinString", ":full")

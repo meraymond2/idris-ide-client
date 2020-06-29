@@ -20,7 +20,7 @@ describe("Running the client commands", () => {
 
   it("returns the expected result for :load-file", async () => {
     const actual = await ic.loadFile("./test/resources/test.idr")
-    assert.deepEqual(actual, expected.loadFileV1)
+    assert.deepEqual(actual, expected.loadFile)
   }).timeout(10000)
 
   it("returns the expected result for :add-clause.", async () => {

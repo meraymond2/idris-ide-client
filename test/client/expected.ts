@@ -1,16 +1,8 @@
 import { FinalReply } from "../../src/reply"
 
-export const loadFileV1: FinalReply.LoadFile = {
+export const loadFile: FinalReply.LoadFile = {
   id: 1,
   ok: true,
-  type: ":return",
-}
-
-export const loadFileV2: FinalReply.LoadFile = {
-  err:
-    "Error(s) building file ./test/resources/test.idr: ./test/resources/test.idr:7:1--8:1:Main.getName is not covering:\n\tMissing cases:\n\t($resolved1171 $resolved1169)",
-  id: 1,
-  ok: false,
   type: ":return",
 }
 
