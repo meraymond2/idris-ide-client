@@ -1,4 +1,4 @@
-module Example
+module Main
 
 data Cat = Cas | Luna | Sherlock
 
