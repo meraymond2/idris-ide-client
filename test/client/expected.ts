@@ -1,8 +1,16 @@
 import { FinalReply } from "../../src/reply"
 
-export const loadFile: FinalReply.LoadFile = {
+export const loadFileV1: FinalReply.LoadFile = {
   id: 1,
   ok: true,
+  type: ":return",
+}
+
+export const loadFileV2: FinalReply.LoadFile = {
+  err:
+    "Error(s) building file ./test/resources/test.idr: ./test/resources/test.idr:7:1--8:1:Main.getName is not covering:\n\tMissing cases:\n\t($resolved1171 $resolved1169)",
+  id: 1,
+  ok: false,
   type: ":return",
 }
 
@@ -108,8 +116,7 @@ export const browseNamespace: FinalReply.BrowseNamespace = {
             docOverview: "",
             type: "Type",
             namespace: "Language.Reflection",
-            ttTerm:
-              "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAHQXJpdGhUeQAAAAAAAAACAAAAAAAAAApSZWZsZWN0aW9uAAAAAAAAAAhMYW5ndWFnZQ==",
+            ttTerm: "TEST",
           },
         },
       ],
@@ -283,7 +290,7 @@ export const interpret: FinalReply.Interpret = {
         decor: ":data",
         docOverview: "An arbitrary-precision integer",
         name: "4",
-        ttTerm: "AAAAAAAAAAAEAQAAAAAE",
+        ttTerm: "TEST",
         type: "Integer",
       },
       start: 0,
@@ -294,7 +301,7 @@ export const interpret: FinalReply.Interpret = {
         decor: ":type",
         docOverview: "Arbitrary-precision integers",
         name: "Integer",
-        ttTerm: "AAAAAAAAAAAECg==",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 4,
@@ -358,8 +365,7 @@ export const metavariables: FinalReply.Metavariables = {
           {
             length: 13,
             metadata: {
-              ttTerm:
-                "AAAAAAAAAAACAAAAAAAAAAADY2F0AQIAAAMAAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAARNYWluBwAAAAAAAAAAOi9ob21lL21pY2hhZWwvZGV2L2lkcmlzLWlkZS1jbGllbnQvdGVzdC9yZXNvdXJjZXMvdGVzdC5pZHIAAAAAAAAAFwQN",
+              ttTerm: "TEST",
             },
             start: 0,
           },
@@ -378,7 +384,7 @@ export const metavariables: FinalReply.Metavariables = {
               decor: ":type",
               docOverview: "Strings in some unspecified encoding",
               name: "String",
-              ttTerm: "AAAAAAAAAAIAAAAAAAAAAAFuAAAAAAAAAAAAAWIABA0=",
+              ttTerm: "TEST",
               type: "Type",
             },
             start: 0,
@@ -401,8 +407,7 @@ export const metavariables: FinalReply.Metavariables = {
                   "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
                 name: "Prelude.Nat.Nat",
                 namespace: "Prelude.Nat",
-                ttTerm:
-                  "AAAAAAAAAAAAAwAAAAAAAAAIAAAAAAAAAAABAAAAAAAAAAADTmF0AAAAAAAAAAIAAAAAAAAAA05hdAAAAAAAAAAHUHJlbHVkZQ==",
+                ttTerm: "TEST",
                 type: "Type",
               },
               start: 0,
@@ -423,8 +428,7 @@ export const metavariables: FinalReply.Metavariables = {
                   "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
                 name: "Prelude.Bool.Bool",
                 namespace: "Prelude.Bool",
-                ttTerm:
-                  "AAAAAAAAAAEAAAAAAAAAAAFuAAADAAAAAAAAAAgAAAAAAAAAAAEAAAAAAAAAAARCb29sAAAAAAAAAAIAAAAAAAAABEJvb2wAAAAAAAAAB1ByZWx1ZGU=",
+                ttTerm: "TEST",
                 type: "Type",
               },
               start: 0,
@@ -449,8 +453,7 @@ export const metavariables: FinalReply.Metavariables = {
                 "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
               name: "Prelude.Nat.Nat",
               namespace: "Prelude.Nat",
-              ttTerm:
-                "AAAAAAAAAAAAAwAAAAAAAAAIAAAAAAAAAAABAAAAAAAAAAADTmF0AAAAAAAAAAIAAAAAAAAAA05hdAAAAAAAAAAHUHJlbHVkZQ==",
+              ttTerm: "TEST",
               type: "Type",
             },
             start: 0,
@@ -497,7 +500,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
         decor: ":type",
         docOverview: "The type of types",
         name: "Type",
-        ttTerm: "AAAAAAAAAAAHAAAAAAAAAAASLi9QcmVsdWRlL0Jvb2wuaWRyAAAAAAAAABQ=",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 12,
@@ -533,8 +536,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
           "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bool.Bool",
         namespace: "Prelude.Bool",
-        ttTerm:
-          "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 33,
@@ -563,8 +565,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
           "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bool.Bool",
         namespace: "Prelude.Bool",
-        ttTerm:
-          "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 47,
@@ -628,8 +629,7 @@ export const typeOf: FinalReply.TypeOf = {
         decor: ":type",
         docOverview: "The type of types",
         name: "Type",
-        ttTerm:
-          "AAAAAAAAAAAHAAAAAAAAAAA6L2hvbWUvbWljaGFlbC9kZXYvaWRyaXMtaWRlLWNsaWVudC90ZXN0L3Jlc291cmNlcy90ZXN0LmlkcgAAAAAAAAAU",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 6,

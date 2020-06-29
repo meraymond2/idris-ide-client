@@ -2,6 +2,7 @@ import { assert } from "chai"
 import { IdrisClient } from "../../src/client"
 import * as expected from "./expected"
 import { spawn, ChildProcess } from "child_process"
+import { testTT } from "./helpers"
 
 // These tests are order dependent, which is ugly, but the alternative is
 // stopping and re-starting the client between each one, which would add seconds
@@ -19,7 +20,7 @@ describe("Running the client commands", () => {
 
   it("returns the expected result for :load-file", async () => {
     const actual = await ic.loadFile("./test/resources/test.idr")
-    assert.deepEqual(actual, expected.loadFile)
+    assert.deepEqual(actual, expected.loadFileV1)
   }).timeout(10000)
 
   it("returns the expected result for :add-clause.", async () => {
@@ -40,7 +41,12 @@ describe("Running the client commands", () => {
   it("returns the expected result for :browse-namespace.", async () => {
     const actual = await ic.browseNamespace("Language.Reflection")
     // The metadata for an actual namespace is too long to read if the test fails.
-    if (actual.ok) actual.declarations = actual.declarations.slice(0, 1)
+    if (actual.ok) {
+      actual.declarations = actual.declarations.slice(0, 1)
+      actual.declarations.forEach((decl) => {
+        decl.metadata = testTT(decl.metadata)
+      })
+    }
     assert.deepEqual(actual, expected.browseNamespace)
   })
 
@@ -61,6 +67,7 @@ describe("Running the client commands", () => {
 
   it("returns the expected result for :interpret", async () => {
     const actual = await ic.interpret("2 * 2")
+    if (actual.ok) actual.metadata = testTT(actual.metadata)
     assert.deepEqual(actual, expected.interpret)
   })
 
@@ -81,11 +88,20 @@ describe("Running the client commands", () => {
 
   it("returns the expected result for :metavariables", async () => {
     const actual = await ic.metavariables(80)
+    if (actual.ok) {
+      actual.metavariables.forEach(({ metavariable, premises }) => {
+        metavariable.metadata = testTT(metavariable.metadata)
+        premises.forEach((p) => {
+          p.metadata = testTT(p.metadata)
+        })
+      })
+    }
     assert.deepEqual(actual, expected.metavariables)
   })
 
   it("returns the expected result for :print-definition", async () => {
     const actual = await ic.printDefinition("Bool")
+    if (actual.ok) actual.metadata = testTT(actual.metadata)
     assert.deepEqual(actual, expected.printDefinition)
   })
 
@@ -101,6 +117,7 @@ describe("Running the client commands", () => {
 
   it("returns the expected result for :type-of", async () => {
     const actual = await ic.typeOf("Cat")
+    if (actual.ok) actual.metadata = testTT(actual.metadata)
     assert.deepEqual(actual, expected.typeOf)
   })
 
