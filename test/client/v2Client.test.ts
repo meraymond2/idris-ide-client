@@ -152,7 +152,8 @@ describe("Running the client commands", () => {
     assert.deepEqual(actual, expected.whoCalls)
   })
 
-  after(async () => {
-    // proc.kill()
+  after(() => {
+    ic.close()
+    proc.kill()
   })
 })
