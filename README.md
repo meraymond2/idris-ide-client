@@ -26,6 +26,7 @@ if (reply.ok) {
 
 // Close the client
 client.close()
+idrisProc.kill()
 ```
 
 ## What’s it for?
