@@ -275,7 +275,7 @@ const intoFinalReplyBrowseNamespace = (
   id: number
 ): FinalReply.BrowseNamespace => {
   if (S_Exp.isOkBrowseNamespace(payload)) {
-    const [_ok, [subModules, decls]] = payload
+    const [_ok, [subModules = [], decls = []]] = payload
     return {
       declarations: decls.map(formatDecl),
       id,
