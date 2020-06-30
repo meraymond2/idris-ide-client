@@ -11,7 +11,7 @@ describe("Running the client commands", () => {
   let proc: ChildProcess
 
   before(async () => {
-    proc = spawn("idris", ["--ide-mode"])
+    proc = spawn("idris.exe", ["--ide-mode"])
     if (proc.stdin && proc.stdout) {
       ic = new IdrisClient(proc.stdin, proc.stdout)
     }
