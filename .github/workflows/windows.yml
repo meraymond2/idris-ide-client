@@ -27,6 +27,8 @@ jobs:
           New-Item -Path . -Name "idris1-bin" -ItemType "directory"
           Invoke-WebRequest -OutFile idris1-bin/idris.exe -Uri https://neon.se/idris/idris-1.3.3-win64.exe
           $env:Path += ";$(pwd)/idris1-bin/"
+          ls idris1-bin
+          echo $env:Path
 
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
