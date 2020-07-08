@@ -24,8 +24,7 @@ if (reply.ok) {
   console.warn(reply.err)
 }
 
-// Close the client
-client.close()
+// Close the process
 idrisProc.kill()
 ```
 
@@ -35,7 +34,9 @@ It’s primarily intended to serve as the foundation for my [VSCode extension](h
 Types are great documentation, and I’ve typed all of the s-expressions that the IDE returns in TypeScript. As the IDE protocol documentation is a bit spare, hopefully this will be of help to anyone implementing something similar in the future.
 
 ## Status
-It’s been tested and is working on Idris 1.3.2, on some Linux distributions. When I can get Idris 2 to compile, it will hopefully be extended to that (as far as I understand, the protocol should be backwards compatible).
+It should work with Idris 1.3.X on all OSes.
+
+Idris 2 compatability is being actively worked on, but at the moment, most IDE commands have not been implemented in v2, so it’s still not very usable.
 
 If you experience any problems on other versions or OSes, please raise an issue. Confirming compatability should be as simple as running the tests.
 
