@@ -280,9 +280,10 @@ const intoFinalReplyBrowseNamespace = (
   id: number
 ): FinalReply.BrowseNamespace => {
   if (S_Exp.isOkBrowseNamespace(payload)) {
-    const [_ok, [subModules, decls]] = payload
-    // TODO: why this?
-    // const [_ok, [subModules = [], decls = []]] = payload
+    // As of version 0.2.1 of Idris 2, browse namespace is unimplemented, and so
+    // returns (:ok "" ()). Until the the implementation stabilises, a simple
+    // workaround is just to default subModules and decls to empty lists, to keep it from crashing.
+    const [_ok, [subModules = [], decls = []]] = payload
     return {
       declarations: decls.map(formatDecl),
       id,

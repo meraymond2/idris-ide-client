@@ -229,6 +229,13 @@ export const caseSplit: FinalReply.CaseSplit = {
   type: ":return",
 }
 
+export const caseSplitV2: FinalReply.CaseSplit = {
+  caseClause: "plusTwo 0 = ?plusTwo_rhs_1\nplusTwo (S k) = ?plusTwo_rhs_2",
+  id: 7,
+  ok: true,
+  type: ":return",
+}
+
 export const docsFor: FinalReply.DocsFor = {
   docs:
     "Prelude.Bits.b8ToBinString : Bits8 -> String\n    Encode Bits8 as an 8-character binary string.\n    \n    The function is: Total & public export",
@@ -306,6 +313,13 @@ export const interpret: FinalReply.Interpret = {
 
 export const makeCase: FinalReply.MakeCase = {
   caseClause: "g n b = case _ of\n             case_val => ?g_rhs\n",
+  id: 10,
+  ok: true,
+  type: ":return",
+}
+
+export const makeCaseV2: FinalReply.MakeCase = {
+  caseClause: "g n b = case _ of\n             case_val => ?g_rhs",
   id: 10,
   ok: true,
   type: ":return",

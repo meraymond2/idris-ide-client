@@ -10,10 +10,10 @@ getName Luna = "Luna"
 getName Sherlock = "Sherlock"
 
 plusTwo : (n: Nat) -> Nat
-plusTwo n = plus 2 n
+plusTwo n = ?plusTwo_rhs
 
 g : (n: Nat) -> (b: Bool) -> String
 g n b = ?g_rhs
 
-n : Nat
-n = ?n_rhs
+num : Nat
+num = ?n_rhs
