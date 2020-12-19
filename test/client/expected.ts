@@ -340,6 +340,13 @@ export const makeWith: FinalReply.MakeWith = {
   withClause: "g n b with (_)\n  g n b | with_pat = ?g_rhs_rhs\n",
 }
 
+export const makeWithV2: FinalReply.MakeWith = {
+  id: 12,
+  ok: true,
+  type: ":return",
+  withClause: "g n b with (_)\n  g n b | with_pat = ?g_rhs_rhs",
+}
+
 export const metavariables: FinalReply.Metavariables = {
   metavariables: [
     {

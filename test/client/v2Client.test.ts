@@ -81,70 +81,65 @@ describe("Running the client commands", () => {
     assert.deepEqual(actual, expected.makeCaseV2)
   })
 
-  // // TODO: Partially implemented, no message metadata.
-  // // (:return (:ok "g_rhs : Bool -> Nat -> String\ng_rhs b n") 11)
-  // // Also appears to have an incorrect return value?
-  // it("returns the expected result for :make-lemma", async () => {
-  //   const actual = await ic.makeLemma("g_rhs", 15)
-  //   assert.deepEqual(actual, expected.makeLemma)
-  // })
+  // Partially implemented — Broken
+  // (:return (:ok "g_rhs : Bool -> Nat -> String\ng_rhs b n") 11)
+  it("returns the expected result for :make-lemma", async () => {
+    const actual = await ic.makeLemma("g_rhs", 16)
+    assert.deepEqual(actual, unimplemented.makeLemma)
+  })
 
-  // // TODO: Partially implemented? Looks broken like make-lemma.
-  // // (:return (:ok "g : (n: Nat) -> (b: Bool) -> Stringwith (_)\n  g : (n: Nat) -> (b: Bool) -> String| with_pat = ?g_rhs_rhs\n  ") 12)
-  // it("returns the expected result for :make-with", async () => {
-  //   const actual = await ic.makeWith("g_rhs", 15)
-  //   assert.deepEqual(actual, expected.makeWith)
-  // })
+  it("returns the expected result for :make-with", async () => {
+    const actual = await ic.makeWith("g_rhs", 16)
+    assert.deepEqual(actual, expected.makeWithV2)
+  })
 
-  // // TODO: Unimplemented?
-  // // (:return (:ok (("Main.f" () ("?" ())) ("Main.g_rhs" () ("?" ())) ("Main.n_rhs" () ("?" ())))) 13)
-  // it("returns the expected result for :metavariables", async () => {
-  //   const actual = await ic.metavariables(80)
-  //   assert.deepEqual(actual, expected.metavariables)
-  // })
+  // Partially implemented — no metadata
+  it("returns the expected result for :metavariables", async () => {
+    const actual = await ic.metavariables(80)
+    assert.deepEqual(actual, unimplemented.metavariables)
+  })
 
-  // // TODO: Unimplemented
-  // //  (:write-string "print-definition: command not yet implemented. Hopefully soon!" 14)
-  // it("returns the expected result for :print-definition", async () => {
-  //   const actual = await ic.printDefinition("Bool")
-  //   assert.deepEqual(actual, expected.printDefinition)
-  // })
+  // Unimplemented
+  //  (:write-string "print-definition: command not yet implemented. Hopefully soon!" 14)
+  it("returns the expected result for :print-definition", async () => {
+    const actual = await ic.printDefinition("Bool")
+    assert.deepEqual(actual, unimplemented.printDefinition)
+  })
 
-  // it("returns the expected result for :proof-search", async () => {
-  //   const actual = await ic.proofSearch("n_rhs", 18, [])
-  //   assert.deepEqual(actual, expected.proofSearch)
-  // })
+  it("returns the expected result for :proof-search", async () => {
+    const actual = await ic.proofSearch("n_rhs", 19, [])
+    assert.deepEqual(actual, expected.proofSearch)
+  })
 
-  // // TODO: Unimplemented
-  // // (:write-string "repl-completions: command not yet implemented. Hopefully soon!" 16)
-  // it("returns the expected result for :repl-completions", async () => {
-  //   const actual = await ic.replCompletions("get")
-  //   assert.deepEqual(actual, expected.replCompletions)
-  // })
+  // Unimplemented
+  // (:write-string "repl-completions: command not yet implemented. Hopefully soon!" 16)
+  // (:return (:ok ()) 3)
+  it("returns the expected result for :repl-completions", async () => {
+    const actual = await ic.replCompletions("get")
+    assert.deepEqual(actual, unimplemented.replCompletions)
+  })
 
-  // // TODO: Partially implemented, no message metadata
-  // // (:return (:ok "Main.Cat : Type" ()) 17)
-  // // Reply now namespaces variable, possibly intentional
-  // it("returns the expected result for :type-of", async () => {
-  //   const actual = await ic.typeOf("Cat")
-  //   assert.deepEqual(actual, expected.typeOf)
-  // })
+  // Partially Implemented — no metadata
+  // (:return (:ok "Main.Cat : Type" ()) 17)
+  it("returns the expected result for :type-of", async () => {
+    const actual = await ic.typeOf("Cat")
+    assert.deepEqual(actual, unimplemented.typeOf)
+  })
 
-  // // TODO: Completely broken, will break client, since client assumes (possibly
-  // // naïvely, that all input and output is well-formed.)
-  // // (:return (:error "Unrecognised command: ((:version) 18)") 17)
-  // it("returns the expected result for :version", async () => {
-  //   // const actual = await ic.version()
-  //   // We don’t want to tie the test to an actual version.
-  //   // assert.isTrue(actual.ok)
-  // })
+  // Unimplemented — command completely unrecognised
+  // (:return (:error "Unrecognised command: ((:version) 18)") 17)
+  it("returns the expected result for :version", async () => {
+    // const actual = await ic.version()
+    // We don’t want to tie the test to an actual version.
+    // assert.isTrue(actual.ok)
+  })
 
-  // // TODO: Unimplemented
-  // // (:write-string "who-calls: command not yet implemented. Hopefully soon!" 18)
-  // it("returns the expected result for :who-calls", async () => {
-  //   const actual = await ic.whoCalls("Cat")
-  //   assert.deepEqual(actual, expected.whoCalls)
-  // })
+  // Unimplemented
+  // (:write-string "who-calls: command not yet implemented. Hopefully soon!" 18)
+  it("returns the expected result for :who-calls", async () => {
+    const actual = await ic.whoCalls("Cat")
+    assert.deepEqual(actual, unimplemented.whoCalls)
+  })
 
   after(() => {
     ic.close()

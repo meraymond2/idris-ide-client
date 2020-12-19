@@ -441,6 +441,24 @@ const intoFinalReplyMakeLemma = (
       _ok,
       [_metavariableLemma, [_replace, metavariable], [_def_type, declaration]],
     ] = payload
+    // Idris 2 hack (version 0.2.1):
+    // It only returns a single string, `{declaration}\n{metavar_replacement}
+    // I should probably make this conditional on the protocol version, and give
+    // it a proper type, but I’m considering this reply unstable and broken.
+    const isIdris2 = metavariable === undefined && declaration === undefined
+    if (isIdris2) {
+      const [
+        declaration,
+        metavariable,
+      ] = ((payload[1] as unknown) as string).split("\n")
+      return {
+        declaration,
+        id,
+        ok: true,
+        metavariable,
+        type: ":return",
+      }
+    }
     return {
       declaration,
       id,
@@ -536,7 +554,10 @@ const intoFinalReplyReplCompletions = (
   payload: S_Exp.ReplCompletions,
   id: number
 ): FinalReply.ReplCompletions => {
-  const [_ok, [completions, _x]] = payload // x is always ""?
+  const [_ok, [completions = [], _x]] = payload // x is always ""?
+  // Idris 2 hack:
+  // This command is unimplemented and returns (:return (:ok ()) 3),
+  // but defaulting it to an empty list is enough to suppress errors.
   return {
     completions,
     id,
