@@ -90,8 +90,6 @@ export namespace S_Exp {
     payload[0] === ":ok"
 
   export type BrowseNamespaceOk = [":ok", [string[], Decl[]]]
-  // export type BrowseNamespaceOk = [":ok", [string[], Decl[]]] | [":ok", []]
-  // TODO Why this ^^^
   export type BrowseNamespaceErr = [":error", "Invalid or empty namespace"]
   export type BrowseNamespace = BrowseNamespaceOk | BrowseNamespaceErr
   export const isOkBrowseNamespace = (
