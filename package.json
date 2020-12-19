@@ -21,7 +21,7 @@
     "lint": "tsc --noEmit && prettier --check --write 'src/**/*.ts' && eslint src --ext .ts --fix",
     "prepublishOnly": "npm run build",
     "start": "npm run build && node build/index.js",
-    "test": "npx mocha --recursive --require ts-node/register --extensions ts 'test/**/*.ts'",
+    "test": "NODE_ENV=test npx mocha --recursive --require ts-node/register --extensions ts 'test/**/*.ts'",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {

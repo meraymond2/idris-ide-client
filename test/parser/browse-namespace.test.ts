@@ -120,8 +120,7 @@ describe("Parsing :browse-namespace reply", () => {
                 docOverview: "",
                 type: "Type",
                 namespace: "Language.Reflection",
-                ttTerm:
-                  "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAHQXJpdGhUeQAAAAAAAAACAAAAAAAAAApSZWZsZWN0aW9uAAAAAAAAAAhMYW5ndWFnZQ==",
+                ttTerm: "TEST",
               },
             },
           ],
@@ -180,7 +179,6 @@ describe("Parsing :browse-namespace reply", () => {
               [
                 7,
                 4,
-
                 [
                   [
                     ":tt-term",
@@ -221,8 +219,7 @@ describe("Parsing :browse-namespace reply", () => {
                 decor: ":type",
                 docOverview: "The type of types",
                 name: "Type",
-                ttTerm:
-                  "AAAAAAAAAAAHAAAAAAAAAAASLi9QcmVsdWRlL0Jvb2wuaWRyAAAAAAAAABQ=",
+                ttTerm: "TEST",
                 type: "Type",
               },
               start: 7,

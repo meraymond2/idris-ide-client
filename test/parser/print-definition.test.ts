@@ -167,8 +167,7 @@ describe("Parsing :print-definition reply", () => {
             decor: ":type",
             docOverview: "The type of types",
             name: "Type",
-            ttTerm:
-              "AAAAAAAAAAAHAAAAAAAAAAASLi9QcmVsdWRlL0Jvb2wuaWRyAAAAAAAAABQ=",
+            ttTerm: "TEST",
             type: "Type",
           },
           start: 12,
@@ -204,8 +203,7 @@ describe("Parsing :print-definition reply", () => {
               "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
             name: "Prelude.Bool.Bool",
             namespace: "Prelude.Bool",
-            ttTerm:
-              "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
+            ttTerm: "TEST",
             type: "Type",
           },
           start: 33,
@@ -234,8 +232,7 @@ describe("Parsing :print-definition reply", () => {
               "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
             name: "Prelude.Bool.Bool",
             namespace: "Prelude.Bool",
-            ttTerm:
-              "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
+            ttTerm: "TEST",
             type: "Type",
           },
           start: 47,

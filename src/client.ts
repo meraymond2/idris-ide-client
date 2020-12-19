@@ -38,11 +38,11 @@ export class IdrisClient {
     this.output = output
     this.output.on("data", (chunk: Buffer | string) => {
       if (this.listening) {
-      // On Windows, newlines are \r\n, but the length-header doesn’t take that into account, so they need to be removed.
-      const newChunk = chunk.toString("utf8").replace(/\r\n/g, "\n")
-      this.messageBuffer = this.messageBuffer + newChunk
-      this.consumeOutput()
-}
+        // On Windows, newlines are \r\n, but the length-header doesn’t take that into account, so they need to be removed.
+        const newChunk = chunk.toString("utf8").replace(/\r\n/g, "\n")
+        this.messageBuffer = this.messageBuffer + newChunk
+        this.consumeOutput()
+      }
     })
   }
 
