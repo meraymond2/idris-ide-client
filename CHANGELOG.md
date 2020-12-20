@@ -1,6 +1,8 @@
 ## Unreleased
 ### Added
+- Added a listening flag to the client, so it can stop listening before closing, to handle Idris2 printing invalid messages on exit.
 ### Changed
+- A few workarounds have been added to the reply-parser to handle Idris 2, version 0.2.1.
 ### Fixed
 
 ## v0.1.3
