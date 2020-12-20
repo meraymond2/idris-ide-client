@@ -79,7 +79,11 @@ export namespace S_Exp {
   export type Output = [":ok", [":highlight-source", SourceMetadataExpr[]]]
 
   /* Final Replies */
-  export type AddClause = [":ok", string]
+  export type AddClauseOk = [":ok", string]
+  export type AddClauseErr = [":error", string]
+  export type AddClause = AddClauseOk | AddClauseErr
+  export const isOkAddClause = (payload: AddClause): payload is AddClauseOk =>
+    payload[0] === ":ok"
 
   export type AddMissing = [":ok", string]
 
