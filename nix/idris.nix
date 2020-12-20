@@ -4,6 +4,7 @@ in
 nixpkgs.mkShell {
   buildInputs =
     [
+      nixpkgs.idris
       nixpkgs.idris2
     ];
 }
