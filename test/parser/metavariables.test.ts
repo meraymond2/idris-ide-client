@@ -179,8 +179,7 @@ describe("Parsing :metavariables reply", () => {
               {
                 length: 13,
                 metadata: {
-                  ttTerm:
-                    "AAAAAAAAAAACAAAAAAAAAAADY2F0AQIAAAMAAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxlBwAAAAAAAAAAGy4vLi90ZXN0L3Jlc291cmNlcy90ZXN0LmlkcgAAAAAAAAAXBA0=",
+                  ttTerm: "TEST",
                 },
                 start: 0,
               },
@@ -199,7 +198,7 @@ describe("Parsing :metavariables reply", () => {
                   decor: ":type",
                   docOverview: "Strings in some unspecified encoding",
                   name: "String",
-                  ttTerm: "AAAAAAAAAAIAAAAAAAAAAAFuAAAAAAAAAAAAAWIABA0=",
+                  ttTerm: "TEST",
                   type: "Type",
                 },
                 start: 0,
@@ -222,8 +221,7 @@ describe("Parsing :metavariables reply", () => {
                       "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
                     name: "Prelude.Nat.Nat",
                     namespace: "Prelude.Nat",
-                    ttTerm:
-                      "AAAAAAAAAAAAAwAAAAAAAAAIAAAAAAAAAAABAAAAAAAAAAADTmF0AAAAAAAAAAIAAAAAAAAAA05hdAAAAAAAAAAHUHJlbHVkZQ==",
+                    ttTerm: "TEST",
                     type: "Type",
                   },
                   start: 0,
@@ -244,8 +242,7 @@ describe("Parsing :metavariables reply", () => {
                       "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
                     name: "Prelude.Bool.Bool",
                     namespace: "Prelude.Bool",
-                    ttTerm:
-                      "AAAAAAAAAAEAAAAAAAAAAAFuAAADAAAAAAAAAAgAAAAAAAAAAAEAAAAAAAAAAARCb29sAAAAAAAAAAIAAAAAAAAABEJvb2wAAAAAAAAAB1ByZWx1ZGU=",
+                    ttTerm: "TEST",
                     type: "Type",
                   },
                   start: 0,

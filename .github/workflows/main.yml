@@ -20,9 +20,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: cachix/install-nix-action@v9
-      - uses: cachix/cachix-action@v6
+      - uses: actions/checkout@v2.3.4
+      - uses: cachix/install-nix-action@v12
+      - uses: cachix/cachix-action@v8
         with:
           name: idris-ide-client
           signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
@@ -33,7 +33,5 @@ jobs:
 
       - run: npm ci
 
-      - name: test with idris 1
-        run: nix-shell ./nix/idris1.nix --run "npm run test"
-      # - name: test with idris 2
-      #   run: nix-shell ./nix/idris2 --run "npm run test"
+      - name: run tests
+        run: nix-shell nix/idris.nix --run "npm test"

@@ -132,6 +132,8 @@ const intoSourceMetadata = (
   return terms
 }
 
+const isTest = process.env["NODE_ENV"] === "test"
+
 const intoMessageMetadata = (
   metadata: MsgMetadataExpr[]
 ): MessageMetadata[] => {
@@ -139,10 +141,13 @@ const intoMessageMetadata = (
     return {
       start,
       length,
-      metadata: attrs.reduce(
-        (acc, [k, v]) => ({ ...acc, [camelCaseKey(k)]: v }),
-        {}
-      ),
+      metadata: attrs.reduce((acc, [k, v]) => {
+        const useMockValue = isTest && k === ":tt-term"
+        return {
+          ...acc,
+          [camelCaseKey(k)]: useMockValue ? "TEST" : v,
+        }
+      }, {}),
     }
   })
   const merged = terms.reduce<Record<string, MessageMetadata>>((acc, term) => {
@@ -275,7 +280,10 @@ const intoFinalReplyBrowseNamespace = (
   id: number
 ): FinalReply.BrowseNamespace => {
   if (S_Exp.isOkBrowseNamespace(payload)) {
-    const [_ok, [subModules, decls]] = payload
+    // As of version 0.2.1 of Idris 2, browse namespace is unimplemented, and so
+    // returns (:ok "" ()). Until the the implementation stabilises, a simple
+    // workaround is just to default subModules and decls to empty lists, to keep it from crashing.
+    const [_ok, [subModules = [], decls = []]] = payload
     return {
       declarations: decls.map(formatDecl),
       id,
@@ -433,6 +441,24 @@ const intoFinalReplyMakeLemma = (
       _ok,
       [_metavariableLemma, [_replace, metavariable], [_def_type, declaration]],
     ] = payload
+    // Idris 2 hack (version 0.2.1):
+    // It only returns a single string, `{declaration}\n{metavar_replacement}
+    // I should probably make this conditional on the protocol version, and give
+    // it a proper type, but I’m considering this reply unstable and broken.
+    const isIdris2 = metavariable === undefined && declaration === undefined
+    if (isIdris2) {
+      const [
+        declaration,
+        metavariable,
+      ] = ((payload[1] as unknown) as string).split("\n")
+      return {
+        declaration,
+        id,
+        ok: true,
+        metavariable,
+        type: ":return",
+      }
+    }
     return {
       declaration,
       id,
@@ -528,7 +554,10 @@ const intoFinalReplyReplCompletions = (
   payload: S_Exp.ReplCompletions,
   id: number
 ): FinalReply.ReplCompletions => {
-  const [_ok, [completions, _x]] = payload // x is always ""?
+  const [_ok, [completions = [], _x]] = payload // x is always ""?
+  // Idris 2 hack:
+  // This command is unimplemented and returns (:return (:ok ()) 3),
+  // but defaulting it to an empty list is enough to suppress errors.
   return {
     completions,
     id,

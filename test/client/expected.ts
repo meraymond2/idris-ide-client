@@ -108,8 +108,7 @@ export const browseNamespace: FinalReply.BrowseNamespace = {
             docOverview: "",
             type: "Type",
             namespace: "Language.Reflection",
-            ttTerm:
-              "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAHQXJpdGhUeQAAAAAAAAACAAAAAAAAAApSZWZsZWN0aW9uAAAAAAAAAAhMYW5ndWFnZQ==",
+            ttTerm: "TEST",
           },
         },
       ],
@@ -122,19 +121,19 @@ export const browseNamespace: FinalReply.BrowseNamespace = {
 
 export const callsWho: FinalReply.CallsWho = {
   caller: {
-    name: "Example.plusTwo",
+    name: "Main.plusTwo",
     metadata: [
       {
         start: 0,
-        length: 15,
+        length: 12,
         metadata: {
-          name: "Example.plusTwo",
+          name: "Main.plusTwo",
           implicit: ":False",
-          key: "AQAAAAAAAAAAB3BsdXNUd28AAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
+          key: "AQAAAAAAAAAAB3BsdXNUd28AAAAAAAAAAQAAAAAAAAAETWFpbg==",
           decor: ":function",
           docOverview: "",
           type: "Nat -> Nat",
-          namespace: "Example",
+          namespace: "Main",
         },
       },
     ],
@@ -230,6 +229,13 @@ export const caseSplit: FinalReply.CaseSplit = {
   type: ":return",
 }
 
+export const caseSplitV2: FinalReply.CaseSplit = {
+  caseClause: "plusTwo 0 = ?plusTwo_rhs_1\nplusTwo (S k) = ?plusTwo_rhs_2",
+  id: 7,
+  ok: true,
+  type: ":return",
+}
+
 export const docsFor: FinalReply.DocsFor = {
   docs:
     "Prelude.Bits.b8ToBinString : Bits8 -> String\n    Encode Bits8 as an 8-character binary string.\n    \n    The function is: Total & public export",
@@ -283,7 +289,7 @@ export const interpret: FinalReply.Interpret = {
         decor: ":data",
         docOverview: "An arbitrary-precision integer",
         name: "4",
-        ttTerm: "AAAAAAAAAAAEAQAAAAAE",
+        ttTerm: "TEST",
         type: "Integer",
       },
       start: 0,
@@ -294,7 +300,7 @@ export const interpret: FinalReply.Interpret = {
         decor: ":type",
         docOverview: "Arbitrary-precision integers",
         name: "Integer",
-        ttTerm: "AAAAAAAAAAAECg==",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 4,
@@ -307,6 +313,13 @@ export const interpret: FinalReply.Interpret = {
 
 export const makeCase: FinalReply.MakeCase = {
   caseClause: "g n b = case _ of\n             case_val => ?g_rhs\n",
+  id: 10,
+  ok: true,
+  type: ":return",
+}
+
+export const makeCaseV2: FinalReply.MakeCase = {
+  caseClause: "g n b = case _ of\n             case_val => ?g_rhs",
   id: 10,
   ok: true,
   type: ":return",
@@ -327,6 +340,13 @@ export const makeWith: FinalReply.MakeWith = {
   withClause: "g n b with (_)\n  g n b | with_pat = ?g_rhs_rhs\n",
 }
 
+export const makeWithV2: FinalReply.MakeWith = {
+  id: 12,
+  ok: true,
+  type: ":return",
+  withClause: "g n b with (_)\n  g n b | with_pat = ?g_rhs_rhs",
+}
+
 export const metavariables: FinalReply.Metavariables = {
   metavariables: [
     {
@@ -338,9 +358,9 @@ export const metavariables: FinalReply.Metavariables = {
               decor: ":type",
               docOverview: "",
               implicit: ":False",
-              key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
-              name: "Example.Cat",
-              namespace: "Example",
+              key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAARNYWlu",
+              name: "Main.Cat",
+              namespace: "Main",
               type: "Type",
             },
             start: 0,
@@ -358,13 +378,12 @@ export const metavariables: FinalReply.Metavariables = {
           {
             length: 13,
             metadata: {
-              ttTerm:
-                "AAAAAAAAAAACAAAAAAAAAAADY2F0AQIAAAMAAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxlBwAAAAAAAAAAGy4vLi90ZXN0L3Jlc291cmNlcy90ZXN0LmlkcgAAAAAAAAAXBA0=",
+              ttTerm: "TEST",
             },
             start: 0,
           },
         ],
-        name: "Example.f",
+        name: "Main.f",
         type: "Cat -> String",
       },
       premises: [],
@@ -378,13 +397,13 @@ export const metavariables: FinalReply.Metavariables = {
               decor: ":type",
               docOverview: "Strings in some unspecified encoding",
               name: "String",
-              ttTerm: "AAAAAAAAAAIAAAAAAAAAAAFuAAAAAAAAAAAAAWIABA0=",
+              ttTerm: "TEST",
               type: "Type",
             },
             start: 0,
           },
         ],
-        name: "Example.g_rhs",
+        name: "Main.g_rhs",
         type: "String",
       },
       premises: [
@@ -401,8 +420,7 @@ export const metavariables: FinalReply.Metavariables = {
                   "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
                 name: "Prelude.Nat.Nat",
                 namespace: "Prelude.Nat",
-                ttTerm:
-                  "AAAAAAAAAAAAAwAAAAAAAAAIAAAAAAAAAAABAAAAAAAAAAADTmF0AAAAAAAAAAIAAAAAAAAAA05hdAAAAAAAAAAHUHJlbHVkZQ==",
+                ttTerm: "TEST",
                 type: "Type",
               },
               start: 0,
@@ -423,8 +441,7 @@ export const metavariables: FinalReply.Metavariables = {
                   "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
                 name: "Prelude.Bool.Bool",
                 namespace: "Prelude.Bool",
-                ttTerm:
-                  "AAAAAAAAAAEAAAAAAAAAAAFuAAADAAAAAAAAAAgAAAAAAAAAAAEAAAAAAAAAAARCb29sAAAAAAAAAAIAAAAAAAAABEJvb2wAAAAAAAAAB1ByZWx1ZGU=",
+                ttTerm: "TEST",
                 type: "Type",
               },
               start: 0,
@@ -449,14 +466,13 @@ export const metavariables: FinalReply.Metavariables = {
                 "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
               name: "Prelude.Nat.Nat",
               namespace: "Prelude.Nat",
-              ttTerm:
-                "AAAAAAAAAAAAAwAAAAAAAAAIAAAAAAAAAAABAAAAAAAAAAADTmF0AAAAAAAAAAIAAAAAAAAAA05hdAAAAAAAAAAHUHJlbHVkZQ==",
+              ttTerm: "TEST",
               type: "Type",
             },
             start: 0,
           },
         ],
-        name: "Example.n_rhs",
+        name: "Main.n_rhs",
         type: "Nat",
       },
       premises: [],
@@ -497,7 +513,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
         decor: ":type",
         docOverview: "The type of types",
         name: "Type",
-        ttTerm: "AAAAAAAAAAAHAAAAAAAAAAASLi9QcmVsdWRlL0Jvb2wuaWRyAAAAAAAAABQ=",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 12,
@@ -533,8 +549,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
           "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bool.Bool",
         namespace: "Prelude.Bool",
-        ttTerm:
-          "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 33,
@@ -563,8 +578,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
           "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bool.Bool",
         namespace: "Prelude.Bool",
-        ttTerm:
-          "AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEQm9vbAAAAAAAAAACAAAAAAAAAARCb29sAAAAAAAAAAdQcmVsdWRl",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 47,
@@ -615,9 +629,9 @@ export const typeOf: FinalReply.TypeOf = {
         decor: ":type",
         docOverview: "",
         implicit: ":False",
-        key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
-        name: "Example.Cat",
-        namespace: "Example",
+        key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAARNYWlu",
+        name: "Main.Cat",
+        namespace: "Main",
         type: "Type",
       },
       start: 0,
@@ -628,8 +642,7 @@ export const typeOf: FinalReply.TypeOf = {
         decor: ":type",
         docOverview: "The type of types",
         name: "Type",
-        ttTerm:
-          "AAAAAAAAAAAHAAAAAAAAAAAbLi8uL3Rlc3QvcmVzb3VyY2VzL3Rlc3QuaWRyAAAAAAAAABQ=",
+        ttTerm: "TEST",
         type: "Type",
       },
       start: 6,
@@ -644,111 +657,111 @@ export const whoCalls: FinalReply.WhoCalls = {
   callee: {
     metadata: [
       {
-        length: 11,
+        length: 8,
         metadata: {
           decor: ":type",
           docOverview: "",
           implicit: ":False",
-          key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
-          name: "Example.Cat",
-          namespace: "Example",
+          key: "AQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAARNYWlu",
+          name: "Main.Cat",
+          namespace: "Main",
           type: "Type",
         },
         start: 0,
       },
     ],
-    name: "Example.Cat",
+    name: "Main.Cat",
   },
   references: [
     {
       metadata: [
         {
-          length: 11,
+          length: 8,
           metadata: {
             decor: ":data",
             docOverview: "",
             implicit: ":False",
-            key: "AQAAAAAAAAAAA0NhcwAAAAAAAAABAAAAAAAAAAdFeGFtcGxl",
-            name: "Example.Cas",
-            namespace: "Example",
+            key: "AQAAAAAAAAAAA0NhcwAAAAAAAAABAAAAAAAAAARNYWlu",
+            name: "Main.Cas",
+            namespace: "Main",
             type: "Cat",
           },
           start: 0,
         },
       ],
-      name: "Example.Cas",
-    },
-    {
-      metadata: [
-        {
-          length: 12,
-          metadata: {
-            decor: ":data",
-            docOverview: "",
-            implicit: ":False",
-            key: "AQAAAAAAAAAABEx1bmEAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
-            name: "Example.Luna",
-            namespace: "Example",
-            type: "Cat",
-          },
-          start: 0,
-        },
-      ],
-      name: "Example.Luna",
-    },
-    {
-      metadata: [
-        {
-          length: 16,
-          metadata: {
-            decor: ":data",
-            docOverview: "",
-            implicit: ":False",
-            key: "AQAAAAAAAAAACFNoZXJsb2NrAAAAAAAAAAEAAAAAAAAAB0V4YW1wbGU=",
-            name: "Example.Sherlock",
-            namespace: "Example",
-            type: "Cat",
-          },
-          start: 0,
-        },
-      ],
-      name: "Example.Sherlock",
+      name: "Main.Cas",
     },
     {
       metadata: [
         {
           length: 9,
           metadata: {
-            decor: ":metavar",
+            decor: ":data",
             docOverview: "",
             implicit: ":False",
-            key: "AQAAAAAAAAAAAWYAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
-            name: "Example.f",
-            namespace: "Example",
-            type: "Cat -> String",
+            key: "AQAAAAAAAAAABEx1bmEAAAAAAAAAAQAAAAAAAAAETWFpbg==",
+            name: "Main.Luna",
+            namespace: "Main",
+            type: "Cat",
           },
           start: 0,
         },
       ],
-      name: "Example.f",
+      name: "Main.Luna",
     },
     {
       metadata: [
         {
-          length: 15,
+          length: 13,
           metadata: {
-            decor: ":function",
+            decor: ":data",
             docOverview: "",
             implicit: ":False",
-            key: "AQAAAAAAAAAAB2dldE5hbWUAAAAAAAAAAQAAAAAAAAAHRXhhbXBsZQ==",
-            name: "Example.getName",
-            namespace: "Example",
+            key: "AQAAAAAAAAAACFNoZXJsb2NrAAAAAAAAAAEAAAAAAAAABE1haW4=",
+            name: "Main.Sherlock",
+            namespace: "Main",
+            type: "Cat",
+          },
+          start: 0,
+        },
+      ],
+      name: "Main.Sherlock",
+    },
+    {
+      metadata: [
+        {
+          length: 6,
+          metadata: {
+            decor: ":metavar",
+            docOverview: "",
+            implicit: ":False",
+            key: "AQAAAAAAAAAAAWYAAAAAAAAAAQAAAAAAAAAETWFpbg==",
+            name: "Main.f",
+            namespace: "Main",
             type: "Cat -> String",
           },
           start: 0,
         },
       ],
-      name: "Example.getName",
+      name: "Main.f",
+    },
+    {
+      metadata: [
+        {
+          length: 12,
+          metadata: {
+            decor: ":function",
+            docOverview: "",
+            implicit: ":False",
+            key: "AQAAAAAAAAAAB2dldE5hbWUAAAAAAAAAAQAAAAAAAAAETWFpbg==",
+            name: "Main.getName",
+            namespace: "Main",
+            type: "Cat -> String",
+          },
+          start: 0,
+        },
+      ],
+      name: "Main.getName",
     },
   ],
   id: 19,
