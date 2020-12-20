@@ -79,7 +79,9 @@ export namespace S_Exp {
   export type Output = [":ok", [":highlight-source", SourceMetadataExpr[]]]
 
   /* Final Replies */
-  export type AddClause = [":ok", string]
+  export type AddClauseOk = [":ok", string]
+  export type AddClauseErr = [":error", string]
+  export type AddClause = AddClauseOk | AddClauseErr
 
   export type AddMissing = [":ok", string]
 

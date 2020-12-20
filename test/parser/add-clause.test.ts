@@ -24,4 +24,23 @@ describe("Parsing :add-clause reply", () => {
     const parsed = parseReply(rootExpr, ":add-clause")
     assert.deepEqual(parsed, expected)
   })
+
+  it("can parse a failure sexp.", () => {
+    const sexp = `(:return (:error "f not defined here") 5)`
+    const payload: S_Exp.AddClause = [":error", "f not defined here"]
+    const rootExpr: RootExpr = [":return", payload, 5]
+    const expected: FinalReply.AddClause = {
+      err: "f not defined here",
+      id: 5,
+      ok: false,
+      type: ":return",
+    }
+
+    const tokens = lex(sexp)
+    const exprs = deserialise(tokens)[0] as RootExpr
+    assert.deepEqual(exprs, rootExpr)
+
+    const parsed = parseReply(rootExpr, ":add-clause")
+    assert.deepEqual(parsed, expected)
+  })
 })

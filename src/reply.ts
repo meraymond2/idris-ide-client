@@ -102,12 +102,14 @@ export namespace FinalReply {
   export const isFinalReply = (reply: Reply): boolean =>
     reply.type === ":return"
 
-  export type AddClause = {
-    initialClause: string
-    id: number
-    ok: true
-    type: ":return"
-  }
+  export type AddClause =
+    | {
+        initialClause: string
+        id: number
+        ok: true
+        type: ":return"
+      }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   export type AddMissing = {
     id: number
