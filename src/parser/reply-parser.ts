@@ -229,12 +229,22 @@ const intoFinalReplyAddClause = (
   payload: S_Exp.AddClause,
   id: number
 ): FinalReply.AddClause => {
-  const [_ok, initialClause] = payload
-  return {
-    initialClause,
-    id,
-    ok: true,
-    type: ":return",
+  if (S_Exp.isOkAddClause(payload)) {
+    const [_ok, initialClause] = payload
+    return {
+      initialClause,
+      id,
+      ok: true,
+      type: ":return",
+    }
+  } else {
+    const [_err, msg] = payload
+    return {
+      err: msg,
+      id,
+      ok: false,
+      type: ":return",
+    }
   }
 }
 
