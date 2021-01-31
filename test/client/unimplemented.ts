@@ -78,12 +78,12 @@ export const metavariables: FinalReply.Metavariables = {
       premises: [
         {
           metadata: [],
-          name: "   b",
+          name: "  b",
           type: "Bool",
         },
         {
           metadata: [],
-          name: "   n",
+          name: "  n",
           type: "Nat",
         },
       ],
@@ -107,7 +107,7 @@ export const metavariables: FinalReply.Metavariables = {
       premises: [
         {
           metadata: [],
-          name: "   n",
+          name: "  n",
           type: "Nat",
         },
       ],
