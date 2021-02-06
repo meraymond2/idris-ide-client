@@ -168,6 +168,13 @@ export namespace FinalReply {
       }
     | { err: string; id: number; ok: false; type: ":return" }
 
+  export type GenerateDef = {
+    def: string
+    id: number
+    ok: true
+    type: ":return"
+  }
+
   /**
    * If part of the input can be interpreted, it will be an error, but with metadata.
    */
@@ -290,6 +297,7 @@ export type Reply =
   | FinalReply.CallsWho
   | FinalReply.CaseSplit
   | FinalReply.DocsFor
+  | FinalReply.GenerateDef
   | FinalReply.Interpret
   | FinalReply.LoadFile
   | FinalReply.MakeCase

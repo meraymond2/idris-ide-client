@@ -197,6 +197,12 @@ export class IdrisClient {
     return this.makeReq(req).then((r) => r as FinalReply.DocsFor)
   }
 
+  public generateDef(line: number, name: string): Promise<any> {
+    const id = ++this.reqCounter
+    const req: Request.GenerateDef = { id, line, name, type: ":generate-def" }
+    return this.makeReq(req)
+  }
+
   /**
    * Returns a reply containing the a string representing the result of
    * interpreting the input, with metadata. Also emits `OutputReply`s with

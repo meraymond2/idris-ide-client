@@ -64,6 +64,14 @@ export const metavariables: FinalReply.Metavariables = {
     {
       metavariable: {
         metadata: [],
+        name: "Main.append",
+        type: "Vect n a -> Vect m a -> Vect (plus n m) a",
+      },
+      premises: [],
+    },
+    {
+      metavariable: {
+        metadata: [],
         name: "Main.f",
         type: "Cat -> String",
       },

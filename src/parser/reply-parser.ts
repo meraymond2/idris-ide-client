@@ -41,6 +41,8 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
           return intoFinalReplyCaseSplit(payload as S_Exp.CaseSplit, id)
         case ":docs-for":
           return intoFinalReplyDocsFor(payload as S_Exp.DocsFor, id)
+        case ":generate-def":
+          return intoFinalReplyGenerateDef(payload as S_Exp.GenerateDef, id)
         case ":interpret":
           return intoFinalReplyInterpret(payload as S_Exp.Interpret, id)
         case ":load-file":
@@ -380,6 +382,19 @@ const intoFinalReplyDocsFor = (
       ok: false,
       type: ":return",
     }
+  }
+}
+
+const intoFinalReplyGenerateDef = (
+  payload: S_Exp.GenerateDef,
+  id: number
+): FinalReply.GenerateDef => {
+  const [_ok, def] = payload
+  return {
+    def,
+    id,
+    ok: true,
+    type: ":return",
   }
 }
 

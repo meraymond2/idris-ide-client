@@ -280,6 +280,13 @@ export const docsFor: FinalReply.DocsFor = {
   type: ":return",
 }
 
+export const generateDef: FinalReply.GenerateDef = {
+  def: "append [] ys = ys\nappend (x :: xs) ys = x :: append xs ys",
+  id: 19,
+  ok: true,
+  type: ":return",
+}
+
 export const interpret: FinalReply.Interpret = {
   result: "4 : Integer",
   metadata: [

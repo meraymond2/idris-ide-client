@@ -8,6 +8,7 @@ export type RequestType =
   | ":case-split"
   | ":docs-for"
   // | ":elaborate-term"
+  | ":generate-def"
   // | ":hide-term-implicits"
   | ":interpret"
   | ":load-file"
@@ -76,6 +77,13 @@ export namespace Request {
     mode: DocMode
     name: string
     type: ":docs-for"
+  }
+
+  export interface GenerateDef extends RequestBase {
+    id: number
+    line: number
+    name: string
+    type: ":generate-def"
   }
 
   export interface Interpret extends RequestBase {
@@ -163,6 +171,7 @@ export type Request =
   | Request.CallsWho
   | Request.CaseSplit
   | Request.DocsFor
+  | Request.GenerateDef
   | Request.Interpret
   | Request.LoadFile
   | Request.MakeCase
@@ -186,6 +195,7 @@ const serialiseArgs = (req: Request): string => {
     case ":add-clause":
     case ":add-missing":
     case ":case-split":
+    case ":generate-def":
     case ":make-case":
     case ":make-lemma":
     case ":make-with":
