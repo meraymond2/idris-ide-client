@@ -389,12 +389,22 @@ const intoFinalReplyGenerateDef = (
   payload: S_Exp.GenerateDef,
   id: number
 ): FinalReply.GenerateDef => {
-  const [_ok, def] = payload
-  return {
-    def,
-    id,
-    ok: true,
-    type: ":return",
+  if (S_Exp.isOkGenerateDef(payload)) {
+    const [_ok, def] = payload
+    return {
+      def,
+      id,
+      ok: true,
+      type: ":return",
+    }
+  } else {
+    const [_err, err] = payload
+    return {
+      err,
+      id,
+      ok: false,
+      type: ":return",
+    }
   }
 }
 

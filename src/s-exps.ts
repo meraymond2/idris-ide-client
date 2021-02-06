@@ -117,7 +117,12 @@ export namespace S_Exp {
   export const isOkDocsFor = (payload: DocsFor): payload is DocsForOk =>
     payload[0] === ":ok"
 
-  export type GenerateDef = [":ok", string]
+  export type GenerateDefOk = [":ok", string]
+  export type GenerateDefErr = [":error", string]
+  export type GenerateDef = GenerateDefOk | GenerateDefErr
+  export const isOkGenerateDef = (
+    payload: GenerateDef
+  ): payload is GenerateDefOk => payload[0] === ":ok"
 
   export type InterpretOk = [":ok", string, MsgMetadataExpr[]]
   // If it can parse some of the input, it returns metadata.

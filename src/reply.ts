@@ -168,12 +168,14 @@ export namespace FinalReply {
       }
     | { err: string; id: number; ok: false; type: ":return" }
 
-  export type GenerateDef = {
-    def: string
-    id: number
-    ok: true
-    type: ":return"
-  }
+  export type GenerateDef =
+    | {
+        def: string
+        id: number
+        ok: true
+        type: ":return"
+      }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   /**
    * If part of the input can be interpreted, it will be an error, but with metadata.

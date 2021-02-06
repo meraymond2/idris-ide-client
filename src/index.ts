@@ -11,3 +11,18 @@ export {
 } from "./reply"
 export { Request } from "./request"
 export { Decor } from "./s-exps"
+
+import { IdrisClient } from "./client"
+import { spawn } from "child_process"
+
+const idrisProc = spawn("idris2", ["--ide-mode"])
+const client = new IdrisClient(idrisProc.stdin, idrisProc.stdout, {
+  debug: true,
+})
+
+client.loadFile("temp.idr").then(() => {
+  client
+    .generateDef(5, "append")
+    .then(console.log)
+    .then(() => idrisProc.kill())
+})

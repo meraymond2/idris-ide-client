@@ -197,6 +197,16 @@ export class IdrisClient {
     return this.makeReq(req).then((r) => r as FinalReply.DocsFor)
   }
 
+  /**
+   * Returns a reply with an attempted solution for the given declaration.
+   *
+   * Returns an error if there is no function declaration on the line arg. It
+   * returns the same not-found error if it is partially-defined.
+   * If the function is already completely defined (all cases handled), it will
+   * return a different error.
+   *
+   * The name parameter doesn’t appear to make any difference.
+   */
   public generateDef(line: number, name: string): Promise<any> {
     const id = ++this.reqCounter
     const req: Request.GenerateDef = { id, line, name, type: ":generate-def" }
