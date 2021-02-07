@@ -141,14 +141,19 @@ describe("Running the client commands", () => {
 
   // New V2 commands
 
-  it("returns the expected result for :generaate-def", async () => {
+  it("returns the expected result for :generate-def", async () => {
     const actual = await ic.generateDef(23, "append")
     assert.deepEqual(actual, expected.generateDef)
   })
 
-  it("returns the expected result for :generaate-def-next", async () => {
+  it("returns the expected result for :generate-def-next", async () => {
     const actual = await ic.generateDefNext()
     assert.deepEqual(actual, expected.generateDefNext)
+  })
+
+  it("returns the expected result for :proof-search-next", async () => {
+    const actual = await ic.proofSearchNext()
+    assert.deepEqual(actual, expected.proofSearchNext)
   })
 
   after(() => {

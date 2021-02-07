@@ -280,20 +280,6 @@ export const docsFor: FinalReply.DocsFor = {
   type: ":return",
 }
 
-export const generateDef: FinalReply.GenerateDef = {
-  def: "append [] ys = ys\nappend (x :: xs) ys = x :: append xs ys",
-  id: 20,
-  ok: true,
-  type: ":return",
-}
-
-export const generateDefNext: FinalReply.GenerateDef = {
-  def: "append [] ys = ys\nappend (x :: xs) [] = x :: append xs []\nappend (x :: xs) (y :: ys) = x :: append xs (y :: ys)",
-  id: 21,
-  ok: true,
-  type: ":return",
-}
-
 export const interpret: FinalReply.Interpret = {
   result: "4 : Integer",
   metadata: [
@@ -780,5 +766,28 @@ export const whoCalls: FinalReply.WhoCalls = {
   ],
   id: 19,
   ok: true,
+  type: ":return",
+}
+
+// Idris 2 only.
+export const generateDef: FinalReply.GenerateDef = {
+  def: "append [] ys = ys\nappend (x :: xs) ys = x :: append xs ys",
+  id: 20,
+  ok: true,
+  type: ":return",
+}
+
+export const generateDefNext: FinalReply.GenerateDef = {
+  def:
+    "append [] ys = ys\nappend (x :: xs) [] = x :: append xs []\nappend (x :: xs) (y :: ys) = x :: append xs (y :: ys)",
+  id: 21,
+  ok: true,
+  type: ":return",
+}
+
+export const proofSearchNext: FinalReply.ProofSearch = {
+  id: 22,
+  ok: true,
+  solution: "1",
   type: ":return",
 }

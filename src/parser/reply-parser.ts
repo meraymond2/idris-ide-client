@@ -76,7 +76,6 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
         case ":who-calls":
           return intoFinalReplyWhoCalls(payload as S_Exp.WhoCalls, id)
         default:
-          console.log("!!!", payload, "???")
           throw "Unreachable."
       }
     case ":set-prompt":
