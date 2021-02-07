@@ -5,7 +5,8 @@ import { deserialise } from "../../src/parser/expr-parser"
 import { lex } from "../../src/parser/lexer"
 import { RootExpr, S_Exp } from "../../src/s-exps"
 
-describe("Parsing :proof-search reply", () => {
+// Idris 2 only.
+describe("Parsing :proof-search-next reply", () => {
   it("can parse a success sexp.", () => {
     const sexp = `(:return (:ok "0") 2)`
     const payload: S_Exp.ProofSearch = [":ok", "0"]
@@ -25,14 +26,13 @@ describe("Parsing :proof-search reply", () => {
     assert.deepEqual(parsed, expected)
   })
 
-  // Idris 2 only.
   it("can parse a failure sexp.", () => {
-    const sexp = `(:return (:error "Not a searchable hole") 2)`
-    const payload: S_Exp.ProofSearch = [":error", "Not a searchable hole"]
-    const rootExpr: RootExpr = [":return", payload, 2]
+    const sexp = `(:return (:error "No more results") 4)`
+    const payload: S_Exp.ProofSearch = [":error", "No more results"]
+    const rootExpr: RootExpr = [":return", payload, 4]
     const expected: FinalReply.ProofSearch = {
-      err: "Not a searchable hole",
-      id: 2,
+      err: "No more results",
+      id: 4,
       ok: false,
       type: ":return",
     }
@@ -41,7 +41,7 @@ describe("Parsing :proof-search reply", () => {
     const exprs = deserialise(tokens)[0] as RootExpr
     assert.deepEqual(exprs, rootExpr)
 
-    const parsed = parseReply(rootExpr, ":proof-search")
+    const parsed = parseReply(rootExpr, ":proof-search-next")
     assert.deepEqual(parsed, expected)
   })
 })

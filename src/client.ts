@@ -1,7 +1,14 @@
 import { parseReply, parseRootExpr } from "./parser"
 import { FinalReply, Reply } from "./reply"
-import { DocMode, Request, RequestType, serialiseRequest } from "./request"
+import {
+  DocMode,
+  Request,
+  RequestType,
+  serialiseRequest,
+  serialiseRequestV2,
+} from "./request"
 import { Readable, Writable } from "stream"
+import { S_Exp } from "./s-exps"
 
 const HEADER_LENGTH = 6
 
@@ -22,6 +29,7 @@ export class IdrisClient {
   private listening: boolean
   private messageBuffer: string
   private output: Readable
+  private protocol: number | null = null
   private registry: Record<string, Resolver>
   private replyCallback?: ReplyCallback
   private reqCounter: number
@@ -71,6 +79,12 @@ export class IdrisClient {
 
   replyHandler(plString: string) {
     const rootExpr = parseRootExpr(plString)
+
+    if (rootExpr[0] === ":protocol-version") {
+      const version = rootExpr[1] as S_Exp.ProtocolVersion
+      this.protocol = version
+    }
+
     const id = rootExpr[2]
     if (this.registry[id]) {
       const { requestType, resFn } = this.registry[id]
@@ -84,7 +98,9 @@ export class IdrisClient {
   }
 
   makeReq(req: Request): Promise<Reply> {
-    const serialisedReq = serialiseRequest(req)
+    const serialise =
+      this.protocol === 2 ? serialiseRequestV2 : serialiseRequest
+    const serialisedReq = serialise(req)
     if (this.debug) console.debug("<< " + serialisedReq)
     return new Promise((res) => {
       this.registry[req.id] = { requestType: req.type, resFn: res }
@@ -198,6 +214,48 @@ export class IdrisClient {
   }
 
   /**
+   * Returns a reply with an attempted solution for the given declaration.
+   *
+   * Returns an error if there is no function declaration on the line arg. It
+   * returns the same not-found error if it is partially-defined.
+   * If the function is already completely defined (all cases handled), it will
+   * return a different error.
+   *
+   * The name parameter doesn’t appear to make any difference.
+   *
+   * This command is Idris 2 only, and will return an unrecognised error if
+   * sent to Idris 1.
+   */
+  public generateDef(
+    line: number,
+    name: string
+  ): Promise<FinalReply.GenerateDef> {
+    const id = ++this.reqCounter
+    const req: Request.GenerateDef = { id, line, name, type: ":generate-def" }
+    return this.makeReq(req).then((r) => r as FinalReply.GenerateDef)
+  }
+
+  /**
+   * Returns a reply with the next attempted solution for the last generate-def
+   * request. If there is a failed generate-def, generate-def-next will continue
+   * producing output for the last _successful_ one.
+   *
+   * Returns an error if it runs out of possible solutions. If no generate-def
+   * requests have been made, it will also report out of solutions.
+   *
+   * This command is Idris 2 only, and will return an unrecognised error if
+   * sent to Idris 1.
+   *
+   * The Idris 2 process keeps track of the definition generation state, the
+   * client does track any state.
+   */
+  public generateDefNext(): Promise<FinalReply.GenerateDef> {
+    const id = ++this.reqCounter
+    const req: Request.GenerateDefNext = { id, type: ":generate-def-next" }
+    return this.makeReq(req).then((r) => r as FinalReply.GenerateDef)
+  }
+
+  /**
    * Returns a reply containing the a string representing the result of
    * interpreting the input, with metadata. Also emits `OutputReply`s with
    * source highlighting for the input.
@@ -290,12 +348,13 @@ export class IdrisClient {
 
   /**
    * Returns a reply containing an attempt to solve a metavariable given its
-   * current scope.
+   * current scope. The hole name should omit the ?.
    *
    * It is unclear how the hints argument works. The protocol documentation describes
    * it as ‘possibly-empty list of additional things to try while searching’.
    *
-   * Always successful — is an empty string if no solution is found.
+   * With Idris 1, always successful — is an empty string if no solution is found.
+   * Can fail with Idris 2 if the name isn’t found or if it’s not a hole.
    */
   public proofSearch(
     name: string,
@@ -310,6 +369,26 @@ export class IdrisClient {
       hints,
       type: ":proof-search",
     }
+    return this.makeReq(req).then((r) => r as FinalReply.ProofSearch)
+  }
+
+  /**
+   * Returns a reply with the next attempted solution for the last proof-search
+   * request. If there is a failed proof-search, proof-search-next will continue
+   * producing output for the last _successful_ one.
+   *
+   * Returns an error if it runs out of possible solutions. If no proof-search
+   * requests have been made, it will also report out of solutions.
+   *
+   * This command is Idris 2 only, and will return an unrecognised error if
+   * sent to Idris 1.
+   *
+   * The Idris 2 process keeps track of the definition generation state, the
+   * client does track any state.
+   */
+  public proofSearchNext(): Promise<FinalReply.ProofSearch> {
+    const id = ++this.reqCounter
+    const req: Request.ProofSearchNext = { id, type: ":proof-search-next" }
     return this.makeReq(req).then((r) => r as FinalReply.ProofSearch)
   }
 

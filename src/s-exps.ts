@@ -117,6 +117,13 @@ export namespace S_Exp {
   export const isOkDocsFor = (payload: DocsFor): payload is DocsForOk =>
     payload[0] === ":ok"
 
+  export type GenerateDefOk = [":ok", string]
+  export type GenerateDefErr = [":error", string]
+  export type GenerateDef = GenerateDefOk | GenerateDefErr
+  export const isOkGenerateDef = (
+    payload: GenerateDef
+  ): payload is GenerateDefOk => payload[0] === ":ok"
+
   export type InterpretOk = [":ok", string, MsgMetadataExpr[]]
   // If it can parse some of the input, it returns metadata.
   export type InterpretErr =
@@ -160,7 +167,12 @@ export namespace S_Exp {
     payload: PrintDefinition
   ): payload is PrintDefinitionOk => payload[0] === ":ok"
 
-  export type ProofSearch = [":ok", string]
+  export type ProofSearchOk = [":ok", string]
+  export type ProofSearchErr = [":error", string]
+  export type ProofSearch = ProofSearchOk | ProofSearchErr
+  export const isOkProofSearch = (
+    payload: ProofSearch
+  ): payload is ProofSearchOk => payload[0] === ":ok"
 
   export type ReplCompletions = [":ok", [string[], ""]]
 

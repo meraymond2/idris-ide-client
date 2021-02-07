@@ -64,6 +64,14 @@ export const metavariables: FinalReply.Metavariables = {
     {
       metavariable: {
         metadata: [],
+        name: "Main.append",
+        type: "Vect n a -> Vect m a -> Vect (plus n m) a",
+      },
+      premises: [],
+    },
+    {
+      metavariable: {
+        metadata: [],
         name: "Main.f",
         type: "Cat -> String",
       },
@@ -144,7 +152,7 @@ export const typeOf: FinalReply.TypeOf = {
 export const whoCalls: FinalReply.WhoCalls = {
   callee: null,
   references: [],
-  id: 18, // one lower, until version can be implemented
+  id: 19,
   ok: true,
   type: ":return",
 }

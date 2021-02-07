@@ -168,6 +168,15 @@ export namespace FinalReply {
       }
     | { err: string; id: number; ok: false; type: ":return" }
 
+  export type GenerateDef =
+    | {
+        def: string
+        id: number
+        ok: true
+        type: ":return"
+      }
+    | { err: string; id: number; ok: false; type: ":return" }
+
   /**
    * If part of the input can be interpreted, it will be an error, but with metadata.
    */
@@ -236,12 +245,14 @@ export namespace FinalReply {
       }
     | { err: string; id: number; ok: false; type: ":return" }
 
-  export type ProofSearch = {
-    id: number
-    ok: true
-    solution: string
-    type: ":return"
-  }
+  export type ProofSearch =
+    | {
+        id: number
+        ok: true
+        solution: string
+        type: ":return"
+      }
+    | { err: string; id: number; ok: false; type: ":return" }
 
   /**
    * This reply omits an additional element that seems to always be an empty string.
@@ -290,6 +301,7 @@ export type Reply =
   | FinalReply.CallsWho
   | FinalReply.CaseSplit
   | FinalReply.DocsFor
+  | FinalReply.GenerateDef
   | FinalReply.Interpret
   | FinalReply.LoadFile
   | FinalReply.MakeCase

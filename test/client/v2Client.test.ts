@@ -24,7 +24,7 @@ describe("Running the client commands", () => {
   }).timeout(10000)
 
   it("returns the expected result for :add-clause.", async () => {
-    const actual = await ic.addClause("f", 5)
+    const actual = await ic.addClause("f", 7)
     assert.deepEqual(actual, expected.addClause)
   })
 
@@ -32,7 +32,7 @@ describe("Running the client commands", () => {
   // (:write-string "add-missing: command not yet implemented. Hopefully soon!" 3)
   // Also, how will this work if it won’t load the file with missing cases?
   it("returns the expected result for :add-missing.", async () => {
-    const actual = await ic.addMissing("getName", 7)
+    const actual = await ic.addMissing("getName", 9)
     assert.deepEqual(actual, unimplemented.addMissing)
   })
 
@@ -58,7 +58,7 @@ describe("Running the client commands", () => {
   })
 
   it("returns the expected result for :case-split", async () => {
-    const actual = await ic.caseSplit("n", 13)
+    const actual = await ic.caseSplit("n", 15)
     assert.deepEqual(actual, expected.caseSplitV2)
   })
 
@@ -77,19 +77,19 @@ describe("Running the client commands", () => {
   })
 
   it("returns the expected result for :make-case", async () => {
-    const actual = await ic.makeCase("g_rhs", 16)
+    const actual = await ic.makeCase("g_rhs", 18)
     assert.deepEqual(actual, expected.makeCaseV2)
   })
 
   // Partially implemented — Broken
   // (:return (:ok "g_rhs : Bool -> Nat -> String\ng_rhs b n") 11)
   it("returns the expected result for :make-lemma", async () => {
-    const actual = await ic.makeLemma("g_rhs", 16)
+    const actual = await ic.makeLemma("g_rhs", 18)
     assert.deepEqual(actual, unimplemented.makeLemma)
   })
 
   it("returns the expected result for :make-with", async () => {
-    const actual = await ic.makeWith("g_rhs", 16)
+    const actual = await ic.makeWith("g_rhs", 18)
     assert.deepEqual(actual, expected.makeWithV2)
   })
 
@@ -107,7 +107,7 @@ describe("Running the client commands", () => {
   })
 
   it("returns the expected result for :proof-search", async () => {
-    const actual = await ic.proofSearch("n_rhs", 19, [])
+    const actual = await ic.proofSearch("n_rhs", 21, [])
     assert.deepEqual(actual, expected.proofSearch)
   })
 
@@ -126,12 +126,10 @@ describe("Running the client commands", () => {
     assert.deepEqual(actual, unimplemented.typeOf)
   })
 
-  // Unimplemented — command completely unrecognised
-  // (:return (:error "Unrecognised command: ((:version) 18)") 17)
   it("returns the expected result for :version", async () => {
-    // const actual = await ic.version()
+    const actual = await ic.version()
     // We don’t want to tie the test to an actual version.
-    // assert.isTrue(actual.ok)
+    assert.isTrue(actual.ok)
   })
 
   // Unimplemented
@@ -139,6 +137,23 @@ describe("Running the client commands", () => {
   it("returns the expected result for :who-calls", async () => {
     const actual = await ic.whoCalls("Cat")
     assert.deepEqual(actual, unimplemented.whoCalls)
+  })
+
+  // New V2 commands
+
+  it("returns the expected result for :generate-def", async () => {
+    const actual = await ic.generateDef(23, "append")
+    assert.deepEqual(actual, expected.generateDef)
+  })
+
+  it("returns the expected result for :generate-def-next", async () => {
+    const actual = await ic.generateDefNext()
+    assert.deepEqual(actual, expected.generateDefNext)
+  })
+
+  it("returns the expected result for :proof-search-next", async () => {
+    const actual = await ic.proofSearchNext()
+    assert.deepEqual(actual, expected.proofSearchNext)
   })
 
   after(() => {

@@ -21,7 +21,7 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
     case ":output":
       return intoOutputReply(payload as S_Exp.Output, id)
     case ":protocol-version":
-      return intoInfoReplyVersion(payload as S_Exp.ProtocolVersion, id)
+      return intoInfoReplyProtocolVersion(payload as S_Exp.ProtocolVersion, id)
     case ":return":
       switch (requestType) {
         case ":add-clause":
@@ -41,6 +41,9 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
           return intoFinalReplyCaseSplit(payload as S_Exp.CaseSplit, id)
         case ":docs-for":
           return intoFinalReplyDocsFor(payload as S_Exp.DocsFor, id)
+        case ":generate-def":
+        case ":generate-def-next":
+          return intoFinalReplyGenerateDef(payload as S_Exp.GenerateDef, id)
         case ":interpret":
           return intoFinalReplyInterpret(payload as S_Exp.Interpret, id)
         case ":load-file":
@@ -59,6 +62,7 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
             id
           )
         case ":proof-search":
+        case ":proof-search-next":
           return intoFinalReplyProofSearch(payload as S_Exp.ProofSearch, id)
         case ":repl-completions":
           return intoFinalReplyReplCompletions(
@@ -172,7 +176,7 @@ const intoInfoReplySetPrompt = (
   type: ":set-prompt",
 })
 
-const intoInfoReplyVersion = (
+const intoInfoReplyProtocolVersion = (
   payload: S_Exp.ProtocolVersion,
   id: number
 ): InfoReply.Version => ({
@@ -383,6 +387,29 @@ const intoFinalReplyDocsFor = (
   }
 }
 
+const intoFinalReplyGenerateDef = (
+  payload: S_Exp.GenerateDef,
+  id: number
+): FinalReply.GenerateDef => {
+  if (S_Exp.isOkGenerateDef(payload)) {
+    const [_ok, def] = payload
+    return {
+      def,
+      id,
+      ok: true,
+      type: ":return",
+    }
+  } else {
+    const [_err, err] = payload
+    return {
+      err,
+      id,
+      ok: false,
+      type: ":return",
+    }
+  }
+}
+
 const intoFinalReplyInterpret = (
   payload: S_Exp.Interpret,
   id: number
@@ -551,12 +578,22 @@ const intoFinalReplyProofSearch = (
   payload: S_Exp.ProofSearch,
   id: number
 ): FinalReply.ProofSearch => {
-  const [_ok, solution] = payload
-  return {
-    id,
-    ok: true,
-    solution,
-    type: ":return",
+  if (S_Exp.isOkProofSearch(payload)) {
+    const [_ok, solution] = payload
+    return {
+      id,
+      ok: true,
+      solution,
+      type: ":return",
+    }
+  } else {
+    const [_err, msg] = payload
+    return {
+      err: msg,
+      id,
+      ok: false,
+      type: ":return",
+    }
   }
 }
 

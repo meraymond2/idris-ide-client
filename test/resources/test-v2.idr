@@ -1,5 +1,7 @@
 module Main
 
+import Data.Vect
+
 data Cat = Cas | Luna | Sherlock
 
 f : (cat: Cat) -> String
@@ -17,3 +19,5 @@ g n b = ?g_rhs
 
 num : Nat
 num = ?n_rhs
+
+append : Vect n a -> Vect m a -> Vect (n + m) a
