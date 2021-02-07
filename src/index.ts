@@ -17,16 +17,14 @@ import { spawn } from "child_process"
 
 const idrisProc = spawn("idris2", ["--ide-mode"])
 const client = new IdrisClient(idrisProc.stdin, idrisProc.stdout, {
-  debug: false,
+  debug: true,
 })
 
-client.loadFile("temp.idr").then(() => {
+client.loadFile("../temp.idr").then(() => {
   client
-    // .generateDef(5, "append")
-    // .then(console.log)
-    // .then(() => client.version())
-
-    .version()
+    .generateDef(5, "append")
+    .then(console.log)
+    .then(() => client.generateDefNext())
     .then(console.log)
     .then(() => idrisProc.kill())
 })

@@ -222,6 +222,9 @@ export class IdrisClient {
    * return a different error.
    *
    * The name parameter doesn’t appear to make any difference.
+   *
+   * This command is Idris 2 only, and will return an unrecognised error if
+   * sent to Idris 1.
    */
   public generateDef(
     line: number,
@@ -233,12 +236,23 @@ export class IdrisClient {
   }
 
   /**
-   * TODO!
+   * Returns a reply with the next attempted solution for the last generate-def
+   * request. If there is a failed generate-def, generate-def-next will continue
+   * producing output for the last _successful_ one.
+   *
+   * Returns an error when it runs out of possible solutions. If no generate-def
+   * requests have been made, it will also report out of solutions.
+   *
+   * This command is Idris 2 only, and will return an unrecognised error if
+   * sent to Idris 1.
+   *
+   * The Idris 2 process keeps track of the definition generation state, the
+   * client does track any state.
    */
-  public generateDefNext(): Promise<any> {
+  public generateDefNext(): Promise<FinalReply.GenerateDef> {
     const id = ++this.reqCounter
     const req: Request.GenerateDefNext = { id, type: ":generate-def-next" }
-    return this.makeReq(req)
+    return this.makeReq(req).then((r) => r as FinalReply.GenerateDef)
   }
 
   /**

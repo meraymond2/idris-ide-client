@@ -146,6 +146,11 @@ describe("Running the client commands", () => {
     assert.deepEqual(actual, expected.generateDef)
   })
 
+  it("returns the expected result for :generaate-def-next", async () => {
+    const actual = await ic.generateDefNext()
+    assert.deepEqual(actual, expected.generateDefNext)
+  })
+
   after(() => {
     ic.close()
     proc.kill()

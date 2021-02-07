@@ -42,6 +42,7 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
         case ":docs-for":
           return intoFinalReplyDocsFor(payload as S_Exp.DocsFor, id)
         case ":generate-def":
+        case ":generate-def-next":
           return intoFinalReplyGenerateDef(payload as S_Exp.GenerateDef, id)
         case ":interpret":
           return intoFinalReplyInterpret(payload as S_Exp.Interpret, id)
@@ -74,6 +75,7 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
         case ":who-calls":
           return intoFinalReplyWhoCalls(payload as S_Exp.WhoCalls, id)
         default:
+          console.log("!!!", payload, "???")
           throw "Unreachable."
       }
     case ":set-prompt":

@@ -287,6 +287,13 @@ export const generateDef: FinalReply.GenerateDef = {
   type: ":return",
 }
 
+export const generateDefNext: FinalReply.GenerateDef = {
+  def: "append [] ys = ys\nappend (x :: xs) [] = x :: append xs []\nappend (x :: xs) (y :: ys) = x :: append xs (y :: ys)",
+  id: 21,
+  ok: true,
+  type: ":return",
+}
+
 export const interpret: FinalReply.Interpret = {
   result: "4 : Integer",
   metadata: [
