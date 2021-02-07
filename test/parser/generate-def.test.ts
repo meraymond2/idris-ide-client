@@ -5,6 +5,7 @@ import { deserialise } from "../../src/parser/expr-parser"
 import { lex } from "../../src/parser/lexer"
 import { S_Exp, RootExpr } from "../../src/s-exps"
 
+// Idris 2 only.
 describe("Parsing :generate-def reply", () => {
   it("can parse a success sexp.", () => {
     const sexp = `(:return (:ok "append [] ys = ys\nappend (x :: xs) ys = x :: append xs ys") 2)`

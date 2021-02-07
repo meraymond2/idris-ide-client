@@ -240,7 +240,7 @@ export class IdrisClient {
    * request. If there is a failed generate-def, generate-def-next will continue
    * producing output for the last _successful_ one.
    *
-   * Returns an error when it runs out of possible solutions. If no generate-def
+   * Returns an error if it runs out of possible solutions. If no generate-def
    * requests have been made, it will also report out of solutions.
    *
    * This command is Idris 2 only, and will return an unrecognised error if
@@ -348,12 +348,13 @@ export class IdrisClient {
 
   /**
    * Returns a reply containing an attempt to solve a metavariable given its
-   * current scope.
+   * current scope. The hole name should omit the ?.
    *
    * It is unclear how the hints argument works. The protocol documentation describes
    * it as ‘possibly-empty list of additional things to try while searching’.
    *
-   * Always successful — is an empty string if no solution is found.
+   * With Idris 1, always successful — is an empty string if no solution is found.
+   * Can fail with Idris 2 if the name isn’t found or if it’s not a hole.
    */
   public proofSearch(
     name: string,
@@ -372,12 +373,23 @@ export class IdrisClient {
   }
 
   /**
-   * TODO!
+   * Returns a reply with the next attempted solution for the last proof-search
+   * request. If there is a failed proof-search, proof-search-next will continue
+   * producing output for the last _successful_ one.
+   *
+   * Returns an error if it runs out of possible solutions. If no proof-search
+   * requests have been made, it will also report out of solutions.
+   *
+   * This command is Idris 2 only, and will return an unrecognised error if
+   * sent to Idris 1.
+   *
+   * The Idris 2 process keeps track of the definition generation state, the
+   * client does track any state.
    */
-  public proofSearchNext(): Promise<any> {
+  public proofSearchNext(): Promise<FinalReply.ProofSearch> {
     const id = ++this.reqCounter
     const req: Request.ProofSearchNext = { id, type: ":proof-search-next" }
-    return this.makeReq(req)
+    return this.makeReq(req).then((r) => r as FinalReply.ProofSearch)
   }
 
   /**

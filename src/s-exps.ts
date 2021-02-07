@@ -167,7 +167,12 @@ export namespace S_Exp {
     payload: PrintDefinition
   ): payload is PrintDefinitionOk => payload[0] === ":ok"
 
-  export type ProofSearch = [":ok", string]
+  export type ProofSearchOk = [":ok", string]
+  export type ProofSearchErr = [":error", string]
+  export type ProofSearch = ProofSearchOk | ProofSearchErr
+  export const isOkProofSearch = (
+    payload: ProofSearch
+  ): payload is ProofSearchOk => payload[0] === ":ok"
 
   export type ReplCompletions = [":ok", [string[], ""]]
 

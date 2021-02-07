@@ -5,6 +5,7 @@ import { deserialise } from "../../src/parser/expr-parser"
 import { lex } from "../../src/parser/lexer"
 import { S_Exp, RootExpr } from "../../src/s-exps"
 
+// Idris 2 only.
 describe("Parsing :generate-def reply", () => {
   it("can parse a success sexp.", () => {
     const sexp = `(:return (:ok "append [] ys = ys\nappend (x :: xs) [] = x :: append xs []\nappend (x :: xs) (y :: ys) = x :: append xs (y :: ys)") 3)`
@@ -31,7 +32,7 @@ describe("Parsing :generate-def reply", () => {
 
   it("can parse a failure sexp.", () => {
     const sexp = `(:return (:error "No more results") 16)`
-    const payload: S_Exp.GenerateDefErr = [":error", "No more results"]
+    const payload: S_Exp.GenerateDef = [":error", "No more results"]
     const rootExpr: RootExpr = [":return", payload, 16]
     const expected: FinalReply.GenerateDef = {
       err: "No more results",

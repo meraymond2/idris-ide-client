@@ -62,6 +62,7 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
             id
           )
         case ":proof-search":
+        case ":proof-search-next":
           return intoFinalReplyProofSearch(payload as S_Exp.ProofSearch, id)
         case ":repl-completions":
           return intoFinalReplyReplCompletions(
@@ -578,12 +579,22 @@ const intoFinalReplyProofSearch = (
   payload: S_Exp.ProofSearch,
   id: number
 ): FinalReply.ProofSearch => {
-  const [_ok, solution] = payload
-  return {
-    id,
-    ok: true,
-    solution,
-    type: ":return",
+  if (S_Exp.isOkProofSearch(payload)) {
+    const [_ok, solution] = payload
+    return {
+      id,
+      ok: true,
+      solution,
+      type: ":return",
+    }
+  } else {
+    const [_err, msg] = payload
+    return {
+      err: msg,
+      id,
+      ok: false,
+      type: ":return",
+    }
   }
 }
 

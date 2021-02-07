@@ -22,9 +22,15 @@ const client = new IdrisClient(idrisProc.stdin, idrisProc.stdout, {
 
 client.loadFile("../temp.idr").then(() => {
   client
-    .generateDef(5, "append")
+    .proofSearch("blue_rhs", 10, [])
     .then(console.log)
-    .then(() => client.generateDefNext())
+    .then(() => client.proofSearchNext())
+    .then(console.log)
+    .then(() => client.proofSearchNext())
+    .then(console.log)
+    .then(() => client.proofSearch("blue", 8, []))
+    .then(console.log)
+    .then(() => client.proofSearchNext())
     .then(console.log)
     .then(() => idrisProc.kill())
 })
