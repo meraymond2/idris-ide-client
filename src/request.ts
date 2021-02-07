@@ -9,6 +9,7 @@ export type RequestType =
   | ":docs-for"
   // | ":elaborate-term"
   | ":generate-def"
+  | ":generate-def-next"
   // | ":hide-term-implicits"
   | ":interpret"
   | ":load-file"
@@ -19,6 +20,7 @@ export type RequestType =
   // | ":normalise-term"
   | ":print-definition"
   | ":proof-search"
+  | ":proof-search-next"
   | ":repl-completions"
   // | ":show-term-implicits"
   | ":type-of"
@@ -86,6 +88,11 @@ export namespace Request {
     type: ":generate-def"
   }
 
+  export interface GenerateDefNext extends RequestBase {
+    id: number
+    type: ":generate-def-next"
+  }
+
   export interface Interpret extends RequestBase {
     expression: string
     id: number
@@ -140,6 +147,11 @@ export namespace Request {
     type: ":proof-search"
   }
 
+  export interface ProofSearchNext extends RequestBase {
+    id: number
+    type: ":proof-search-next"
+  }
+
   export interface ReplCompletions extends RequestBase {
     id: number
     name: string
@@ -172,6 +184,7 @@ export type Request =
   | Request.CaseSplit
   | Request.DocsFor
   | Request.GenerateDef
+  | Request.GenerateDefNext
   | Request.Interpret
   | Request.LoadFile
   | Request.MakeCase
@@ -180,6 +193,7 @@ export type Request =
   | Request.Metavariables
   | Request.PrintDefinition
   | Request.ProofSearch
+  | Request.ProofSearchNext
   | Request.ReplCompletions
   | Request.TypeOf
   | Request.Version
@@ -220,10 +234,33 @@ const serialiseArgs = (req: Request): string => {
       return `${req.type} ${req.width}`
     case ":proof-search":
       return `${req.type} ${req.line} "${req.name}" (${req.hints.join(" ")})`
+    case ":generate-def-next":
+    case ":proof-search-next":
     case ":version":
       return req.type
   }
 }
 
+/**
+ * Serialise request according to the Idris 1 IDE protocol. Arguments, including
+ * the request type are always an s-expression list.
+ */
 export const serialiseRequest = (req: Request): string =>
   prependLen(`((${serialiseArgs(req)}) ${req.id})\n`)
+
+/**
+ * The Idris 2 IDE protocol introduces some new commands, and at least one
+ * breaking change to the serialised request format. Specifically commands
+ * without arguments are now simply atoms, rather than single-element lists.
+ */
+export const serialiseRequestV2 = (req: Request): string => {
+  if (
+    req.type === ":generate-def-next" ||
+    req.type === ":proof-search-next" ||
+    req.type === ":version"
+  ) {
+    return prependLen(`(${serialiseArgs(req)} ${req.id})\n`)
+  } else {
+    return prependLen(`((${serialiseArgs(req)}) ${req.id})\n`)
+  }
+}

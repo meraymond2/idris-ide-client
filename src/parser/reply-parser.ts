@@ -21,7 +21,7 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
     case ":output":
       return intoOutputReply(payload as S_Exp.Output, id)
     case ":protocol-version":
-      return intoInfoReplyVersion(payload as S_Exp.ProtocolVersion, id)
+      return intoInfoReplyProtocolVersion(payload as S_Exp.ProtocolVersion, id)
     case ":return":
       switch (requestType) {
         case ":add-clause":
@@ -174,7 +174,7 @@ const intoInfoReplySetPrompt = (
   type: ":set-prompt",
 })
 
-const intoInfoReplyVersion = (
+const intoInfoReplyProtocolVersion = (
   payload: S_Exp.ProtocolVersion,
   id: number
 ): InfoReply.Version => ({

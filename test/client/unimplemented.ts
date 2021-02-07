@@ -152,7 +152,7 @@ export const typeOf: FinalReply.TypeOf = {
 export const whoCalls: FinalReply.WhoCalls = {
   callee: null,
   references: [],
-  id: 18, // one lower, until version can be implemented
+  id: 19,
   ok: true,
   type: ":return",
 }

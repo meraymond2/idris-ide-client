@@ -282,7 +282,7 @@ export const docsFor: FinalReply.DocsFor = {
 
 export const generateDef: FinalReply.GenerateDef = {
   def: "append [] ys = ys\nappend (x :: xs) ys = x :: append xs ys",
-  id: 19,
+  id: 20,
   ok: true,
   type: ":return",
 }

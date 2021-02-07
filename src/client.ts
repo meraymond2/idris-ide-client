@@ -1,7 +1,14 @@
 import { parseReply, parseRootExpr } from "./parser"
 import { FinalReply, Reply } from "./reply"
-import { DocMode, Request, RequestType, serialiseRequest } from "./request"
+import {
+  DocMode,
+  Request,
+  RequestType,
+  serialiseRequest,
+  serialiseRequestV2,
+} from "./request"
 import { Readable, Writable } from "stream"
+import { S_Exp } from "./s-exps"
 
 const HEADER_LENGTH = 6
 
@@ -22,6 +29,7 @@ export class IdrisClient {
   private listening: boolean
   private messageBuffer: string
   private output: Readable
+  private protocol: number | null = null
   private registry: Record<string, Resolver>
   private replyCallback?: ReplyCallback
   private reqCounter: number
@@ -71,6 +79,12 @@ export class IdrisClient {
 
   replyHandler(plString: string) {
     const rootExpr = parseRootExpr(plString)
+
+    if (rootExpr[0] === ":protocol-version") {
+      const version = rootExpr[1] as S_Exp.ProtocolVersion
+      this.protocol = version
+    }
+
     const id = rootExpr[2]
     if (this.registry[id]) {
       const { requestType, resFn } = this.registry[id]
@@ -84,7 +98,9 @@ export class IdrisClient {
   }
 
   makeReq(req: Request): Promise<Reply> {
-    const serialisedReq = serialiseRequest(req)
+    const serialise =
+      this.protocol === 2 ? serialiseRequestV2 : serialiseRequest
+    const serialisedReq = serialise(req)
     if (this.debug) console.debug("<< " + serialisedReq)
     return new Promise((res) => {
       this.registry[req.id] = { requestType: req.type, resFn: res }
@@ -207,9 +223,21 @@ export class IdrisClient {
    *
    * The name parameter doesn’t appear to make any difference.
    */
-  public generateDef(line: number, name: string): Promise<any> {
+  public generateDef(
+    line: number,
+    name: string
+  ): Promise<FinalReply.GenerateDef> {
     const id = ++this.reqCounter
     const req: Request.GenerateDef = { id, line, name, type: ":generate-def" }
+    return this.makeReq(req).then((r) => r as FinalReply.GenerateDef)
+  }
+
+  /**
+   * TODO!
+   */
+  public generateDefNext(): Promise<any> {
+    const id = ++this.reqCounter
+    const req: Request.GenerateDefNext = { id, type: ":generate-def-next" }
     return this.makeReq(req)
   }
 
@@ -327,6 +355,15 @@ export class IdrisClient {
       type: ":proof-search",
     }
     return this.makeReq(req).then((r) => r as FinalReply.ProofSearch)
+  }
+
+  /**
+   * TODO!
+   */
+  public proofSearchNext(): Promise<any> {
+    const id = ++this.reqCounter
+    const req: Request.ProofSearchNext = { id, type: ":proof-search-next" }
+    return this.makeReq(req)
   }
 
   /**

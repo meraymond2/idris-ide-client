@@ -126,12 +126,10 @@ describe("Running the client commands", () => {
     assert.deepEqual(actual, unimplemented.typeOf)
   })
 
-  // Unimplemented — command completely unrecognised
-  // (:return (:error "Unrecognised command: ((:version) 18)") 17)
   it("returns the expected result for :version", async () => {
-    // const actual = await ic.version()
+    const actual = await ic.version()
     // We don’t want to tie the test to an actual version.
-    // assert.isTrue(actual.ok)
+    assert.isTrue(actual.ok)
   })
 
   // Unimplemented
