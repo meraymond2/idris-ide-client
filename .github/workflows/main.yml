@@ -24,4 +24,4 @@ jobs:
       - run: npm ci
 
       - name: run tests
-        run: nix-shell nix/idris.nix --run "npm test"
+        run: nix-shell nix/idris1and2.nix --run "npm test"
