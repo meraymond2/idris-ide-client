@@ -44,3 +44,23 @@ A few request-types related to tt-terms have not been implemented yet, because I
 
 ## Known Issues
 The handling for unexpected errors could use a bit of work. For example, in Idris 1.3.2, you can cause the IDE to crash by passing in a line number that doesn’t exist, and there’s nothing at the moment to restart the IDE if it dies unexpectedly.
+
+## Upgrade idris for CI
+
+from the root:
+```sh
+niv update nixpkgs -b nixos-20.09
+niv update nixpkgs-unstable -b nixpkgs-unstable
+```
+this will update to the newest nixos-unstable branch of nixpkgs.
+
+To test the idris versions in the nix shell you can then use
+```sh
+nix-shell nix/idris1and2.nix
+```
+to get dropped into a shell with both `idris` and `idris2`.
+
+To directly run the tests in the nix shell use:
+```sh
+nix-shell nix/idris1and2.nix --run "npm test"
+```
