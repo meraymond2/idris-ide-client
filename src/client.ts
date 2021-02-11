@@ -227,8 +227,8 @@ export class IdrisClient {
    * sent to Idris 1.
    */
   public generateDef(
-    line: number,
-    name: string
+    name: string,
+    line: number
   ): Promise<FinalReply.GenerateDef> {
     const id = ++this.reqCounter
     const req: Request.GenerateDef = { id, line, name, type: ":generate-def" }

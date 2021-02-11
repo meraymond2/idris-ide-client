@@ -142,7 +142,7 @@ describe("Running the client commands", () => {
   // New V2 commands
 
   it("returns the expected result for :generate-def", async () => {
-    const actual = await ic.generateDef(23, "append")
+    const actual = await ic.generateDef("append", 23)
     assert.deepEqual(actual, expected.generateDef)
   })
 
