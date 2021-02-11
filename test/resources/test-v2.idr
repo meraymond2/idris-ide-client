@@ -21,3 +21,6 @@ num : Nat
 num = ?n_rhs
 
 append : Vect n a -> Vect m a -> Vect (n + m) a
+
+inc : Nat -> Nat
+inc k = S(k)

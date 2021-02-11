@@ -176,6 +176,12 @@ export namespace S_Exp {
 
   export type ReplCompletions = [":ok", [string[], ""]]
 
+  export type TypeAtOk = [":ok", string]
+  export type TypeAtErr = [":error", string]
+  export type TypeAt = TypeAtOk | TypeAtErr
+  export const isOkTypeAt = (payload: TypeAt): payload is TypeAtOk =>
+    payload[0] === ":ok"
+
   export type TypeOfOk = [":ok", string, MsgMetadataExpr[]]
   export type TypeOfErr = [":error", string]
   export type TypeOf = TypeOfOk | TypeOfErr

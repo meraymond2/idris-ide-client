@@ -69,6 +69,8 @@ export const parseReply = (expr: RootExpr, requestType: RequestType): Reply => {
             payload as S_Exp.ReplCompletions,
             id
           )
+        case ":type-at":
+          return intoFinalReplyTypeAt(payload as S_Exp.TypeAt, id)
         case ":type-of":
           return intoFinalReplyTypeOf(payload as S_Exp.TypeOf, id)
         case ":version":
@@ -610,6 +612,29 @@ const intoFinalReplyReplCompletions = (
     id,
     ok: true,
     type: ":return",
+  }
+}
+
+const intoFinalReplyTypeAt = (
+  payload: S_Exp.TypeAt,
+  id: number
+): FinalReply.TypeAt => {
+  if (S_Exp.isOkTypeAt(payload)) {
+    const [_ok, typeAt] = payload
+    return {
+      id,
+      ok: true,
+      type: ":return",
+      typeAt,
+    }
+  } else {
+    const [_err, msg] = payload
+    return {
+      err: msg,
+      id,
+      ok: false,
+      type: ":return",
+    }
   }
 }
 
