@@ -23,6 +23,7 @@ export type RequestType =
   | ":proof-search-next"
   | ":repl-completions"
   // | ":show-term-implicits"
+  | ":type-at"
   | ":type-of"
   | ":version"
   | ":who-calls"
@@ -158,6 +159,14 @@ export namespace Request {
     type: ":repl-completions"
   }
 
+  export interface TypeAt extends RequestBase {
+    column: number
+    id: number
+    line: number
+    name: string
+    type: ":type-at"
+  }
+
   export interface TypeOf extends RequestBase {
     id: number
     name: string
@@ -195,6 +204,7 @@ export type Request =
   | Request.ProofSearch
   | Request.ProofSearchNext
   | Request.ReplCompletions
+  | Request.TypeAt
   | Request.TypeOf
   | Request.Version
   | Request.WhoCalls
@@ -234,6 +244,8 @@ const serialiseArgs = (req: Request): string => {
       return `${req.type} ${req.width}`
     case ":proof-search":
       return `${req.type} ${req.line} "${req.name}" (${req.hints.join(" ")})`
+    case ":type-at":
+      return `:type-of "${req.name}" ${req.line} ${req.column}`
     case ":generate-def-next":
     case ":proof-search-next":
     case ":version":

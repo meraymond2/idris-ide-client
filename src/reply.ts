@@ -264,6 +264,15 @@ export namespace FinalReply {
     type: ":return"
   }
 
+  export type TypeAt =
+    | {
+        id: number
+        ok: true
+        type: ":return"
+        typeAt: string
+      }
+    | { err: string; id: number; ok: false; type: ":return" }
+
   export type TypeOf =
     | {
         id: number
