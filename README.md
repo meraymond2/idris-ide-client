@@ -34,9 +34,9 @@ It’s primarily intended to serve as the foundation for my [VSCode extension](h
 Types are great documentation, and I’ve typed all of the s-expressions that the IDE returns in TypeScript. As the IDE protocol documentation is a bit spare, hopefully this will be of help to anyone implementing something similar in the future.
 
 ## Status
-It should work with Idris 1.3.X on all OSes.
+It works with Idris 1.3.X on all OSes.
 
-Idris 2 compatability is being actively worked on, but at the moment, most IDE commands have not been implemented in v2, so it’s still not very usable.
+It is also compatible with the most recent release of Idris 2, currently v0.3.0. Not all IDE commands have been completely implemented in Idris2, see the issues for their current status.
 
 If you experience any problems on other versions or OSes, please raise an issue. Confirming compatability should be as simple as running the tests.
 
