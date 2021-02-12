@@ -156,6 +156,11 @@ describe("Running the client commands", () => {
     assert.deepEqual(actual, expected.proofSearchNext)
   })
 
+  it("returns the expected result for :type-at", async () => {
+    const actual = await ic.typeAt("b", 18, 5)
+    assert.deepEqual(actual, expected.typeAt)
+  })
+
   after(() => {
     ic.close()
     proc.kill()

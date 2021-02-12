@@ -791,3 +791,10 @@ export const proofSearchNext: FinalReply.ProofSearch = {
   solution: "1",
   type: ":return",
 }
+
+export const typeAt: FinalReply.TypeAt = {
+  id: 23,
+  ok: true,
+  type: ":return",
+  typeAt: "b : Bool",
+}
