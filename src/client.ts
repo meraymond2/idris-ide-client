@@ -405,7 +405,16 @@ export class IdrisClient {
   }
 
   /**
-   * Description - TODO
+   * Returns a reply containing the type of the argument, but does not include
+   * metadata.
+   *
+   * If it finds an identifier at the specified location, it will use that,
+   * regardless of the name supplied.
+   *
+   * If there is no identifier at the location, but there is a top-level
+   * declaration that matches the name, it will return that type.
+   *
+   * Returns an error object if neither the location nor name can be found.
    *
    * Lines and columns are both 1-indexed.
    */
