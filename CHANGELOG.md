@@ -1,5 +1,10 @@
 ## Unreleased
 ### Added
+### Changed
+### Fixed
+
+## v0.1.5
+### Added
 - Added the new Idris2-specific commands :generate-def, :generate-def-next and :proof-search-next.
 - Added a typeAt method, which implements the Idris2 :type-of + location command.
 ### Changed
