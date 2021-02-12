@@ -20,8 +20,5 @@ import { IdrisClient } from "idris-ide-client"
   client
     .iterpret("2 + 2")
     .then(console.log)
-    .then(() => {
-      client.close()
-      idrisProc.kill()
-    })
+    .then(() => idrisProc.kill())
 }

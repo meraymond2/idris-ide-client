@@ -43,8 +43,5 @@ import { Socket } from "net"
   client
     .interpret("2 + 2")
     .then(console.log)
-    .then(() => {
-      client.close()
-      socket.destroy()
-    })
+    .then(() => socket.destroy())
 }
