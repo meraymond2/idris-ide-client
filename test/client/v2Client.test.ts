@@ -162,7 +162,6 @@ describe("Running the client commands", () => {
   })
 
   after(() => {
-    ic.close()
     proc.kill()
   })
 })
