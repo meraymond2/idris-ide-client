@@ -1,10 +1,11 @@
 ## Unreleased
 ### Added
 - Added the new Idris2-specific commands :generate-def, :generate-def-next and :proof-search-next.
+- Added a typeAt method, which implements the Idris2 :type-of + location command.
 ### Changed
 - The client now keeps track of the protocol version, and some requests are serialised differently depending on the version.
 ### Fixed
-- Fixed a bug where the :version request didn't work with Idris2 because of a breaking change in the protocol.
+- Partially fixed a bug where the :version request didn't work with Idris2 because of a breaking change in the protocol.
 
 ## v0.1.4
 ### Added
