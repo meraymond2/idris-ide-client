@@ -51,7 +51,7 @@ The handling for unexpected errors could use a bit of work. For example, in Idri
 
 from the root:
 ```sh
-niv update nixpkgs -b nixos-20.09
+niv update nixpkgs -b nixos-21.05
 niv update nixpkgs-unstable -b nixpkgs-unstable
 ```
 this will update to the newest nixos-unstable branch of nixpkgs.
