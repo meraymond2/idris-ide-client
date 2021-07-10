@@ -486,10 +486,9 @@ const intoFinalReplyMakeLemma = (
     // it a proper type, but I’m considering this reply unstable and broken.
     const isIdris2 = metavariable === undefined && declaration === undefined
     if (isIdris2) {
-      const [
-        declaration,
-        metavariable,
-      ] = ((payload[1] as unknown) as string).split("\n")
+      const [declaration, metavariable] = (
+        payload[1] as unknown as string
+      ).split("\n")
       return {
         declaration,
         id,
