@@ -12,7 +12,7 @@ describe("Running the client commands", () => {
   let proc: ChildProcess
 
   before(async () => {
-    proc = spawn("idris2", ["--ide-mode"])
+    proc = spawn("idris2", ["--ide-mode", "--no-color"])
     if (proc.stdin && proc.stdout) {
       ic = new IdrisClient(proc.stdin, proc.stdout)
     }
