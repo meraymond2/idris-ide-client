@@ -34,7 +34,7 @@ export const callsWho: FinalReply.CallsWho = {
 // Partially Implemented — no metadata
 export const docsFor: FinalReply.DocsFor = {
   docs:
-    "Prelude.putStrLn : HasIO io => String -> io ()\n\t Output a string to stdout with a trailing newline.\n\nTotality: total",
+    "Prelude.putStrLn : HasIO io => String -> io ()\n  Output a string to stdout with a trailing newline.\n  Totality: total",
   metadata: [],
   id: 8,
   ok: true,
