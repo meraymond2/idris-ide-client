@@ -71,7 +71,7 @@ describe("Parsing :type-of reply", () => {
             decor: ":type",
             docOverview: "The type of types",
             name: "Type",
-            ttTerm: "TEST",
+            ttTerm: "AAAAAAAAAAAHAAAAAAAAAAAbLi8uL3Rlc3QvcmVzb3VyY2VzL3Rlc3QuaWRyAAAAAAAAABQ=",
             type: "Type",
           },
           start: 6,

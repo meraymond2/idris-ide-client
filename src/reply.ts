@@ -1,6 +1,6 @@
 import { Decor, S_ExpBool, ReplyType } from "./s-exps"
 
-export interface BaseReply {
+interface BaseReply {
   id: number
   type: ReplyType
 }
@@ -102,14 +102,15 @@ export namespace FinalReply {
   export const isFinalReply = (reply: Reply): boolean =>
     reply.type === ":return"
 
-  export type AddClause =
-    | {
-        initialClause: string
-        id: number
-        ok: true
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type AddClauseOk = {
+    initialClause: string
+    id: number
+    ok: true
+    type: ":return"
+  }
+  type AddClauseErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type AddClause = AddClauseOk | AddClauseErr
 
   export type AddMissing = {
     id: number
@@ -118,25 +119,34 @@ export namespace FinalReply {
     type: ":return"
   }
 
-  export type Apropos =
-    | {
-        docs: string
-        id: number
-        metadata: Array<MessageMetadata>
-        ok: true
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type AproposOk = {
+    docs: string
+    id: number
+    metadata: Array<MessageMetadata>
+    ok: true
+    type: ":return"
+  }
 
-  export type BrowseNamespace =
-    | {
-        declarations: Array<Declaration>
-        id: number
-        ok: true
-        subModules: string[]
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type AproposErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type Apropos = AproposOk | AproposErr
+
+  type BrowseNamespaceOk = {
+    declarations: Array<Declaration>
+    id: number
+    ok: true
+    subModules: string[]
+    type: ":return"
+  }
+
+  type BrowseNamespaceErr = {
+    err: string
+    id: number
+    ok: false
+    type: ":return"
+  }
+
+  export type BrowseNamespace = BrowseNamespaceOk | BrowseNamespaceErr
 
   /**
    * Caller is null only when it is not found.
@@ -149,60 +159,70 @@ export namespace FinalReply {
     type: ":return"
   }
 
-  export type CaseSplit =
-    | {
-        caseClause: string
-        id: number
-        ok: true
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type CaseSplitOk = {
+    caseClause: string
+    id: number
+    ok: true
+    type: ":return"
+  }
 
-  export type DocsFor =
-    | {
-        docs: string
-        metadata: Array<MessageMetadata>
-        id: number
-        ok: true
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type CaseSplitErr = { err: string; id: number; ok: false; type: ":return" }
 
-  export type GenerateDef =
-    | {
-        def: string
-        id: number
-        ok: true
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  export type CaseSplit = CaseSplitOk | CaseSplitErr
+
+  type DocsForOk = {
+    docs: string
+    metadata: Array<MessageMetadata>
+    id: number
+    ok: true
+    type: ":return"
+  }
+
+  type DocsForErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type DocsFor = DocsForOk | DocsForErr
+
+  type GenerateDefOk = {
+    def: string
+    id: number
+    ok: true
+    type: ":return"
+  }
+
+  type GenerateDefErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type GenerateDef = GenerateDefOk | GenerateDefErr
 
   /**
    * If part of the input can be interpreted, it will be an error, but with metadata.
    */
-  export type Interpret =
-    | {
-        id: number
-        ok: true
-        metadata: Array<MessageMetadata>
-        result: string
-        type: ":return"
-      }
-    | {
-        err: string
-        metadata: MessageMetadata[]
-        id: number
-        ok: false
-        type: ":return"
-      }
+  type InterpretOk = {
+    id: number
+    ok: true
+    metadata: Array<MessageMetadata>
+    result: string
+    type: ":return"
+  }
 
-  export type LoadFile =
-    | {
-        id: number
-        ok: true
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type InterpretErr = {
+    err: string
+    metadata: MessageMetadata[]
+    id: number
+    ok: false
+    type: ":return"
+  }
+
+  export type Interpret = InterpretOk | InterpretErr
+
+  type LoadFileOk = {
+    id: number
+    ok: true
+    type: ":return"
+  }
+
+  type LoadFileErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type LoadFile = LoadFileOk | LoadFileErr
 
   export type MakeCase = {
     caseClause: string
@@ -211,15 +231,17 @@ export namespace FinalReply {
     type: ":return"
   }
 
-  export type MakeLemma =
-    | {
-        declaration: string
-        metavariable: string
-        id: number
-        ok: true
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type MakeLemmaOk = {
+    declaration: string
+    metavariable: string
+    id: number
+    ok: true
+    type: ":return"
+  }
+
+  type MakeLemmaErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type MakeLemma = MakeLemmaOk | MakeLemmaErr
 
   export type MakeWith = {
     id: number
@@ -235,24 +257,33 @@ export namespace FinalReply {
     type: ":return"
   }
 
-  export type PrintDefinition =
-    | {
-        definition: string
-        id: number
-        metadata: Array<MessageMetadata>
-        ok: true
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type PrintDefinitionOk = {
+    definition: string
+    id: number
+    metadata: Array<MessageMetadata>
+    ok: true
+    type: ":return"
+  }
 
-  export type ProofSearch =
-    | {
-        id: number
-        ok: true
-        solution: string
-        type: ":return"
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type PrintDefinitionErr = {
+    err: string
+    id: number
+    ok: false
+    type: ":return"
+  }
+
+  export type PrintDefinition = PrintDefinitionOk | PrintDefinitionErr
+
+  type ProofSearchOk = {
+    id: number
+    ok: true
+    solution: string
+    type: ":return"
+  }
+
+  type ProofSearchErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type ProofSearch = ProofSearchOk | ProofSearchErr
 
   /**
    * This reply omits an additional element that seems to always be an empty string.
@@ -264,24 +295,28 @@ export namespace FinalReply {
     type: ":return"
   }
 
-  export type TypeAt =
-    | {
-        id: number
-        ok: true
-        type: ":return"
-        typeAt: string
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type TypeAtOk = {
+    id: number
+    ok: true
+    type: ":return"
+    typeAt: string
+  }
 
-  export type TypeOf =
-    | {
-        id: number
-        ok: true
-        metadata: Array<MessageMetadata>
-        type: ":return"
-        typeOf: string
-      }
-    | { err: string; id: number; ok: false; type: ":return" }
+  type TypeAtErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type TypeAt = TypeAtOk | TypeAtErr
+
+  type TypeOfOk = {
+    id: number
+    ok: true
+    metadata: Array<MessageMetadata>
+    type: ":return"
+    typeOf: string
+  }
+
+  type TypeOfErr = { err: string; id: number; ok: false; type: ":return" }
+
+  export type TypeOf = TypeOfOk | TypeOfErr
 
   export type Version = {
     id: number

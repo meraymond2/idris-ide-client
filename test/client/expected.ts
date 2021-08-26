@@ -1,5 +1,13 @@
 import { FinalReply } from "../../src/reply"
 
+/**
+ * The expected replies are extracted into a separate file because I want to reuse
+ * them across the V1 and V2 tests. That makes it easier to determine where V2
+ * is not backwards compatible, or has bugs.
+ *
+ * The ttTerm key has been omitted, since it’s random, and we can’t check it for equality.
+ */
+
 export const loadFile: FinalReply.LoadFile = {
   id: 1,
   ok: true,
@@ -7,22 +15,21 @@ export const loadFile: FinalReply.LoadFile = {
 }
 
 export const addClause: FinalReply.AddClause = {
-  id: 2,
+  id: 8,
   initialClause: "f cat = ?f_rhs",
   ok: true,
   type: ":return",
 }
 
 export const addMissing: FinalReply.AddMissing = {
-  id: 3,
+  id: 8,
   missingClauses: "getName Sherlock = ?getName_rhs_1",
   ok: true,
   type: ":return",
 }
 
 export const apropos: FinalReply.Apropos = {
-  docs:
-    "\nPrelude.Bits.b8ToBinString : Bits8 -> String\nEncode Bits8 as an 8-character binary string.\n",
+  docs: "\nPrelude.Bits.b8ToBinString : Bits8 -> String\nEncode Bits8 as an 8-character binary string.\n",
   metadata: [
     {
       length: 26,
@@ -30,8 +37,7 @@ export const apropos: FinalReply.Apropos = {
         decor: ":function",
         docOverview: "Encode Bits8 as an 8-character binary string.",
         implicit: ":False",
-        key:
-          "AQAAAAAAAAAADWI4VG9CaW5TdHJpbmcAAAAAAAAAAgAAAAAAAAAEQml0cwAAAAAAAAAHUHJlbHVkZQ==",
+        key: "AQAAAAAAAAAADWI4VG9CaW5TdHJpbmcAAAAAAAAAAgAAAAAAAAAEQml0cwAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bits.b8ToBinString",
         namespace: "Prelude.Bits",
         type: "Bits8 -> String",
@@ -59,7 +65,7 @@ export const apropos: FinalReply.Apropos = {
       start: 39,
     },
   ],
-  id: 4,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -88,8 +94,7 @@ export const browseNamespace: FinalReply.BrowseNamespace = {
           metadata: {
             name: "Language.Reflection.ATDouble",
             implicit: ":False",
-            key:
-              "AQAAAAAAAAAACEFURG91YmxlAAAAAAAAAAIAAAAAAAAAClJlZmxlY3Rpb24AAAAAAAAACExhbmd1YWdl",
+            key: "AQAAAAAAAAAACEFURG91YmxlAAAAAAAAAAIAAAAAAAAAClJlZmxlY3Rpb24AAAAAAAAACExhbmd1YWdl",
             decor: ":data",
             docOverview: "",
             type: "ArithTy",
@@ -102,19 +107,17 @@ export const browseNamespace: FinalReply.BrowseNamespace = {
           metadata: {
             name: "Language.Reflection.ArithTy",
             implicit: ":False",
-            key:
-              "AQAAAAAAAAAAB0FyaXRoVHkAAAAAAAAAAgAAAAAAAAAKUmVmbGVjdGlvbgAAAAAAAAAITGFuZ3VhZ2U=",
+            key: "AQAAAAAAAAAAB0FyaXRoVHkAAAAAAAAAAgAAAAAAAAAKUmVmbGVjdGlvbgAAAAAAAAAITGFuZ3VhZ2U=",
             decor: ":type",
             docOverview: "",
             type: "Type",
             namespace: "Language.Reflection",
-            ttTerm: "TEST",
           },
         },
       ],
     },
   ],
-  id: 5,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -148,8 +151,7 @@ export const callsWho: FinalReply.CallsWho = {
           metadata: {
             name: "Prelude.Nat.Nat",
             implicit: ":False",
-            key:
-              "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
+            key: "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
             decor: ":type",
             docOverview:
               "Natural numbers: unbounded, unsigned integers\nwhich can be pattern matched.",
@@ -168,8 +170,7 @@ export const callsWho: FinalReply.CallsWho = {
           metadata: {
             name: "Prelude.Nat.plus",
             implicit: ":False",
-            key:
-              "AQAAAAAAAAAABHBsdXMAAAAAAAAAAgAAAAAAAAADTmF0AAAAAAAAAAdQcmVsdWRl",
+            key: "AQAAAAAAAAAABHBsdXMAAAAAAAAAAgAAAAAAAAADTmF0AAAAAAAAAAdQcmVsdWRl",
             decor: ":function",
             docOverview: "Add two natural numbers.",
             type: "Nat -> Nat -> Nat",
@@ -187,8 +188,7 @@ export const callsWho: FinalReply.CallsWho = {
           metadata: {
             name: "Prelude.Interfaces.fromInteger",
             implicit: ":False",
-            key:
-              "AQAAAAAAAAAAC2Zyb21JbnRlZ2VyAAAAAAAAAAIAAAAAAAAACkludGVyZmFjZXMAAAAAAAAAB1ByZWx1ZGU=",
+            key: "AQAAAAAAAAAAC2Zyb21JbnRlZ2VyAAAAAAAAAAIAAAAAAAAACkludGVyZmFjZXMAAAAAAAAAB1ByZWx1ZGU=",
             decor: ":function",
             docOverview: "Conversion from Integer.",
             type: "Num ty => Integer -> ty",
@@ -206,8 +206,7 @@ export const callsWho: FinalReply.CallsWho = {
           metadata: {
             name: "Prelude.Nat.Nat implementation of Prelude.Interfaces.Num",
             implicit: ":False",
-            key:
-              "AQMCAQAAAAAAAAAAA051bQAAAAAAAAACAAAAAAAAAApJbnRlcmZhY2VzAAAAAAAAAAdQcmVsdWRlAAAAAAAAAAEAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
+            key: "AQMCAQAAAAAAAAAAA051bQAAAAAAAAACAAAAAAAAAApJbnRlcmZhY2VzAAAAAAAAAAdQcmVsdWRlAAAAAAAAAAEAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
             decor: ":function",
             docOverview: "",
             type: "Num Nat",
@@ -217,28 +216,27 @@ export const callsWho: FinalReply.CallsWho = {
       ],
     },
   ],
-  id: 6,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const caseSplit: FinalReply.CaseSplit = {
   caseClause: "plusTwo Z = plus 2 n\nplusTwo (S k) = plus 2 n\n",
-  id: 7,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const caseSplitV2: FinalReply.CaseSplit = {
   caseClause: "plusTwo 0 = ?plusTwo_rhs_1\nplusTwo (S k) = ?plusTwo_rhs_2",
-  id: 7,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const docsFor: FinalReply.DocsFor = {
-  docs:
-    "Prelude.Bits.b8ToBinString : Bits8 -> String\n    Encode Bits8 as an 8-character binary string.\n    \n    The function is: Total & public export",
+  docs: "Prelude.Bits.b8ToBinString : Bits8 -> String\n    Encode Bits8 as an 8-character binary string.\n    \n    The function is: Total & public export",
   metadata: [
     {
       start: 0,
@@ -246,8 +244,7 @@ export const docsFor: FinalReply.DocsFor = {
       metadata: {
         name: "Prelude.Bits.b8ToBinString",
         implicit: ":False",
-        key:
-          "AQAAAAAAAAAADWI4VG9CaW5TdHJpbmcAAAAAAAAAAgAAAAAAAAAEQml0cwAAAAAAAAAHUHJlbHVkZQ==",
+        key: "AQAAAAAAAAAADWI4VG9CaW5TdHJpbmcAAAAAAAAAAgAAAAAAAAAEQml0cwAAAAAAAAAHUHJlbHVkZQ==",
         decor: ":function",
         docOverview: "Encode Bits8 as an 8-character binary string.",
         type: "Bits8 -> String",
@@ -289,7 +286,6 @@ export const interpret: FinalReply.Interpret = {
         decor: ":data",
         docOverview: "An arbitrary-precision integer",
         name: "4",
-        ttTerm: "TEST",
         type: "Integer",
       },
       start: 0,
@@ -300,27 +296,26 @@ export const interpret: FinalReply.Interpret = {
         decor: ":type",
         docOverview: "Arbitrary-precision integers",
         name: "Integer",
-        ttTerm: "TEST",
         type: "Type",
       },
       start: 4,
     },
   ],
-  id: 9,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const makeCase: FinalReply.MakeCase = {
   caseClause: "g n b = case _ of\n             case_val => ?g_rhs\n",
-  id: 10,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const makeCaseV2: FinalReply.MakeCase = {
   caseClause: "g n b = case _ of\n             case_val => ?g_rhs",
-  id: 10,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -328,20 +323,20 @@ export const makeCaseV2: FinalReply.MakeCase = {
 export const makeLemma: FinalReply.MakeLemma = {
   declaration: "g_rhs : (n : Nat) -> (b : Bool) -> String",
   metavariable: "g_rhs n b",
-  id: 11,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const makeWith: FinalReply.MakeWith = {
-  id: 12,
+  id: 8,
   ok: true,
   type: ":return",
   withClause: "g n b with (_)\n  g n b | with_pat = ?g_rhs_rhs\n",
 }
 
 export const makeWithV2: FinalReply.MakeWith = {
-  id: 12,
+  id: 8,
   ok: true,
   type: ":return",
   withClause: "g n b with (_)\n  g n b | with_pat = ?g_rhs_rhs",
@@ -377,9 +372,7 @@ export const metavariables: FinalReply.Metavariables = {
           },
           {
             length: 13,
-            metadata: {
-              ttTerm: "TEST",
-            },
+            metadata: {},
             start: 0,
           },
         ],
@@ -397,7 +390,6 @@ export const metavariables: FinalReply.Metavariables = {
               decor: ":type",
               docOverview: "Strings in some unspecified encoding",
               name: "String",
-              ttTerm: "TEST",
               type: "Type",
             },
             start: 0,
@@ -416,11 +408,9 @@ export const metavariables: FinalReply.Metavariables = {
                 docOverview:
                   "Natural numbers: unbounded, unsigned integers\nwhich can be pattern matched.",
                 implicit: ":False",
-                key:
-                  "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
+                key: "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
                 name: "Prelude.Nat.Nat",
                 namespace: "Prelude.Nat",
-                ttTerm: "TEST",
                 type: "Type",
               },
               start: 0,
@@ -437,11 +427,9 @@ export const metavariables: FinalReply.Metavariables = {
                 decor: ":type",
                 docOverview: "Boolean Data Type",
                 implicit: ":False",
-                key:
-                  "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+                key: "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
                 name: "Prelude.Bool.Bool",
                 namespace: "Prelude.Bool",
-                ttTerm: "TEST",
                 type: "Type",
               },
               start: 0,
@@ -462,11 +450,9 @@ export const metavariables: FinalReply.Metavariables = {
               docOverview:
                 "Natural numbers: unbounded, unsigned integers\nwhich can be pattern matched.",
               implicit: ":False",
-              key:
-                "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
+              key: "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
               name: "Prelude.Nat.Nat",
               namespace: "Prelude.Nat",
-              ttTerm: "TEST",
               type: "Type",
             },
             start: 0,
@@ -478,7 +464,7 @@ export const metavariables: FinalReply.Metavariables = {
       premises: [],
     },
   ],
-  id: 13,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -499,8 +485,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
         decor: ":type",
         docOverview: "Boolean Data Type",
         implicit: ":False",
-        key:
-          "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+        key: "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bool.Bool",
         namespace: "Prelude.Bool",
         type: "Type",
@@ -513,7 +498,6 @@ export const printDefinition: FinalReply.PrintDefinition = {
         decor: ":type",
         docOverview: "The type of types",
         name: "Type",
-        ttTerm: "TEST",
         type: "Type",
       },
       start: 12,
@@ -531,8 +515,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
         decor: ":data",
         docOverview: "",
         implicit: ":False",
-        key:
-          "AQAAAAAAAAAABUZhbHNlAAAAAAAAAAIAAAAAAAAABEJvb2wAAAAAAAAAB1ByZWx1ZGU=",
+        key: "AQAAAAAAAAAABUZhbHNlAAAAAAAAAAIAAAAAAAAABEJvb2wAAAAAAAAAB1ByZWx1ZGU=",
         name: "Prelude.Bool.False",
         namespace: "Prelude.Bool",
         type: "Bool",
@@ -545,11 +528,9 @@ export const printDefinition: FinalReply.PrintDefinition = {
         decor: ":type",
         docOverview: "Boolean Data Type",
         implicit: ":False",
-        key:
-          "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+        key: "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bool.Bool",
         namespace: "Prelude.Bool",
-        ttTerm: "TEST",
         type: "Type",
       },
       start: 33,
@@ -560,8 +541,7 @@ export const printDefinition: FinalReply.PrintDefinition = {
         decor: ":data",
         docOverview: "",
         implicit: ":False",
-        key:
-          "AQAAAAAAAAAABFRydWUAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+        key: "AQAAAAAAAAAABFRydWUAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bool.True",
         namespace: "Prelude.Bool",
         type: "Bool",
@@ -574,23 +554,21 @@ export const printDefinition: FinalReply.PrintDefinition = {
         decor: ":type",
         docOverview: "Boolean Data Type",
         implicit: ":False",
-        key:
-          "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+        key: "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
         name: "Prelude.Bool.Bool",
         namespace: "Prelude.Bool",
-        ttTerm: "TEST",
         type: "Type",
       },
       start: 47,
     },
   ],
-  id: 14,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const proofSearch: FinalReply.ProofSearch = {
-  id: 15,
+  id: 8,
   ok: true,
   solution: "0",
   type: ":return",
@@ -615,7 +593,7 @@ export const replCompletions: FinalReply.ReplCompletions = {
     "getStringFromBuffer",
     "getWitness",
   ],
-  id: 16,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -642,13 +620,12 @@ export const typeOf: FinalReply.TypeOf = {
         decor: ":type",
         docOverview: "The type of types",
         name: "Type",
-        ttTerm: "TEST",
         type: "Type",
       },
       start: 6,
     },
   ],
-  id: 17,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -764,7 +741,7 @@ export const whoCalls: FinalReply.WhoCalls = {
       name: "Main.getName",
     },
   ],
-  id: 19,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -772,28 +749,27 @@ export const whoCalls: FinalReply.WhoCalls = {
 // Idris 2 only.
 export const generateDef: FinalReply.GenerateDef = {
   def: "append [] ys = ys\nappend (x :: xs) ys = x :: append xs ys",
-  id: 20,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const generateDefNext: FinalReply.GenerateDef = {
-  def:
-    "append [] ys = ys\nappend (x :: xs) [] = x :: append xs []\nappend (x :: xs) (y :: ys) = x :: append xs (y :: ys)",
-  id: 21,
+  def: "append [] ys = ys\nappend (x :: xs) [] = x :: append xs []\nappend (x :: xs) (y :: ys) = x :: append xs (y :: ys)",
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const proofSearchNext: FinalReply.ProofSearch = {
-  id: 22,
+  id: 8,
   ok: true,
   solution: "1",
   type: ":return",
 }
 
 export const typeAt: FinalReply.TypeAt = {
-  id: 23,
+  id: 8,
   ok: true,
   type: ":return",
   typeAt: "b : Bool",
