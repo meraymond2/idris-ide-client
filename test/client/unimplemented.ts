@@ -1,7 +1,7 @@
 import { FinalReply } from "../../src/reply"
 
 export const addMissing: FinalReply.AddMissing = {
-  id: 3,
+  id: 8,
   missingClauses: "",
   ok: true,
   type: ":return",
@@ -10,7 +10,7 @@ export const addMissing: FinalReply.AddMissing = {
 export const apropos: FinalReply.Apropos = {
   docs: "",
   metadata: [],
-  id: 4,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -18,7 +18,7 @@ export const apropos: FinalReply.Apropos = {
 export const browseNamespace: FinalReply.BrowseNamespace = {
   subModules: [],
   declarations: [],
-  id: 5,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -26,15 +26,14 @@ export const browseNamespace: FinalReply.BrowseNamespace = {
 export const callsWho: FinalReply.CallsWho = {
   caller: null,
   references: [],
-  id: 6,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 // Partially Implemented — no metadata
 export const docsFor: FinalReply.DocsFor = {
-  docs:
-    "Prelude.putStrLn : HasIO io => String -> io ()\n  Output a string to stdout with a trailing newline.\n  Totality: total",
+  docs: "Prelude.putStrLn : HasIO io => String -> io ()\n  Output a string to stdout with a trailing newline.\n  Totality: total",
   metadata: [],
   id: 8,
   ok: true,
@@ -45,7 +44,7 @@ export const docsFor: FinalReply.DocsFor = {
 export const interpret: FinalReply.Interpret = {
   result: "4",
   metadata: [],
-  id: 9,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -54,7 +53,7 @@ export const interpret: FinalReply.Interpret = {
 export const makeLemma: FinalReply.MakeLemma = {
   declaration: "g_rhs : Bool -> Nat -> String",
   metavariable: "g_rhs b n",
-  id: 11,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -121,7 +120,7 @@ export const metavariables: FinalReply.Metavariables = {
       ],
     },
   ],
-  id: 13,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -129,14 +128,14 @@ export const metavariables: FinalReply.Metavariables = {
 export const printDefinition: FinalReply.PrintDefinition = {
   definition: "Bool",
   metadata: [],
-  id: 14,
+  id: 8,
   ok: true,
   type: ":return",
 }
 
 export const replCompletions: FinalReply.ReplCompletions = {
   completions: [],
-  id: 16,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -144,7 +143,7 @@ export const replCompletions: FinalReply.ReplCompletions = {
 export const typeOf: FinalReply.TypeOf = {
   typeOf: "Main.Cat : Type",
   metadata: [],
-  id: 17,
+  id: 8,
   ok: true,
   type: ":return",
 }
@@ -152,7 +151,7 @@ export const typeOf: FinalReply.TypeOf = {
 export const whoCalls: FinalReply.WhoCalls = {
   callee: null,
   references: [],
-  id: 19,
+  id: 8,
   ok: true,
   type: ":return",
 }

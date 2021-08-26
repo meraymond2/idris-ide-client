@@ -138,8 +138,6 @@ const intoSourceMetadata = (
   return terms
 }
 
-const isTest = process.env["NODE_ENV"] === "test"
-
 const intoMessageMetadata = (
   metadata: MsgMetadataExpr[]
 ): MessageMetadata[] => {
@@ -147,13 +145,10 @@ const intoMessageMetadata = (
     return {
       start,
       length,
-      metadata: attrs.reduce((acc, [k, v]) => {
-        const useMockValue = isTest && k === ":tt-term"
-        return {
-          ...acc,
-          [camelCaseKey(k)]: useMockValue ? "TEST" : v,
-        }
-      }, {}),
+      metadata: attrs.reduce(
+        (acc, [k, v]) => ({ ...acc, [camelCaseKey(k)]: v }),
+        {}
+      ),
     }
   })
   const merged = terms.reduce<Record<string, MessageMetadata>>((acc, term) => {

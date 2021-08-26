@@ -179,7 +179,8 @@ describe("Parsing :metavariables reply", () => {
               {
                 length: 13,
                 metadata: {
-                  ttTerm: "TEST",
+                  ttTerm:
+                    "AAAAAAAAAAACAAAAAAAAAAADY2F0AQIAAAMAAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAAA0NhdAAAAAAAAAABAAAAAAAAAAdFeGFtcGxlBwAAAAAAAAAAGy4vLi90ZXN0L3Jlc291cmNlcy90ZXN0LmlkcgAAAAAAAAAXBA0=",
                 },
                 start: 0,
               },
@@ -198,7 +199,7 @@ describe("Parsing :metavariables reply", () => {
                   decor: ":type",
                   docOverview: "Strings in some unspecified encoding",
                   name: "String",
-                  ttTerm: "TEST",
+                  ttTerm: "AAAAAAAAAAIAAAAAAAAAAAFuAAAAAAAAAAAAAWIABA0=",
                   type: "Type",
                 },
                 start: 0,
@@ -217,11 +218,11 @@ describe("Parsing :metavariables reply", () => {
                     docOverview:
                       "Natural numbers: unbounded, unsigned integers\nwhich can be pattern matched.",
                     implicit: ":False",
-                    key:
-                      "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
+                    key: "AQAAAAAAAAAAA05hdAAAAAAAAAACAAAAAAAAAANOYXQAAAAAAAAAB1ByZWx1ZGU=",
                     name: "Prelude.Nat.Nat",
                     namespace: "Prelude.Nat",
-                    ttTerm: "TEST",
+                    ttTerm:
+                      "AAAAAAAAAAAAAwAAAAAAAAAIAAAAAAAAAAABAAAAAAAAAAADTmF0AAAAAAAAAAIAAAAAAAAAA05hdAAAAAAAAAAHUHJlbHVkZQ==",
                     type: "Type",
                   },
                   start: 0,
@@ -238,11 +239,11 @@ describe("Parsing :metavariables reply", () => {
                     decor: ":type",
                     docOverview: "Boolean Data Type",
                     implicit: ":False",
-                    key:
-                      "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
+                    key: "AQAAAAAAAAAABEJvb2wAAAAAAAAAAgAAAAAAAAAEQm9vbAAAAAAAAAAHUHJlbHVkZQ==",
                     name: "Prelude.Bool.Bool",
                     namespace: "Prelude.Bool",
-                    ttTerm: "TEST",
+                    ttTerm:
+                      "AAAAAAAAAAEAAAAAAAAAAAFuAAADAAAAAAAAAAgAAAAAAAAAAAEAAAAAAAAAAARCb29sAAAAAAAAAAIAAAAAAAAABEJvb2wAAAAAAAAAB1ByZWx1ZGU=",
                     type: "Type",
                   },
                   start: 0,
