@@ -1,0 +1,174 @@
+import { assert } from "chai"
+import { spawn, ChildProcess } from "child_process"
+
+import * as expected from "./expected"
+import * as unimplemented from "./unimplemented"
+import { clean, omitKeys } from "../utils"
+import { IdrisClient } from "../../src/client"
+
+/**
+ * Check the IDE process responses for literate Idris files.
+ * The expected behaviour is that the they are identical
+ * to the normal V2 responses, except with the appropriate
+ * prefix when returning new lines.
+ *
+ * From the Idris2 docs:
+ * Bird notation is a classic literate mode found in Haskell,
+ * (and Orwell) in which visible code lines begin with > and
+ * hidden lines with <. Other lines are treated as documentation.
+ */
+
+const codePrefix = "> "
+
+/**
+ * Standardise dynamic return values to allow equality checking.
+ * All messages ids are set to an arbitrary number, so the tests are (mostly)
+ * order independent. And we remove the ttTerm key, which is random.
+ */
+const std = (reply: object): object => ({
+  ...omitKeys(reply, ["ttTerm"]),
+  id: 8,
+})
+
+describe("Running the v1 client commands on test.lidr", () => {
+  let ic: IdrisClient
+  let proc: ChildProcess
+
+  before(async () => {
+    clean()
+    proc = spawn("idris", ["--ide-mode"])
+    if (proc.stdin && proc.stdout) {
+      ic = new IdrisClient(proc.stdin, proc.stdout)
+    }
+  })
+
+  // This test _does_ need to be first, because it sets up the internal state
+  // of the Idris IDE process.
+  it("returns the expected result for :load-file", async () => {
+    const actual = await ic.loadFile("./test/resources/test.lidr")
+    assert.deepEqual(actual, expected.loadFile)
+  }).timeout(10000)
+
+  // it("returns the expected result for :add-clause.", async () => {
+  //   const actual = await ic.addClause("f", 11)
+  //   assert.deepEqual(std(actual), expected.addClause)
+  // })
+
+  // it("returns the expected result for :add-missing.", async () => {
+  //   const actual = await ic.addMissing("getName", 13)
+  //   assert.deepEqual(std(actual), {
+  //     ...expected.addMissing,
+  //     missingClauses: codePrefix + expected.addMissing.missingClauses,
+  //   })
+  // })
+
+  // it("returns the expected result for :apropos.", async () => {
+  //   const actual = await ic.apropos("b8ToBinString")
+  //   assert.deepEqual(std(actual), expected.apropos)
+  // })
+
+  // it("returns the expected result for :browse-namespace.", async () => {
+  //   const actual = await ic.browseNamespace("Language.Reflection")
+  //   // The metadata for an actual namespace is too long to read if the test fails.
+  //   if (actual.ok) actual.declarations = actual.declarations.slice(0, 1)
+  //   assert.deepEqual(std(actual), expected.browseNamespace)
+  // })
+
+  // TODO: Come back to, I think this isn't working.
+  // it("returns the expected result for :calls-who.", async () => {
+  //   const actual = await ic.callsWho("plusTwo")
+  //   console.log(JSON.stringify(std(actual)))
+  //   console.log(JSON.stringify(expected.callsWho))
+  //   assert.deepEqual(std(actual), expected.callsWho)
+  // })
+
+  // it("returns the expected result for :case-split", async () => {
+  //   const actual = await ic.caseSplit("n", 12)
+  //   assert.deepEqual(std(actual), expected.caseSplit)
+  // })
+
+  // it("returns the expected result for :docs-for", async () => {
+  //   const actual = await ic.docsFor("b8ToBinString", ":full")
+  //   assert.deepEqual(std(actual), expected.docsFor)
+  // })
+
+  // it("returns the expected result for :interpret", async () => {
+  //   const actual = await ic.interpret("2 * 2")
+  //   assert.deepEqual(std(actual), expected.interpret)
+  // })
+
+  // it("returns the expected result for :make-case", async () => {
+  //   const actual = await ic.makeCase("g_rhs", 23)
+  //   // Missing the code prefix on the second line.
+  //   const incorrectlyPrefixed =
+  //     expected.makeCase.caseClause
+  //       .trim()
+  //       .split("\n")
+  //       .map((line, idx) => (idx === 0 ? codePrefix : "  ") + line)
+  //       .join("\n") + "\n"
+  //   assert.deepEqual(std(actual), {
+  //     ...expected.makeCase,
+  //     caseClause: incorrectlyPrefixed,
+  //   })
+  // })
+
+  // it("returns the expected result for :make-lemma", async () => {
+  //   const actual = await ic.makeLemma("g_rhs", 23)
+  //   // Also wrong, because it's not prefixed at all.
+  //   assert.deepEqual(std(actual), expected.makeLemma)
+  // })
+
+  // it("returns the expected result for :make-with", async () => {
+  //   const actual = await ic.makeWith("g_rhs", 23)
+  //   const correctlyPrefixed =
+  //     expected.makeWith.withClause
+  //       .trim()
+  //       .split("\n")
+  //       .map((line) => codePrefix + line)
+  //       .join("\n") + "\n"
+  //   assert.deepEqual(std(actual), {
+  //     ...expected.makeWith,
+  //     withClause: correctlyPrefixed,
+  //   })
+  // })
+
+  // it("returns the expected result for :metavariables", async () => {
+  //   const actual = await ic.metavariables(80)
+  //   assert.deepEqual(std(actual), expected.metavariables)
+  // })
+
+  // it("returns the expected result for :print-definition", async () => {
+  //   const actual = await ic.printDefinition("Bool")
+  //   assert.deepEqual(std(actual), expected.printDefinition)
+  // })
+
+  // it("returns the expected result for :proof-search", async () => {
+  //   const actual = await ic.proofSearch("n_rhs", 26, [])
+  //   assert.deepEqual(std(actual), expected.proofSearch)
+  // })
+
+  // it("returns the expected result for :repl-completions", async () => {
+  //   const actual = await ic.replCompletions("get")
+  //   assert.deepEqual(std(actual), expected.replCompletions)
+  // })
+
+  // it("returns the expected result for :type-of", async () => {
+  //   const actual = await ic.typeOf("Cat")
+  //   assert.deepEqual(std(actual), expected.typeOf)
+  // })
+
+  // it("returns the expected result for :version", async () => {
+  //   const actual = await ic.version()
+  //   // We don’t want to tie the test to an actual version.
+  //   assert.isTrue(actual.ok)
+  // })
+
+  // it("returns the expected result for :who-calls", async () => {
+  //   const actual = await ic.whoCalls("Cat")
+  //   assert.deepEqual(std(actual), expected.whoCalls)
+  // })
+
+  after(async () => {
+    proc.kill()
+  })
+})

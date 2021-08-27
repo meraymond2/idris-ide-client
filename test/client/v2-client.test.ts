@@ -2,7 +2,7 @@ import { assert } from "chai"
 import { spawn, ChildProcess } from "child_process"
 import * as expected from "./expected"
 import * as unimplemented from "./unimplemented"
-import { omitKeys } from "../utils"
+import { clean, omitKeys } from "../utils"
 import { IdrisClient } from "../../src/client"
 
 /**
@@ -15,11 +15,12 @@ const std = (reply: object): object => ({
   id: 8,
 })
 
-describe("Running the client commands", () => {
+describe("Running the v2 client commands on test.idr", () => {
   let ic: IdrisClient
   let proc: ChildProcess
 
   before(async () => {
+    clean()
     proc = spawn("idris2", ["--ide-mode", "--no-color"])
     if (proc.stdin && proc.stdout) {
       ic = new IdrisClient(proc.stdin, proc.stdout)
