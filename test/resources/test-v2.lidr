@@ -13,6 +13,7 @@ More documentation.
 > getName : (cat: Cat) -> String
 > getName Cas = "Cas"
 > getName Luna = "Luna"
+> getName Sherlock = "Sherlock"
 
 An intermission.
 
