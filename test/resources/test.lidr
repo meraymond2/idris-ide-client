@@ -4,8 +4,6 @@ More documentation.
 
 > module Main
 >
-> import Data.Vect
->
 > data Cat = Cas | Luna | Sherlock
 >
 > f : (cat: Cat) -> String
@@ -17,14 +15,12 @@ More documentation.
 An intermission.
 
 > plusTwo : (n: Nat) -> Nat
-> plusTwo n = ?plusTwo_rhs
+> plusTwo n = plus 2 n
 >
 > g : (n: Nat) -> (b: Bool) -> String
 > g n b = ?g_rhs
 >
-> num : Nat
-> num = ?n_rhs
->
-> append : Vect n a -> Vect m a -> Vect (n + m) a
+> n : Nat
+> n = ?n_rhs
 
 Some closing thoughts.
