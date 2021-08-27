@@ -221,7 +221,7 @@ export const callsWho: FinalReply.CallsWho = {
   type: ":return",
 }
 
-export const caseSplit: FinalReply.CaseSplit = {
+export const caseSplit: FinalReply.CaseSplitOk = {
   caseClause: "plusTwo Z = plus 2 n\nplusTwo (S k) = plus 2 n\n",
   id: 8,
   ok: true,
