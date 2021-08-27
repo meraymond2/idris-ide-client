@@ -50,7 +50,7 @@ export const interpret: FinalReply.Interpret = {
 }
 
 // Partially Implemented — kinda broken
-export const makeLemma: FinalReply.MakeLemma = {
+export const makeLemma: FinalReply.MakeLemmaOk = {
   declaration: "g_rhs : Bool -> Nat -> String",
   metavariable: "g_rhs b n",
   id: 8,

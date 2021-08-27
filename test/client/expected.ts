@@ -14,7 +14,7 @@ export const loadFile: FinalReply.LoadFile = {
   type: ":return",
 }
 
-export const addClause: FinalReply.AddClause = {
+export const addClause: FinalReply.AddClauseOk = {
   id: 8,
   initialClause: "f cat = ?f_rhs",
   ok: true,
@@ -228,7 +228,7 @@ export const caseSplit: FinalReply.CaseSplit = {
   type: ":return",
 }
 
-export const caseSplitV2: FinalReply.CaseSplit = {
+export const caseSplitV2: FinalReply.CaseSplitOk = {
   caseClause: "plusTwo 0 = ?plusTwo_rhs_1\nplusTwo (S k) = ?plusTwo_rhs_2",
   id: 8,
   ok: true,
@@ -747,14 +747,14 @@ export const whoCalls: FinalReply.WhoCalls = {
 }
 
 // Idris 2 only.
-export const generateDef: FinalReply.GenerateDef = {
+export const generateDef: FinalReply.GenerateDefOk = {
   def: "append [] ys = ys\nappend (x :: xs) ys = x :: append xs ys",
   id: 8,
   ok: true,
   type: ":return",
 }
 
-export const generateDefNext: FinalReply.GenerateDef = {
+export const generateDefNext: FinalReply.GenerateDefOk = {
   def: "append [] ys = ys\nappend (x :: xs) [] = x :: append xs []\nappend (x :: xs) (y :: ys) = x :: append xs (y :: ys)",
   id: 8,
   ok: true,

@@ -102,7 +102,7 @@ export namespace FinalReply {
   export const isFinalReply = (reply: Reply): boolean =>
     reply.type === ":return"
 
-  type AddClauseOk = {
+  export type AddClauseOk = {
     initialClause: string
     id: number
     ok: true
@@ -159,7 +159,7 @@ export namespace FinalReply {
     type: ":return"
   }
 
-  type CaseSplitOk = {
+  export type CaseSplitOk = {
     caseClause: string
     id: number
     ok: true
@@ -182,7 +182,7 @@ export namespace FinalReply {
 
   export type DocsFor = DocsForOk | DocsForErr
 
-  type GenerateDefOk = {
+  export type GenerateDefOk = {
     def: string
     id: number
     ok: true
@@ -231,7 +231,7 @@ export namespace FinalReply {
     type: ":return"
   }
 
-  type MakeLemmaOk = {
+  export type MakeLemmaOk = {
     declaration: string
     metavariable: string
     id: number
