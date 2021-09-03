@@ -8,10 +8,13 @@ const isNumeric = (char: string): boolean => {
   return charCode >= 48 && charCode <= 57
 }
 
-const isAlpha = (char: string): boolean => {
+// Is a character part of a keyword: alpha-numeric or a hyphen.
+const isKeywordChar = (char: string): boolean => {
   const charCode = char.charCodeAt(0)
   return (
-    (65 <= charCode && charCode <= 90) || (97 <= charCode && charCode <= 122)
+    (97 <= charCode && charCode <= 122) ||
+    char === "-" ||
+    (65 <= charCode && charCode <= 90)
   )
 }
 
@@ -33,66 +36,85 @@ const parseEscapes = (s: string): string => {
   return res
 }
 
-export const lex = (msg: string): Token[] => {
-  let pos = 0
-  let tokens: Token[] = []
-  while (pos < msg.length) {
-    const char = msg[pos]
+export class TokenIter {
+  private text: string
+  private pos: number
+
+  constructor(msg: string) {
+    this.pos = 0
+    this.text = msg
+  }
+
+  advance = (n: number = 1): void => {
+    this.pos += n
+  }
+
+  next = (): Token | null => {
+    if (this.pos >= this.text.length) return null
+
+    const char = this.text[this.pos]
     switch (char) {
       case "(":
-        tokens.push({ type: "LEFT_PAREN" })
-        pos += 1
-        break
+        this.advance()
+        return { type: "LEFT_PAREN" }
       case ")":
-        tokens.push({ type: "RIGHT_PAREN" })
-        pos += 1
-        break
+        this.advance()
+        return { type: "RIGHT_PAREN" }
       case ":": {
-        const start = pos
-        pos += 1
-        while (isAlpha(msg[pos]) || msg[pos] === "-") {
-          pos += 1
+        const start = this.pos
+        this.advance() // advance over the colon
+        while (isKeywordChar(this.text[this.pos])) {
+          this.advance()
         }
-        tokens.push({ type: "SYMBOL", sym: msg.slice(start, pos) })
-        break
+        return { type: "SYMBOL", sym: this.text.slice(start, this.pos) }
       }
       case '"': {
-        const start = pos
-        pos += 1 // consume the opening quotes
+        const start = this.pos
+        this.advance() // consume the opening quotes
         let escapes = 0
-        while (msg[pos] !== '"' || escapes % 2 !== 0) {
-          if (msg[pos] === "\\") escapes += 1
-          else escapes = 0
-          pos += 1
+        while (this.text[this.pos] !== '"' || escapes % 2 !== 0) {
+          if (this.text[this.pos] === "\\") {
+            escapes += 1
+          } else {
+            escapes = 0
+          }
+          this.advance()
         }
-        pos += 1 // consume the closing quotes
-        const str = parseEscapes(msg.slice(start, pos))
-        tokens.push({ type: "STRING", str })
-        break
+        this.advance() // consume the closing quotes
+        const str = parseEscapes(this.text.slice(start, this.pos))
+        return { type: "STRING", str }
       }
       default: {
         if (isNumeric(char)) {
-          const start = pos
-          while (isNumeric(msg[pos])) {
-            pos += 1
+          const start = this.pos
+          while (isNumeric(this.text[this.pos])) {
+            this.advance()
           }
-          tokens.push({ type: "NAT", nat: parseInt(msg.slice(start, pos)) })
-          break
+          return {
+            type: "NAT",
+            nat: parseInt(this.text.slice(start, this.pos)),
+          }
         } else if (whitespace(char)) {
-          pos += 1
-          break
+          this.advance()
+          return this.next()
         } else {
           throw (
             "Unhandled character: " +
-            msg[pos] +
+            this.text[this.pos] +
             " at " +
-            pos +
+            this.pos +
             " in " +
-            msg.slice(pos - 100, pos + 100)
+            this.text.slice(this.pos - 100, this.pos + 100)
           )
         }
       }
     }
   }
-  return tokens
+
+  peek = (): Token | null => {
+    const start = this.pos
+    const token = this.next()
+    this.pos = start
+    return token
+  }
 }
