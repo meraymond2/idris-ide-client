@@ -1,8 +1,7 @@
 import { assert } from "chai"
-import { parseReply } from "../../src/parser"
+import { parse, parseReply } from "../../src/parser"
 import { FinalReply } from "../../src/reply"
-import { deserialise } from "../../src/parser/expr-parser"
-import { lex } from "../../src/parser/lexer"
+import { TokenIter } from "../../src/parser/lexer"
 import { RootExpr, S_Exp } from "../../src/s-exps"
 
 describe("Parsing :make-lemma reply", () => {
@@ -25,8 +24,8 @@ describe("Parsing :make-lemma reply", () => {
       type: ":return",
     }
 
-    const tokens = lex(sexp)
-    const exprs = deserialise(tokens)[0] as RootExpr
+    const tokens = new TokenIter(sexp)
+    const exprs = parse(tokens) as RootExpr
     assert.deepEqual(exprs, rootExpr)
 
     const parsed = parseReply(rootExpr, ":make-lemma")
@@ -44,8 +43,8 @@ describe("Parsing :make-lemma reply", () => {
       type: ":return",
     }
 
-    const tokens = lex(sexp)
-    const exprs = deserialise(tokens)[0] as RootExpr
+    const tokens = new TokenIter(sexp)
+    const exprs = parse(tokens) as RootExpr
     assert.deepEqual(exprs, rootExpr)
 
     const parsed = parseReply(rootExpr, ":make-lemma")
