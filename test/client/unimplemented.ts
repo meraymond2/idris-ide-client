@@ -31,19 +31,34 @@ export const callsWho: FinalReply.CallsWho = {
   type: ":return",
 }
 
-// Partially Implemented — no metadata
+// Partially Implemented — partial metadata
 export const docsFor: FinalReply.DocsFor = {
   docs: "Prelude.putStrLn : HasIO io => String -> io ()\n  Output a string to stdout with a trailing newline.\n  Totality: total",
-  metadata: [],
+  metadata: [
+    { length: 16, metadata: { decor: ":function" }, start: 0 },
+    { length: 5, metadata: { decor: ":type" }, start: 19 },
+    { length: 2, metadata: { decor: ":bound" }, start: 25 },
+    { length: 6, metadata: { decor: ":type" }, start: 31 },
+    { length: 2, metadata: { decor: ":bound" }, start: 41 },
+    { length: 8, metadata: { textFormatting: ":underline" }, start: 102 },
+  ],
   id: 8,
   ok: true,
   type: ":return",
 }
 
-// Partially Implemented — no metadata
+// Partially Implemented — partial metadata
 export const interpret: FinalReply.Interpret = {
   result: "4",
-  metadata: [],
+  metadata: [
+    {
+      length: 1,
+      metadata: {
+        decor: ":data",
+      },
+      start: 0,
+    },
+  ],
   id: 8,
   ok: true,
   type: ":return",
@@ -140,9 +155,25 @@ export const replCompletions: FinalReply.ReplCompletions = {
   type: ":return",
 }
 
+// Partially implemented — partial metadata
 export const typeOf: FinalReply.TypeOf = {
   typeOf: "Main.Cat : Type",
-  metadata: [],
+  metadata: [
+    {
+      length: 8,
+      metadata: {
+        decor: ":type",
+      },
+      start: 0,
+    },
+    {
+      length: 4,
+      metadata: {
+        decor: ":type",
+      },
+      start: 11,
+    },
+  ],
   id: 8,
   ok: true,
   type: ":return",

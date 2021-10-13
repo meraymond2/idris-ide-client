@@ -18,6 +18,7 @@ interface MetaDetails {
   name?: string
   namespace?: string
   sourceFile?: string
+  textFormatting?: string
   ttTerm?: string
   type?: string
 }
