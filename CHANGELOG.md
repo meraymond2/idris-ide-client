@@ -1,6 +1,7 @@
 ## Unreleased
 ### Added
 ### Changed
+- Added workarounds to the reply-parser to handle Idris 2, version 0.6.0.
 ### Fixed
 
 ## v0.1.5
