@@ -36,7 +36,7 @@ Types are great documentation, and I’ve typed all of the s-expressions that th
 ## Status
 It works with Idris 1.3.X on all OSes.
 
-It is also compatible with the most recent release of Idris 2, currently v0.4.0. This will _not_ maintain backwards compatibility with older versions of Idris 2 until it stabilises.
+It is also compatible with the most recent release of Idris 2, currently v0.6.0. This will _not_ maintain backwards compatibility with older versions of Idris 2 until it stabilises.
 
 Not all IDE commands have been completely implemented in Idris2, see the issues for their current status.
 
@@ -45,13 +45,13 @@ If you experience any problems on other versions or OSes, please raise an issue.
 A few request-types related to tt-terms have not been implemented yet, because I don’t understand what they’re supposed to do.
 
 ## Known Issues
-The handling for unexpected errors could use a bit of work. For example, in Idris 1.3.2, you can cause the IDE to crash by passing in a line number that doesn’t exist, and there’s nothing at the moment to restart the IDE if it dies unexpectedly.
+The handling for unexpected errors could use a bit of work. For example, in Idris 1.3.4, you can cause the IDE to crash by passing in a line number that doesn’t exist, and there’s nothing at the moment to restart the IDE if it dies unexpectedly.
 
 ## Upgrade idris for CI
 
 from the root:
 ```sh
-niv update nixpkgs -b nixos-21.05
+niv update nixpkgs -b nixos-22.05
 niv update nixpkgs-unstable -b nixpkgs-unstable
 ```
 this will update to the newest nixos-unstable branch of nixpkgs.
