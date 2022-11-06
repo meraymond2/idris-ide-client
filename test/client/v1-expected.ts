@@ -598,6 +598,17 @@ export const replCompletions: FinalReply.ReplCompletions = {
   type: ":return",
 }
 
+export const replCompletionsV2 : FinalReply.ReplCompletions = {
+  completions: [
+    "getName",
+    "getAt",
+    "getLine", "getChar", "getRight", "getLeft"
+  ],
+  id: 8,
+  ok: true,
+  type: ":return",
+}
+
 export const typeOf: FinalReply.TypeOf = {
   typeOf: "Cat : Type",
   metadata: [
@@ -623,6 +634,29 @@ export const typeOf: FinalReply.TypeOf = {
         type: "Type",
       },
       start: 6,
+    },
+  ],
+  id: 8,
+  ok: true,
+  type: ":return",
+}
+
+export const typeOfV2: FinalReply.TypeOf = {
+  typeOf: "Main.Cat : Type",
+  metadata: [
+    {
+      length: 8,
+      metadata: {
+        decor: ":type",
+      },
+      start: 0,
+    },
+    {
+      length: 4,
+      metadata: {
+        decor: ":type",
+      },
+      start: 11,
     },
   ],
   id: 8,

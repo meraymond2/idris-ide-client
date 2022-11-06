@@ -18,6 +18,7 @@ interface MetaDetails {
   name?: string
   namespace?: string
   sourceFile?: string
+  textFormatting?: string
   ttTerm?: string
   type?: string
 }
@@ -122,7 +123,7 @@ export namespace FinalReply {
   type AproposOk = {
     docs: string
     id: number
-    metadata: Array<MessageMetadata>
+    metadata: Array<MessageMetadata> | undefined
     ok: true
     type: ":return"
   }
@@ -260,7 +261,7 @@ export namespace FinalReply {
   type PrintDefinitionOk = {
     definition: string
     id: number
-    metadata: Array<MessageMetadata>
+    metadata: Array<MessageMetadata> | undefined
     ok: true
     type: ":return"
   }

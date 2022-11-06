@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { spawn, ChildProcess } from "child_process"
-import * as expected from "./expected"
+import * as expected from "./v2-expected"
 import * as unimplemented from "./unimplemented"
 import { clean, omitKeys } from "../utils"
 import { IdrisClient } from "../../src/client"
@@ -70,26 +70,18 @@ describe("Running the v2 client commands on test.md", () => {
 
   it("returns the expected result for :case-split", async () => {
     const actual = await ic.caseSplit("n", 26)
-    assert.deepEqual(std(actual), expected.caseSplitV2)
+    assert.deepEqual(std(actual), expected.caseSplit)
   })
 
   // Partially Implemented — no metadata
   it("returns the expected result for :docs-for", async () => {
     const actual = await ic.docsFor("putStrLn", ":full")
-    assert.deepEqual(std(actual), unimplemented.docsFor)
-  })
-
-  // Partially Implemented — no metadata.
-  // (:return (:ok "4" ()) 9)
-  // Also, no longer includes type in response, possibly intentional.
-  it("returns the expected result for :interpret", async () => {
-    const actual = await ic.interpret("2 * 2")
-    assert.deepEqual(std(actual), unimplemented.interpret)
+    assert.deepEqual(std(actual), expected.docsFor)
   })
 
   it("returns the expected result for :make-case", async () => {
     const actual = await ic.makeCase("g_rhs", 29)
-    assert.deepEqual(std(actual), expected.makeCaseV2)
+    assert.deepEqual(std(actual), expected.makeCase)
   })
 
   // Partially implemented — Broken
@@ -101,7 +93,7 @@ describe("Running the v2 client commands on test.md", () => {
 
   it("returns the expected result for :make-with", async () => {
     const actual = await ic.makeWith("g_rhs", 29)
-    assert.deepEqual(std(actual), expected.makeWithV2)
+    assert.deepEqual(std(actual), expected.makeWith)
   })
 
   // Partially implemented — no metadata
@@ -127,14 +119,7 @@ describe("Running the v2 client commands on test.md", () => {
   // (:return (:ok ()) 3)
   it("returns the expected result for :repl-completions", async () => {
     const actual = await ic.replCompletions("get")
-    assert.deepEqual(std(actual), unimplemented.replCompletions)
-  })
-
-  // Partially Implemented — no metadata
-  // (:return (:ok "Main.Cat : Type" ()) 17)
-  it("returns the expected result for :type-of", async () => {
-    const actual = await ic.typeOf("Cat")
-    assert.deepEqual(std(actual), unimplemented.typeOf)
+    assert.deepEqual(std(actual), expected.replCompletions)
   })
 
   it("returns the expected result for :version", async () => {

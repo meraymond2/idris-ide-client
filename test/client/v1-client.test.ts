@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { spawn, ChildProcess } from "child_process"
-import * as expected from "./expected"
+import * as expected from "./v1-expected"
 import { clean, omitKeys } from "../utils"
 import { IdrisClient } from "../../src/client"
 

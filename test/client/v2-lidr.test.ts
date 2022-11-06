@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { spawn, ChildProcess } from "child_process"
-import * as expected from "./expected"
+import * as expected from "./v2-expected"
 import * as unimplemented from "./unimplemented"
 import { clean, omitKeys } from "../utils"
 import { IdrisClient } from "../../src/client"
@@ -88,12 +88,12 @@ describe("Running the v2 client commands on test.lidr", () => {
 
   it("returns the expected result for :case-split", async () => {
     const actual = await ic.caseSplit("n", 21)
-    const correctlyPrefixed = expected.caseSplitV2.caseClause
+    const correctlyPrefixed = expected.caseSplit.caseClause
       .split("\n")
       .map((line) => codePrefix + line)
       .join("\n")
     assert.deepEqual(std(actual), {
-      ...expected.caseSplitV2,
+      ...expected.caseSplit,
       caseClause: correctlyPrefixed,
     })
   })
@@ -101,7 +101,7 @@ describe("Running the v2 client commands on test.lidr", () => {
   // Partially Implemented — no metadata
   it("returns the expected result for :docs-for", async () => {
     const actual = await ic.docsFor("putStrLn", ":full")
-    assert.deepEqual(std(actual), unimplemented.docsFor)
+    assert.deepEqual(std(actual), expected.docsFor)
   })
 
   // Partially Implemented — no metadata.
@@ -109,7 +109,7 @@ describe("Running the v2 client commands on test.lidr", () => {
   // Also, no longer includes type in response, possibly intentional.
   it("returns the expected result for :interpret", async () => {
     const actual = await ic.interpret("2 * 2")
-    assert.deepEqual(std(actual), unimplemented.interpret)
+    assert.deepEqual(std(actual), expected.interpret)
   })
 
   it("returns the expected result for :make-case", async () => {
@@ -119,12 +119,12 @@ describe("Running the v2 client commands on test.lidr", () => {
     // prefixed though, and indented correctly.
     // > > g n b = case _ of
     // >                case_val => ?g_rhs
-    const incorrectlyPrefixed = expected.makeCaseV2.caseClause
+    const incorrectlyPrefixed = expected.makeCase.caseClause
       .split("\n")
       .map((line, idx) => (idx === 0 ? "> > " + line : ">   " + line))
       .join("\n")
     assert.deepEqual(std(actual), {
-      ...expected.makeCaseV2,
+      ...expected.makeCase,
       caseClause: incorrectlyPrefixed,
     })
   })
@@ -151,14 +151,14 @@ describe("Running the v2 client commands on test.lidr", () => {
     // to:
     // > > > g n b with (_)
     // > >   > g n b | with_pat = ?g_rhs_rhs
-    const incorrectlyPrefixed = expected.makeWithV2.withClause
+    const incorrectlyPrefixed = expected.makeWith.withClause
       .split("\n")
       .map((line, idx) =>
         idx === 0 ? "> > > " + line : "> >   > " + line.trim()
       )
       .join("\n")
     assert.deepEqual(std(actual), {
-      ...expected.makeWithV2,
+      ...expected.makeWith,
       withClause: incorrectlyPrefixed,
     })
   })
@@ -186,14 +186,14 @@ describe("Running the v2 client commands on test.lidr", () => {
   // (:return (:ok ()) 3)
   it("returns the expected result for :repl-completions", async () => {
     const actual = await ic.replCompletions("get")
-    assert.deepEqual(std(actual), unimplemented.replCompletions)
+    assert.deepEqual(std(actual), expected.replCompletions)
   })
 
   // Partially Implemented — no metadata
   // (:return (:ok "Main.Cat : Type" ()) 17)
   it("returns the expected result for :type-of", async () => {
     const actual = await ic.typeOf("Cat")
-    assert.deepEqual(std(actual), unimplemented.typeOf)
+    assert.deepEqual(std(actual), expected.typeOf)
   })
 
   it("returns the expected result for :version", async () => {
