@@ -270,7 +270,7 @@ const intoFinalReplyApropos = (
     const [_ok, apropos, metadata] = payload
     return {
       docs: apropos,
-      metadata: intoMessageMetadata(metadata),
+      metadata: metadata ? intoMessageMetadata(metadata) : [],
       id,
       ok: true,
       type: ":return",
@@ -555,7 +555,7 @@ const intoFinalReplyPrintDefinition = (
     return {
       definition,
       id,
-      metadata: intoMessageMetadata(metadata),
+      metadata: metadata ? intoMessageMetadata(metadata) : [],
       ok: true,
       type: ":return",
     }

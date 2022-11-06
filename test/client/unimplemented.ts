@@ -31,24 +31,6 @@ export const callsWho: FinalReply.CallsWho = {
   type: ":return",
 }
 
-// Partially Implemented — no metadata
-export const docsFor: FinalReply.DocsFor = {
-  docs: "Prelude.putStrLn : HasIO io => String -> io ()\n  Output a string to stdout with a trailing newline.\n  Totality: total",
-  metadata: [],
-  id: 8,
-  ok: true,
-  type: ":return",
-}
-
-// Partially Implemented — no metadata
-export const interpret: FinalReply.Interpret = {
-  result: "4",
-  metadata: [],
-  id: 8,
-  ok: true,
-  type: ":return",
-}
-
 // Partially Implemented — kinda broken
 export const makeLemma: FinalReply.MakeLemmaOk = {
   declaration: "g_rhs : Bool -> Nat -> String",
@@ -63,7 +45,7 @@ export const metavariables: FinalReply.Metavariables = {
     {
       metavariable: {
         metadata: [],
-        name: "Main.append",
+        name: `"Main.append"`,
         type: "Vect n a -> Vect m a -> Vect (plus n m) a",
       },
       premises: [],
@@ -71,7 +53,7 @@ export const metavariables: FinalReply.Metavariables = {
     {
       metavariable: {
         metadata: [],
-        name: "Main.f",
+        name: `"Main.f"`,
         type: "Cat -> String",
       },
       premises: [],
@@ -79,7 +61,7 @@ export const metavariables: FinalReply.Metavariables = {
     {
       metavariable: {
         metadata: [],
-        name: "Main.g_rhs",
+        name: `"Main.g_rhs"`,
         type: "String",
       },
       premises: [
@@ -98,7 +80,7 @@ export const metavariables: FinalReply.Metavariables = {
     {
       metavariable: {
         metadata: [],
-        name: "Main.n_rhs",
+        name: `"Main.n_rhs"`,
         type: "Nat",
       },
       premises: [],
@@ -108,7 +90,7 @@ export const metavariables: FinalReply.Metavariables = {
     {
       metavariable: {
         metadata: [],
-        name: "Main.plusTwo_rhs",
+        name: `"Main.plusTwo_rhs"`,
         type: "Nat",
       },
       premises: [
@@ -127,21 +109,6 @@ export const metavariables: FinalReply.Metavariables = {
 
 export const printDefinition: FinalReply.PrintDefinition = {
   definition: "Bool",
-  metadata: [],
-  id: 8,
-  ok: true,
-  type: ":return",
-}
-
-export const replCompletions: FinalReply.ReplCompletions = {
-  completions: [],
-  id: 8,
-  ok: true,
-  type: ":return",
-}
-
-export const typeOf: FinalReply.TypeOf = {
-  typeOf: "Main.Cat : Type",
   metadata: [],
   id: 8,
   ok: true,
